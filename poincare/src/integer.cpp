@@ -39,12 +39,36 @@ Integer::Integer(Integer&& other) {
   other.m_digits = NULL;
 }
 
+Integer::Integer(const Integer& other) {
+  // Pilfer other's data
+  m_numberOfDigits = other.m_numberOfDigits;
+  // Duplicate m_digits objects
+  m_digits = new native_uint_t[m_numberOfDigits];
+  for (int k = 0; k < m_numberOfDigits; k++) {
+    m_digits[k] = other.m_digits[k];
+  }
+  m_negative = other.m_negative;
+}
+
 Integer::Integer(native_int_t i) {
   assert(sizeof(native_int_t) <= sizeof(native_uint_t));
   m_negative = (i<0);
   m_numberOfDigits = 1;
   m_digits = new native_uint_t[1];
   *m_digits = (native_uint_t)(i>0 ? i : -i);
+}
+
+Integer::Integer(double_native_int_t i) {
+  assert(sizeof(native_int_t) <= sizeof(native_uint_t));
+  m_negative = (i<0);
+  m_numberOfDigits = 2;
+  m_digits = new native_uint_t[2];
+  double_native_uint_t unsignedI = i>0 ? i : -i;
+  memcpy(&m_digits[0], &unsignedI, sizeof(native_uint_t)/sizeof(char));
+  memcpy(&m_digits[1], (native_uint_t *)&unsignedI+1, sizeof(native_uint_t)/sizeof(char));
+  if (m_digits[1] == 0) {
+    m_numberOfDigits = 1;
+  }
 }
 
 /* Caution: string is NOT guaranteed to be NULL-terminated! */
@@ -402,25 +426,39 @@ Expression::Type Integer::type() const {
 ExpressionLayout * Integer::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  /* If the integer is too long, this method may overflow the stack.
+  char buffer[255];
+  int size = convertToText(buffer, 255);
+  return new StringLayout(buffer, size);
+}
+
+bool Integer::valueEquals(const Expression * e) const {
+  assert(e->type() == Type::Integer);
+  return (*this == *(Integer *)e); // FIXME: Remove operator overloading
+}
+
+int Integer::convertToText(char * buffer, int bufferSize) const {
+  /* If the integer is too long, convertToText may overflow the stack.
    * Experimentally, we can display at most integer whose number of digits is
    * around 7. However, to avoid crashing when the stack is already half full,
    * we decide not to display integers whose number of digits > 5. */
+  assert(bufferSize >= 4);
   if (m_numberOfDigits > 5) {
-    return new StringLayout("inf", 3);
+    strlcpy(buffer, "inf", 4);
+    return 3;
   }
-
-  char buffer[255];
-
   Integer base = Integer(10);
-  Division d = Division(*this, base);
+  Integer abs = m_negative ? Integer(0).subtract(*this) : *this;
+  Division d = Division(abs, base);
   int size = 0;
   if (*this == Integer((native_int_t)0)) {
     buffer[size++] = '0';
   }
+  if (m_negative) {
+    buffer[size++] = '-';
+  }
   while (!(d.m_remainder == Integer((native_int_t)0) &&
         d.m_quotient == Integer((native_int_t)0))) {
-    assert(size<255); //TODO: malloc an extra buffer
+    assert(size<bufferSize); //TODO: malloc an extra buffer
     char c = char_from_digit(d.m_remainder.m_digits[0]);
     buffer[size++] = c;
     d = Division(d.m_quotient, base);
@@ -428,18 +466,12 @@ ExpressionLayout * Integer::privateCreateLayout(FloatDisplayMode floatDisplayMod
   buffer[size] = 0;
 
   // Flip the string
-  for (int i=0, j=size-1 ; i < j ; i++, j--) {
+  for (int i=m_negative, j=size-1 ; i < j ; i++, j--) {
     char c = buffer[i];
     buffer[i] = buffer[j];
     buffer[j] = c;
   }
-
-  return new StringLayout(buffer, size);
-}
-
-bool Integer::valueEquals(const Expression * e) const {
-  assert(e->type() == Type::Integer);
-  return (*this == *(Integer *)e); // FIXME: Remove operator overloading
+  return size;
 }
 
 }
