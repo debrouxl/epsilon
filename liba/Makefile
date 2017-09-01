@@ -23,6 +23,7 @@ objs += $(addprefix liba/src/, \
   strcmp.o \
   strchr.o \
   strlcpy.o \
+  strcpy.o \
   strlen.o \
   external/sqlite/mem5.o \
 )
