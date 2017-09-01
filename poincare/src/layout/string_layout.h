@@ -6,18 +6,22 @@
 
 namespace Poincare {
 
-class StringLayout : public ExpressionLayout {
+class StringLayout final : public ExpressionLayout {
 public:
   // Here the inverse is a uint8_t instead of a bool, because the size of a bool is
   // not standardized, thus since we call a foreign C function with this value we want to be
   // sure about compatibility.
   StringLayout(const char * string, size_t length, KDText::FontSize fontSize = KDText::FontSize::Large);
-  ~StringLayout();
+  ~StringLayout() {
+    delete[] m_string;
+  }
   StringLayout(const StringLayout& other) = delete;
   StringLayout(StringLayout&& other) = delete;
   StringLayout& operator=(const StringLayout& other) = delete;
   StringLayout& operator=(StringLayout&& other) = delete;
-  char * text();
+  char * text() {
+    return m_string;
+  }
 protected:
   void render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) override;
   KDSize computeSize() override;

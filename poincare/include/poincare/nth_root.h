@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class NthRoot : public Function {
+class NthRoot final : public Function {
 public:
   NthRoot();
   Type type() const override;

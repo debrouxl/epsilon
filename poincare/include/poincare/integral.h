@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class Integral : public Function {
+class Integral final : public Function {
 public:
   Integral();
   Type type() const override;

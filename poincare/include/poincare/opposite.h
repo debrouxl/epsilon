@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class Opposite : public Expression {
+class Opposite final : public Expression {
 public:
   Opposite(Expression * operand, bool cloneOperands = true);
   ~Opposite();

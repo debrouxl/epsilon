@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Parenthesis : public Expression {
+class Parenthesis final : public Expression {
 public:
   Parenthesis(Expression * operand, bool cloneOperands = true);
   ~Parenthesis();

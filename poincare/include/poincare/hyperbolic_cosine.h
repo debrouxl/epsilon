@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class HyperbolicCosine : public Function {
+class HyperbolicCosine final : public Function {
 public:
   HyperbolicCosine();
   Type type() const override;

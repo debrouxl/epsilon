@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ArcTangent: public Function {
+class ArcTangent final : public Function {
 public:
   ArcTangent();
   Type type() const override;

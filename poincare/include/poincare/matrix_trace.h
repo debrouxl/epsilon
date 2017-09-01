@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class MatrixTrace : public Function {
+class MatrixTrace final : public Function {
 public:
   MatrixTrace();
   Type type() const override;

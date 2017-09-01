@@ -32,9 +32,7 @@ NthRootLayout::NthRootLayout(ExpressionLayout * radicandLayout, ExpressionLayout
 
 NthRootLayout::~NthRootLayout() {
   delete m_radicandLayout;
-  if (m_indexLayout != nullptr) {
-    delete m_indexLayout;
-  }
+  delete m_indexLayout;
 }
 
 void NthRootLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {

@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Product : public Sequence {
+class Product final : public Sequence {
 public:
   Product();
   Type type() const override;

@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class DivisionRemainder : public Function {
+class DivisionRemainder final : public Function {
 public:
   DivisionRemainder();
   Type type() const override;

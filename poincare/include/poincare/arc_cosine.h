@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ArcCosine : public Function {
+class ArcCosine final : public Function {
 public:
   ArcCosine();
   Type type() const override;

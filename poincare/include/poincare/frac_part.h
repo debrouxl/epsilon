@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class FracPart : public Function {
+class FracPart final : public Function {
 public:
   FracPart();
   Type type() const override;

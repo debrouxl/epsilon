@@ -6,7 +6,7 @@
 namespace Poincare {
 
 template<typename T>
-class ComplexMatrix : public Evaluation<T> {
+class ComplexMatrix final : public Evaluation<T> {
 public:
   ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns);
   ~ComplexMatrix();

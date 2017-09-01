@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class MatrixDimension : public Function {
+class MatrixDimension final : public Function {
 public:
   MatrixDimension();
   Type type() const override;

@@ -14,10 +14,6 @@ BracketLayout::BracketLayout(ExpressionLayout * operandLayout) :
   m_baseline = m_operandLayout->baseline();
 }
 
-BracketLayout::~BracketLayout() {
-  delete m_operandLayout;
-}
-
 void BracketLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   const KDCoordinate k_widthMargin = widthMargin();
   KDSize operandSize = m_operandLayout->size();

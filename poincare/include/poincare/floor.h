@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Floor : public Function {
+class Floor final : public Function {
 public:
   Floor();
   Type type() const override;
