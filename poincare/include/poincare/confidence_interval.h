@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ConfidenceInterval : public Function {
+class ConfidenceInterval final : public Function {
 public:
   ConfidenceInterval();
   Type type() const override;

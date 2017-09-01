@@ -6,10 +6,12 @@
 
 namespace Poincare {
 
-class ParenthesisLayout : public ExpressionLayout {
+class ParenthesisLayout final : public ExpressionLayout {
 public:
   ParenthesisLayout(ExpressionLayout * operandLayout);
-  ~ParenthesisLayout();
+  ~ParenthesisLayout() {
+    delete m_operandLayout;
+  }
   ParenthesisLayout(const ParenthesisLayout& other) = delete;
   ParenthesisLayout(ParenthesisLayout&& other) = delete;
   ParenthesisLayout& operator=(const ParenthesisLayout& other) = delete;

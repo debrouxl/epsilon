@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class GridLayout : public ExpressionLayout {
+class GridLayout final : public ExpressionLayout {
 public:
   GridLayout(ExpressionLayout ** entryLayouts, int numberOfRows, int numberOfColumns);
   ~GridLayout();

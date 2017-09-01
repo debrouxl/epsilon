@@ -22,9 +22,7 @@ CondensedSumLayout::CondensedSumLayout(ExpressionLayout * baseLayout, Expression
 CondensedSumLayout::~CondensedSumLayout() {
   delete m_baseLayout;
   delete m_subscriptLayout;
-  if (m_superscriptLayout) {
-    delete m_superscriptLayout;
-  }
+  delete m_superscriptLayout;
 }
 
 void CondensedSumLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {

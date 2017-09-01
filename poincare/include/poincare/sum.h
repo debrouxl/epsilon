@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Sum : public Sequence {
+class Sum final : public Sequence {
 public:
   Sum();
   Type type() const override;

@@ -10,7 +10,7 @@ namespace Poincare {
 
 class BinaryOperation : public Expression {
 public:
-  BinaryOperation();
+  BinaryOperation() : m_operands{nullptr, nullptr} {}
   BinaryOperation(Expression ** operands, bool cloneOperands = true);
   ~BinaryOperation();
   BinaryOperation(const BinaryOperation& other) = delete;

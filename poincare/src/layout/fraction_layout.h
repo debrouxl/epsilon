@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class FractionLayout : public ExpressionLayout {
+class FractionLayout final : public ExpressionLayout {
 public:
   FractionLayout(ExpressionLayout * numerator, ExpressionLayout * denominator);
   ~FractionLayout();

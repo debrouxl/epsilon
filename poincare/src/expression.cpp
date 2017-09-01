@@ -18,7 +18,7 @@ int poincare_expression_yyparse(Poincare::Expression ** expressionOutput);
 
 namespace Poincare {
 
-static Expression::CircuitBreaker sCircuitBreaker = nullptr;
+Expression::CircuitBreaker Expression::sCircuitBreaker = nullptr;
 
 #include <stdio.h>
 
@@ -238,10 +238,6 @@ bool Expression::isCommutative() const {
 
 int Expression::writeTextInBuffer(char * buffer, int bufferSize) const {
   return 0;
-}
-
-void Expression::setCircuitBreaker(CircuitBreaker cb) {
-  sCircuitBreaker = cb;
 }
 
 bool Expression::shouldStopProcessing() const {

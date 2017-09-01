@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ExpressionMatrix : public Matrix {
+class ExpressionMatrix final : public Matrix {
 public:
   ExpressionMatrix(MatrixData * matrixData);
   ExpressionMatrix(Expression ** newOperands, int numberOfOperands, int m_numberOfRows, int m_numberOfColumns, bool cloneOperands);

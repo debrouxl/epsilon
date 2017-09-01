@@ -19,14 +19,6 @@ Function::Function(const char * name, int requiredNumberOfArguments) :
 {
 }
 
-void Function::setArgument(Expression ** args, int numberOfArguments, bool clone) {
-  build(args, numberOfArguments, clone);
-}
-
-void Function::setArgument(ListData * listData, bool clone) {
-  build(listData->operands(), listData->numberOfOperands(), clone);
-}
-
 Function::~Function() {
   clean();
 }

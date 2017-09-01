@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Factorial : public Function {
+class Factorial final : public Function {
 public:
   Factorial(Expression * argument, bool clone = true);
   Type type() const override;

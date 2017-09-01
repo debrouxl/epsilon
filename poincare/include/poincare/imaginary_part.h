@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ImaginaryPart : public Function {
+class ImaginaryPart final : public Function {
 public:
   ImaginaryPart();
   Type type() const override;

@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class Derivative : public Function {
+class Derivative final : public Function {
 public:
   Derivative();
   Type type() const override;

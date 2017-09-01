@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Conjugate : public Function {
+class Conjugate final : public Function {
 public:
   Conjugate();
   Type type() const override;

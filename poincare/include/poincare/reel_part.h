@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ReelPart : public Function {
+class ReelPart final : public Function {
 public:
   ReelPart();
   Type type() const override;

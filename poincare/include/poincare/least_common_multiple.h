@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class LeastCommonMultiple : public Function {
+class LeastCommonMultiple final : public Function {
 public:
   LeastCommonMultiple();
   Type type() const override;

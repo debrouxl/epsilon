@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class IntegralLayout : public ExpressionLayout {
+class IntegralLayout final : public ExpressionLayout {
 public:
   IntegralLayout(ExpressionLayout * lowerBoundLayout, ExpressionLayout * upperBoundLayout, ExpressionLayout * integrandLayout);
   ~IntegralLayout();

@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class NthRootLayout : public ExpressionLayout {
+class NthRootLayout final : public ExpressionLayout {
 public:
   NthRootLayout(ExpressionLayout * radicandLayout, ExpressionLayout * indexLayout);
   ~NthRootLayout();

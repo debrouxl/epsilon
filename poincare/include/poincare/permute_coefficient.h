@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class PermuteCoefficient : public Function {
+class PermuteCoefficient final : public Function {
 public:
   PermuteCoefficient();
   Type type() const override;

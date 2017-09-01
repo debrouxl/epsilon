@@ -20,8 +20,12 @@ public:
   Function(Function&& other) = delete;
   Function& operator=(const Function& other) = delete;
   Function& operator=(Function&& other) = delete;
-  void setArgument(Expression ** args, int numberOfArguments, bool clone = true);
-  void setArgument(ListData * listData, bool clone = true);
+  void setArgument(Expression ** args, int numberOfArguments, bool clone = true) {
+    build(args, numberOfArguments, clone);
+  }
+  void setArgument(ListData * listData, bool clone = true) {
+    build(listData->operands(), listData->numberOfOperands(), clone);
+  }
   bool hasValidNumberOfArguments() const override;
   const Expression * operand(int i) const override;
   int numberOfOperands() const override;

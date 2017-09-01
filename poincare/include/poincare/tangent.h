@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Tangent : public Function {
+class Tangent final : public Function {
 public:
   Tangent();
   Type type() const override;

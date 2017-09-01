@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class GreatCommonDivisor : public Function {
+class GreatCommonDivisor final : public Function {
 public:
   GreatCommonDivisor();
   Type type() const override;

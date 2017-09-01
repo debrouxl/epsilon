@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class Store : public Expression {
+class Store final : public Expression {
 public:
   Store(Symbol * symbol, Expression * value, bool clone = true);
   ~Store();

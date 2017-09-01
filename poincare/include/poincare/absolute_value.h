@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class AbsoluteValue : public Function {
+class AbsoluteValue final : public Function {
 public:
   AbsoluteValue();
   Type type() const override;
