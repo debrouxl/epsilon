@@ -31,10 +31,17 @@ public:
   static SpecialSymbols matrixSymbol(char index);
   Symbol(char name);
   Type type() const override;
-  char name() const;
+  char name() const {
+    return m_name;
+  }
   Expression * clone() const override;
   bool valueEquals(const Expression * e) const override;
-  bool isMatrixSymbol() const;
+  bool isMatrixSymbol() const {
+    if (m_name >= (char)SpecialSymbols::M0 && m_name <= (char)SpecialSymbols::M9) {
+      return true;
+    }
+    return false;
+  }
 private:
   Evaluation<float> * privateEvaluate(SinglePrecision p, Context& context, AngleUnit angleUnit) const override { return templatedEvaluate<float>(context, angleUnit); }
   Evaluation<double> * privateEvaluate(DoublePrecision p, Context& context, AngleUnit angleUnit) const override { return templatedEvaluate<double>(context, angleUnit); }

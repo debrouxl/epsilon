@@ -56,33 +56,17 @@ Expression::Type Symbol::type() const {
   return Expression::Type::Symbol;
 }
 
-char Symbol::name() const {
-  return m_name;
-}
-
 ExpressionLayout * Symbol::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
   if (m_name == SpecialSymbols::Ans) {
     return new StringLayout("ans", 3);
   }
-  if (m_name == SpecialSymbols::un) {
-    return new BaselineRelativeLayout(new StringLayout("u", 1), new StringLayout("n",1, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
-  }
-  if (m_name == SpecialSymbols::un1) {
-    return new BaselineRelativeLayout(new StringLayout("u", 1), new StringLayout("n+1",3, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
-  }
-  if (m_name == SpecialSymbols::vn) {
-    return new BaselineRelativeLayout(new StringLayout("v", 1), new StringLayout("n",1, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
-  }
-  if (m_name == SpecialSymbols::vn1) {
-    return new BaselineRelativeLayout(new StringLayout("v", 1), new StringLayout("n+1",3, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
-  }
-  if (m_name == SpecialSymbols::wn) {
-    return new BaselineRelativeLayout(new StringLayout("w", 1), new StringLayout("n",1, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
-  }
-  if (m_name == SpecialSymbols::wn1) {
-    return new BaselineRelativeLayout(new StringLayout("w", 1), new StringLayout("n+1",3, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
+  if (m_name >= SpecialSymbols::un1 && m_name <= SpecialSymbols::wn1) {
+    const char letter = ((m_name - (char)SpecialSymbols::un1) / 2) + 'u';
+    const char * string = (m_name & 1) ? "n+1" : "n";
+    int strLength = (m_name & 1) ? 3 : 1;
+    return new BaselineRelativeLayout(new StringLayout(&letter, 1), new StringLayout(string, strLength, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
   }
   if (isMatrixSymbol()) {
     const char mi[] = { 'M', (char)(m_name-(char)SpecialSymbols::M0+'0') };
@@ -98,13 +82,6 @@ Expression * Symbol::clone() const {
 bool Symbol::valueEquals(const Expression * e) const {
   assert(e->type() == Expression::Type::Symbol);
   return (m_name == ((Symbol *)e)->m_name);
-}
-
-bool Symbol::isMatrixSymbol() const {
-  if (m_name >= (char)SpecialSymbols::M0 && m_name <= (char)SpecialSymbols::M9) {
-    return true;
-  }
-  return false;
 }
 
 }

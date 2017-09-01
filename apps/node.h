@@ -9,11 +9,17 @@ public:
     m_label(label),
     m_numberOfChildren(numberOfChildren)
   {
-  };
+  }
   virtual const Node * children(int index) const = 0;
-  I18n::Message label() const;
-  int numberOfChildren() const;
-  bool isNull() const;
+  I18n::Message label() const {
+    return m_label;
+  }
+  int numberOfChildren() const {
+    return m_numberOfChildren;
+  }
+  bool isNull() const {
+    return (m_label == I18n::Message::Default);
+  }
 protected:
   I18n::Message m_label;
   int m_numberOfChildren;
