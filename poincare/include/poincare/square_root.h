@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class SquareRoot : public Function {
+class SquareRoot final : public Function {
 public:
   SquareRoot();
   Type type() const override;

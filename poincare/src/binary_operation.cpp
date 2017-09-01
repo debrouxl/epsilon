@@ -8,12 +8,6 @@ extern "C" {
 
 namespace Poincare {
 
-BinaryOperation::BinaryOperation()
-{
-  m_operands[0] = nullptr;
-  m_operands[1] = nullptr;
-}
-
 BinaryOperation::BinaryOperation(Expression ** operands, bool cloneOperands) {
   assert(operands != nullptr);
   assert(operands[0] != nullptr);
@@ -28,12 +22,10 @@ BinaryOperation::BinaryOperation(Expression ** operands, bool cloneOperands) {
 }
 
 BinaryOperation::~BinaryOperation() {
-  if (m_operands[1] != nullptr) {
-    delete m_operands[1];
-  }
-  if (m_operands[0] != nullptr) {
-    delete m_operands[0];
-  }
+  delete m_operands[1];
+  m_operands[1] = nullptr;
+  delete m_operands[0];
+  m_operands[0] = nullptr;
 }
 
 bool BinaryOperation::hasValidNumberOfArguments() const {

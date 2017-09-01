@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Round : public Function {
+class Round final : public Function {
 public:
   Round();
   Type type() const override;

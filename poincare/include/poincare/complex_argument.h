@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class ComplexArgument : public Function {
+class ComplexArgument final : public Function {
 public:
   ComplexArgument();
   Type type() const override;

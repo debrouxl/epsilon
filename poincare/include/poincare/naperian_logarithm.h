@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class NaperianLogarithm : public Function {
+class NaperianLogarithm final : public Function {
 public:
   NaperianLogarithm();
   Type type() const override;

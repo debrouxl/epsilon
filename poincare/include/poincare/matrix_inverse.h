@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class MatrixInverse : public Function {
+class MatrixInverse final : public Function {
 public:
   MatrixInverse();
   Type type() const override;

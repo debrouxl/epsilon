@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class BinomialCoefficient : public Function {
+class BinomialCoefficient final : public Function {
 public:
   BinomialCoefficient();
   Type type() const override;

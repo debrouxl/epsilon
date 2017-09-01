@@ -71,16 +71,4 @@ void MatrixData::pushListData(ListData * listData, bool clone) {
   m_numberOfRows++;
 }
 
-int MatrixData::numberOfRows() {
-  return m_numberOfRows;
-}
-
-int MatrixData::numberOfColumns() {
-  return m_numberOfColumns;
-}
-
-Expression ** MatrixData::operands() const {
-  return m_operands;
-}
-
 }

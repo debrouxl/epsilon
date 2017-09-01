@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Sine : public Function {
+class Sine final : public Function {
 public:
   Sine();
   Type type() const override;

@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class HyperbolicArcTangent : public Function {
+class HyperbolicArcTangent final : public Function {
 public:
   HyperbolicArcTangent();
   Type type() const override;

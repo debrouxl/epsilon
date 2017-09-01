@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class DivisionQuotient : public Function {
+class DivisionQuotient final : public Function {
 public:
   DivisionQuotient();
   Type type() const override;

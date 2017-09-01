@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Ceiling : public Function {
+class Ceiling final : public Function {
 public:
   Ceiling();
   Type type() const override;

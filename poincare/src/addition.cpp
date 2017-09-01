@@ -10,6 +10,8 @@ extern "C" {
 
 namespace Poincare {
 
+const Addition Addition::staticAdd;
+
 Expression::Type Addition::type() const {
   return Type::Addition;
 }
@@ -29,18 +31,6 @@ ExpressionLayout * Addition::privateCreateLayout(FloatDisplayMode floatDisplayMo
 template<typename T>
 Complex<T> Addition::compute(const Complex<T> c, const Complex<T> d) {
   return Complex<T>::Cartesian(c.a()+d.a(), c.b()+d.b());
-}
-
-template<typename T>
-Evaluation<T> * Addition::computeOnMatrices(Evaluation<T> * m, Evaluation<T> * n) {
-  Addition a;
-  return a.computeOnComplexMatrices(m,n);
-}
-
-template<typename T>
-Evaluation<T> * Addition::computeOnComplexAndMatrix(const Complex<T> * c, Evaluation<T> * m) {
-  Addition a;
-  return a.computeOnComplexAndComplexMatrix(c,m);
 }
 
 Expression * Addition::cloneWithDifferentOperands(Expression** newOperands,

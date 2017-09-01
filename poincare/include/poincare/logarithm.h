@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Logarithm : public Function {
+class Logarithm final : public Function {
 public:
   Logarithm();
   bool hasValidNumberOfArguments() const override;

@@ -9,7 +9,7 @@ namespace Poincare {
 template<class T>
 class Complex;
 
-class MatrixData {
+class MatrixData final {
 public:
   MatrixData(ListData * listData, bool clone);
   MatrixData(Expression ** newOperands, int numberOfOperands, int m_numberOfRows, int m_numberOfColumns, bool cloneOperands);
@@ -19,9 +19,15 @@ public:
   MatrixData& operator=(const MatrixData& other) = delete;
   MatrixData& operator=(MatrixData&& other) = delete;
   void pushListData(ListData * listData, bool clone);
-  int numberOfRows();
-  int numberOfColumns();
-  Expression ** operands() const;
+  int numberOfRows() const {
+    return m_numberOfRows;
+  }
+  int numberOfColumns() const {
+    return m_numberOfColumns;
+  }
+  Expression ** operands() const {
+    return m_operands;
+  }
 private:
   int m_numberOfRows;
   int m_numberOfColumns;

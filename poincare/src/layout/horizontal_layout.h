@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class HorizontalLayout : public ExpressionLayout {
+class HorizontalLayout final : public ExpressionLayout {
 public:
   HorizontalLayout(ExpressionLayout ** layouts, int number_of_children);
   ~HorizontalLayout();

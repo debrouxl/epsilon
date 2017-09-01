@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class FloorLayout : public BracketLayout {
+class FloorLayout final : public BracketLayout {
 public:
   FloorLayout(ExpressionLayout * operandLayout) : BracketLayout(operandLayout) {}
   ~FloorLayout() {}

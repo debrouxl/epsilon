@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Determinant : public Function {
+class Determinant final : public Function {
 public:
   Determinant();
   Type type() const override;

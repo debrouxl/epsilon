@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Power : public BinaryOperation {
+class Power final : public BinaryOperation {
   using BinaryOperation::BinaryOperation;
 public:
   Type type() const override;

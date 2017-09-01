@@ -15,14 +15,6 @@ StringLayout::StringLayout(const char * string, size_t length, KDText::FontSize 
   m_baseline = KDText::charSize(m_fontSize).height();
 }
 
-StringLayout::~StringLayout() {
-  delete[] m_string;
-}
-
-char * StringLayout::text() {
-  return m_string;
-}
-
 ExpressionLayout * StringLayout::child(uint16_t index) {
   return nullptr;
 }

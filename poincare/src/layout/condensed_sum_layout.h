@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class CondensedSumLayout : public ExpressionLayout {
+class CondensedSumLayout final : public ExpressionLayout {
 public:
   CondensedSumLayout(ExpressionLayout * baseLayout, ExpressionLayout * subscriptLayout, ExpressionLayout * superscriptLayout = nullptr);
   ~CondensedSumLayout();

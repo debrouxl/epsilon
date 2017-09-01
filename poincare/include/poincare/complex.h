@@ -22,7 +22,7 @@ namespace PrintFloat {
 }
 
 template<typename T>
-class Complex : public Evaluation<T> {
+class Complex final : public Evaluation<T> {
 public:
   Complex() : m_a(0), m_b(0) {}
   static Complex<T> Float(T x);

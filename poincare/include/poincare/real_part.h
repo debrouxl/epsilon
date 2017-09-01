@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class RealPart : public Function {
+class RealPart final : public Function {
 public:
   RealPart();
   Type type() const override;

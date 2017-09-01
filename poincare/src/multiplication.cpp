@@ -11,6 +11,8 @@ extern "C" {
 
 namespace Poincare {
 
+const Multiplication Multiplication::staticMul;
+
 Expression::Type Multiplication::type() const {
   return Expression::Type::Multiplication;
 }
@@ -35,12 +37,6 @@ Expression * Multiplication::cloneWithDifferentOperands(Expression** newOperands
 template<typename T>
 Complex<T> Multiplication::compute(const Complex<T> c, const Complex<T> d) {
   return Complex<T>::Cartesian(c.a()*d.a()-c.b()*d.b(), c.b()*d.a() + c.a()*d.b());
-}
-
-template<typename T>
-Evaluation<T> * Multiplication::computeOnComplexAndMatrix(const Complex<T> * c, Evaluation<T> * m) {
-  Multiplication mul;
-  return mul.computeOnComplexAndComplexMatrix(c, m);
 }
 
 template<typename T>

@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class Fraction : public BinaryOperation {
+class Fraction final : public BinaryOperation {
   using BinaryOperation::BinaryOperation;
 public:
   Type type() const override;

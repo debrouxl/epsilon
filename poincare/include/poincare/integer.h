@@ -10,7 +10,7 @@ typedef uint64_t double_native_uint_t;
 
 namespace Poincare {
 
-class Integer : public LeafExpression {
+class Integer final : public LeafExpression {
 public:
   Integer(native_int_t i);
   Integer(const char * digits, bool negative = false); // Digits are NOT NULL-terminated

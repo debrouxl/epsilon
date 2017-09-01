@@ -18,7 +18,7 @@ int poincare_expression_yyparse(Poincare::Expression ** expressionOutput);
 
 namespace Poincare {
 
-static Expression::CircuitBreaker sCircuitBreaker = nullptr;
+Expression::CircuitBreaker Expression::sCircuitBreaker = nullptr;
 
 #include <stdio.h>
 
@@ -85,11 +85,6 @@ template<typename T> T Expression::approximate(const char * text, Context& conte
   T result = evaluation->toScalar();
   delete evaluation;
   return result;
-}
-
-template<typename T> T Expression::epsilon() {
-  static T epsilon = sizeof(T) == sizeof(double) ? 1E-15 : 1E-7f;
-  return epsilon;
 }
 
 #if POINCARE_SIMPLIFY
@@ -242,10 +237,6 @@ bool Expression::isCommutative() const {
 
 int Expression::writeTextInBuffer(char * buffer, int bufferSize) const {
   return 0;
-}
-
-void Expression::setCircuitBreaker(CircuitBreaker cb) {
-  sCircuitBreaker = cb;
 }
 
 bool Expression::shouldStopProcessing() const {
