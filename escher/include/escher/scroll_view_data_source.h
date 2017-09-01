@@ -5,9 +5,17 @@
 
 class ScrollViewDataSource {
 public:
-  ScrollViewDataSource();
-  KDPoint offset() const;
-  bool setOffset(KDPoint offset);
+  ScrollViewDataSource() : m_offset(KDPointZero) {}
+  KDPoint offset() const {
+    return m_offset;
+  }
+  bool setOffset(KDPoint offset) {
+  if (offset != m_offset) {
+    m_offset = offset;
+    return true;
+  }
+  return false;
+}
 private:
   KDPoint m_offset;
 };
