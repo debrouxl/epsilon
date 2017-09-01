@@ -27,8 +27,7 @@ ExpressionLayout * Subtraction::privateCreateLayout(FloatDisplayMode floatDispla
   assert(complexFormat != ComplexFormat::Default);
   ExpressionLayout * children_layouts[3];
   children_layouts[0] = m_operands[0]->createLayout(floatDisplayMode, complexFormat);
-  char string[2] = {'-', '\0'};
-  children_layouts[1] = new StringLayout(string, 1);
+  children_layouts[1] = new StringLayout("-", 1);
   children_layouts[2] = m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat);
   return new HorizontalLayout(children_layouts, 3);
 }

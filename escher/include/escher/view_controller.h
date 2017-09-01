@@ -5,6 +5,7 @@
 #include <escher/i18n.h>
 extern "C" {
 #include <stdint.h>
+#include <stddef.h>
 }
 
 /* ViewControllers are reponsible for
@@ -34,6 +35,7 @@ public:
   virtual View * view() = 0;
   virtual void viewWillAppear();
   virtual void viewDidDisappear();
+  static void convertFloatToText(double value, char * buffer, const char * header, size_t headerLength, const char * trailer, int precision);
 };
 
 #endif

@@ -66,7 +66,7 @@ ExpressionLayout * Store::privateCreateLayout(FloatDisplayMode floatDisplayMode,
   assert(complexFormat != ComplexFormat::Default);
   ExpressionLayout * childrenLayouts[3];
   childrenLayouts[0] = m_value->createLayout(floatDisplayMode, complexFormat);
-  const char stoSymbol[2] = {Ion::Charset::Sto, 0};
+  static const char stoSymbol[2] = {Ion::Charset::Sto, 0};
   childrenLayouts[1] = new StringLayout(stoSymbol, 1);
   childrenLayouts[2] = m_symbol->createLayout(floatDisplayMode, complexFormat);
   return new HorizontalLayout(childrenLayouts, 3);
