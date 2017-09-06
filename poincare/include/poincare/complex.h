@@ -26,7 +26,9 @@ class Complex final : public Evaluation<T> {
 public:
   Complex() : m_a(0), m_b(0) {}
   static Complex<T> Float(T x);
-  static Complex<T> Cartesian(T a, T b);
+  static Complex<T> Cartesian(T a, T b) {
+    return Complex(a,b);
+  }
   static Complex<T> Polar(T r, T theta);
   Complex(const char * integralPart, int integralPartLength, bool integralNegative,
         const char * fractionalPart, int fractionalPartLength,
@@ -38,7 +40,9 @@ public:
   int numberOfRows() const override;
   int numberOfColumns() const override;
   Expression::Type type() const override;
-  Complex<T> * clone() const override;
+  Complex<T> * clone() const override {
+    return new Complex<T>(*this);
+  }
   Evaluation<T> * cloneWithDifferentOperands(Expression** newOperands,
     int numberOfOperands, bool cloneOperands = true) const override;
   int writeTextInBuffer(char * buffer, int bufferSize) const override;
@@ -49,11 +53,17 @@ public:
   Evaluation<T> * createTrace() const override {
     return clone();
   }
-  T a() const;
-  T b() const;
+  T a() const {
+    return m_a;
+  }
+  T b() const {
+    return m_b;
+  }
   T r() const;
   T th() const;
-  Complex<T> conjugate() const;
+  Complex<T> conjugate() const {
+    return Cartesian(m_a, -m_b);
+  }
   /* The parameter 'DisplayMode' refers to the way to display float 'scientific'
    * or 'auto'. The scientific mode returns float with style -1.2E2 whereas
    * the auto mode tries to return 'natural' float like (0.021) and switches
@@ -67,8 +77,12 @@ public:
    * in buffer (excluding the last \O character) */
   static int convertFloatToText(T d, char * buffer, int bufferSize, int numberOfSignificantDigits, Expression::FloatDisplayMode mode = Expression::FloatDisplayMode::Default);
 private:
-  Complex(T a, T b);
-  const Complex<T> * complexOperand(int i) const override;
+  Complex(T a, T b) : m_a(a), m_b(b)
+  {
+  }
+  const Complex<T> * complexOperand(int i) const override {
+    return this;
+  }
   constexpr static int k_numberOfSignificantDigits = 7;
   ExpressionLayout * privateCreateLayout(Expression::FloatDisplayMode floatDisplayMode, Expression::ComplexFormat complexFormat) const override;
   Evaluation<float> * privateEvaluate(Expression::SinglePrecision p, Context& context, Expression::AngleUnit angleUnit) const override { return templatedEvaluate<float>(context, angleUnit); }

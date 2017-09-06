@@ -50,4 +50,6 @@ Complex<T> Cosine::compute(const Complex<T> c, AngleUnit angleUnit) {
   return HyperbolicCosine::compute(arg);
 }
 
+template Complex<double> Cosine::compute(const Complex<double> c, AngleUnit angleUnit);
+template Complex<float> Cosine::compute(const Complex<float> c, AngleUnit angleUnit);
 }
