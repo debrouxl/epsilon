@@ -85,7 +85,6 @@ template<typename T> Evaluation<T> * Power::templatedComputeOnComplexAndComplexM
 }
 
 template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrices(Evaluation<T> * m, Evaluation<T> * n) const {
-
   return new Complex<T>(Complex<T>::Float(NAN));
 }
 

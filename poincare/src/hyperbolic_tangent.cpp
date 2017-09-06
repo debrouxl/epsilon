@@ -36,4 +36,6 @@ Complex<T> HyperbolicTangent::compute(const Complex<T> c) {
   return Fraction::compute(arg1, arg2);
 }
 
+template Complex<double> HyperbolicTangent::compute(const Complex<double> c);
+template Complex<float> HyperbolicTangent::compute(const Complex<float> c);
 }
