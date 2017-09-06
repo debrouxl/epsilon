@@ -13,7 +13,6 @@ extern "C" {
 
 namespace Poincare {
 
-
 void PrintFloat::printBase10IntegerWithDecimalMarker(char * buffer, int bufferSize,  int i, int decimalMarkerPosition) {
   /* The decimal marker position is always preceded by a char, thus, it is never
    * in first position. When called by convertFloatToText, the buffer length is
@@ -44,11 +43,6 @@ void PrintFloat::printBase10IntegerWithDecimalMarker(char * buffer, int bufferSi
 template<typename T>
 Complex<T> Complex<T>::Float(T x) {
   return Complex(x,0);
-}
-
-template<typename T>
-Complex<T> Complex<T>::Cartesian(T a, T b) {
-  return Complex(a,b);
 }
 
 template<typename T>
@@ -128,11 +122,6 @@ Expression::Type Complex<T>::type() const {
 }
 
 template <class T>
-Complex<T> * Complex<T>::clone() const {
-  return new Complex<T>(*this);
-}
-
-template <class T>
 Evaluation<T> * Complex<T>::cloneWithDifferentOperands(Expression** newOperands,
     int numberOfOperands, bool cloneOperands) const {
   return this->clone();
@@ -146,16 +135,6 @@ int Complex<T>::writeTextInBuffer(char * buffer, int bufferSize) const {
 template <class T>
 Evaluation<T> * Complex<T>::createInverse() const {
   return new Complex<T>(Cartesian(1/m_a, -1/m_b));
-}
-
-template <class T>
-T Complex<T>::a() const {
-  return m_a;
-}
-
-template <class T>
-T Complex<T>::b() const {
-  return m_b;
 }
 
 template <class T>
@@ -208,11 +187,6 @@ T Complex<T>::th() const {
 }
 
 template <class T>
-Complex<T> Complex<T>::conjugate() const {
-  return Cartesian(m_a, -m_b);
-}
-
-template <class T>
 int Complex<T>::convertFloatToText(T f, char * buffer, int bufferSize,
     int numberOfSignificantDigits, Expression::FloatDisplayMode mode) {
   assert(numberOfSignificantDigits > 0);
@@ -240,30 +214,12 @@ int Complex<T>::convertFloatToText(T f, char * buffer, int bufferSize,
 }
 
 template <class T>
-Complex<T>::Complex(T a, T b) :
-  m_a(a),
-  m_b(b)
-{
-}
-
-template <class T>
-const Complex<T> * Complex<T>::complexOperand(int i) const {
-  return this;
-}
-
-template <class T>
 ExpressionLayout * Complex<T>::privateCreateLayout(Expression::FloatDisplayMode floatDisplayMode, Expression::ComplexFormat complexFormat) const {
   assert(floatDisplayMode != Expression::FloatDisplayMode::Default);
   if (complexFormat == Expression::ComplexFormat::Polar) {
     return createPolarLayout(floatDisplayMode);
   }
   return createCartesianLayout(floatDisplayMode);
-}
-
-template<typename T>
-template<typename U>
-Evaluation<U> * Complex<T>::templatedEvaluate(Context& context, Expression::AngleUnit angleUnit) const {
-  return new Complex<U>(Complex<U>::Cartesian((U)m_a, (U)m_b));
 }
 
 template <class T>
