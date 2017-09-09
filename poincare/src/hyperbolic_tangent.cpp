@@ -27,7 +27,7 @@ Expression * HyperbolicTangent::cloneWithDifferentOperands(Expression** newOpera
 }
 
 template<typename T>
-Complex<T> HyperbolicTangent::compute(const Complex<T> c) {
+Complex<T> HyperbolicTangent::compute(const Complex<T> & c) {
   if (c.b() == 0) {
     return Complex<T>::Float(std::tanh(c.a()));
   }
@@ -36,6 +36,6 @@ Complex<T> HyperbolicTangent::compute(const Complex<T> c) {
   return Fraction::compute(arg1, arg2);
 }
 
-template Complex<double> HyperbolicTangent::compute(const Complex<double> c);
-template Complex<float> HyperbolicTangent::compute(const Complex<float> c);
+template Complex<double> HyperbolicTangent::compute(const Complex<double> & c);
+template Complex<float> HyperbolicTangent::compute(const Complex<float> & c);
 }

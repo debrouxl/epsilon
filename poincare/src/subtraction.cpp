@@ -33,7 +33,7 @@ ExpressionLayout * Subtraction::privateCreateLayout(FloatDisplayMode floatDispla
 }
 
 template<typename T>
-Complex<T> Subtraction::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Subtraction::compute(const Complex<T> & c, const Complex<T> & d) {
   return Complex<T>::Cartesian(c.a()-d.a(), c.b() - d.b());
 }
 
@@ -46,5 +46,5 @@ template<typename T> Evaluation<T> * Subtraction::templatedComputeOnComplexAndCo
 
 }
 
-template Poincare::Complex<float> Poincare::Subtraction::compute<float>(Poincare::Complex<float>, Poincare::Complex<float>);
-template Poincare::Complex<double> Poincare::Subtraction::compute<double>(Poincare::Complex<double>, Poincare::Complex<double>);
+template Poincare::Complex<float> Poincare::Subtraction::compute<float>(const Poincare::Complex<float> &, const Poincare::Complex<float> &);
+template Poincare::Complex<double> Poincare::Subtraction::compute<double>(const Poincare::Complex<double> &, const Poincare::Complex<double> &);

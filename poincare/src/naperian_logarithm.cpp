@@ -28,7 +28,7 @@ Expression * NaperianLogarithm::cloneWithDifferentOperands(Expression** newOpera
 }
 
 template<typename T>
-Complex<T> NaperianLogarithm::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> NaperianLogarithm::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
     return Complex<T>::Float(NAN);
   }

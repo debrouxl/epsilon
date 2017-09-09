@@ -24,11 +24,6 @@ Expression * ImaginaryPart::cloneWithDifferentOperands(Expression** newOperands,
   return ip;
 }
 
-template<typename T>
-Complex<T> ImaginaryPart::templatedComputeComplex(const Complex<T> c) const {
-  return Complex<T>::Float(c.b());
-}
-
 }
 
 

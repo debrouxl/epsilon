@@ -33,7 +33,7 @@ ExpressionLayout * SquareRoot::privateCreateLayout(FloatDisplayMode floatDisplay
 }
 
 template<typename T>
-Complex<T> SquareRoot::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> SquareRoot::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() == 0 && c.a() >= 0) {
     return Complex<T>::Float(std::sqrt(c.a()));
   }

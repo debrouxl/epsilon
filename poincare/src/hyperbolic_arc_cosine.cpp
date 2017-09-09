@@ -24,7 +24,7 @@ Expression * HyperbolicArcCosine::cloneWithDifferentOperands(Expression** newOpe
 }
 
 template<typename T>
-Complex<T> HyperbolicArcCosine::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> HyperbolicArcCosine::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
     return Complex<T>::Float(NAN);
   }

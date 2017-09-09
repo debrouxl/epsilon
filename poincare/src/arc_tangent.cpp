@@ -24,7 +24,7 @@ Expression * ArcTangent::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> ArcTangent::templatedComputeComplex(const Complex<T> c, AngleUnit angleUnit) const {
+Complex<T> ArcTangent::templatedComputeComplex(const Complex<T> & c, AngleUnit angleUnit) const {
   assert(angleUnit != AngleUnit::Default);
   if (c.b() != 0) {
     return Complex<T>::Float(NAN);

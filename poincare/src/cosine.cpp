@@ -26,7 +26,7 @@ Expression * Cosine::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Cosine::compute(const Complex<T> c, AngleUnit angleUnit) {
+Complex<T> Cosine::compute(const Complex<T> & c, AngleUnit angleUnit) {
   assert(angleUnit != AngleUnit::Default);
   if (c.b() == 0) {
     T input = c.a();
@@ -50,6 +50,6 @@ Complex<T> Cosine::compute(const Complex<T> c, AngleUnit angleUnit) {
   return HyperbolicCosine::compute(arg);
 }
 
-template Complex<double> Cosine::compute(const Complex<double> c, AngleUnit angleUnit);
-template Complex<float> Cosine::compute(const Complex<float> c, AngleUnit angleUnit);
+template Complex<double> Cosine::compute(const Complex<double> & c, AngleUnit angleUnit);
+template Complex<float> Cosine::compute(const Complex<float> & c, AngleUnit angleUnit);
 }
