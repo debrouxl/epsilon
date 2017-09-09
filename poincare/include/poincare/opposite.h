@@ -21,7 +21,7 @@ public:
   Type type() const override;
   Expression * cloneWithDifferentOperands(Expression** newOperands,
     int numnerOfOperands, bool cloneOperands = true) const override;
-  template<typename T> static Complex<T> compute(const Complex<T> c);
+  template<typename T> static Complex<T> compute(const Complex<T> & c);
   template<typename T> static Evaluation<T> * computeOnMatrix(Evaluation<T> * m);
 private:
   Evaluation<float> * privateEvaluate(SinglePrecision p, Context& context, AngleUnit angleUnit) const override { return templatedEvaluate<float>(context, angleUnit); }

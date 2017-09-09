@@ -51,8 +51,8 @@ protected:
   }
   template<typename T> Evaluation<T> * templatedComputeOnComplexMatrices(Evaluation<T> * m, Evaluation<T> * n) const;
 
-  virtual Complex<float> privateCompute(const Complex<float> c, const Complex<float> d) const = 0;
-  virtual Complex<double> privateCompute(const Complex<double> c, const Complex<double> d) const = 0;
+  virtual Complex<float> privateCompute(const Complex<float> & c, const Complex<float> & d) const = 0;
+  virtual Complex<double> privateCompute(const Complex<double> & c, const Complex<double> & d) const = 0;
 };
 
 }

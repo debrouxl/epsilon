@@ -26,7 +26,7 @@ Expression * Ceiling::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Ceiling::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> Ceiling::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
     return Complex<T>::Float(NAN);
   }

@@ -43,7 +43,7 @@ Expression * Opposite::clone() const {
 }
 
 template<typename T>
-Complex<T> Opposite::compute(const Complex<T> c) {
+Complex<T> Opposite::compute(const Complex<T> & c) {
   return Complex<T>::Cartesian(-c.a(), -c.b());
 }
 
@@ -94,5 +94,5 @@ Expression * Opposite::cloneWithDifferentOperands(Expression** newOperands,
 
 }
 
-template Poincare::Complex<float> Poincare::Opposite::compute<float>(Poincare::Complex<float>);
-template Poincare::Complex<double> Poincare::Opposite::compute<double>(Poincare::Complex<double>);
+template Poincare::Complex<float> Poincare::Opposite::compute<float>(const Poincare::Complex<float> &);
+template Poincare::Complex<double> Poincare::Opposite::compute<double>(const Poincare::Complex<double> &);

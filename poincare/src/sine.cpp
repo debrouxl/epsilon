@@ -27,7 +27,7 @@ Expression * Sine::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Sine::compute(const Complex<T> c, AngleUnit angleUnit) {
+Complex<T> Sine::compute(const Complex<T> & c, AngleUnit angleUnit) {
   if (c.b() == 0) {
     T input = c.a();
     if (angleUnit == AngleUnit::Degree) {
@@ -45,5 +45,8 @@ Complex<T> Sine::compute(const Complex<T> c, AngleUnit angleUnit) {
   Complex<T> sinh = HyperbolicSine::compute(arg);
   return Multiplication::compute(Complex<T>::Cartesian(0, -1), sinh);
 }
+
+template Poincare::Complex<float> Poincare::Sine::compute<float>(const Poincare::Complex<float> &, AngleUnit angleUnit);
+template Poincare::Complex<double> Poincare::Sine::compute<double>(const Poincare::Complex<double> &, AngleUnit angleUnit);
 
 }

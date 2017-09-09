@@ -25,11 +25,6 @@ Expression * RealPart::cloneWithDifferentOperands(Expression** newOperands,
   return rp;
 }
 
-template<typename T>
-Complex<T> RealPart::templatedComputeComplex(const Complex<T> c) const {
-  return Complex<T>::Float(c.a());
-}
-
 }
 
 

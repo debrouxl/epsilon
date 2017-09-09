@@ -24,7 +24,7 @@ Expression * HyperbolicArcTangent::cloneWithDifferentOperands(Expression** newOp
 }
 
 template<typename T>
-Complex<T> HyperbolicArcTangent::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> HyperbolicArcTangent::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
     return Complex<T>::Float(NAN);
   }

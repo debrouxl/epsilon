@@ -48,7 +48,7 @@ Evaluation<T> * NthRoot::templatedEvaluate(Context& context, AngleUnit angleUnit
 }
 
 template<typename T>
-Complex<T> NthRoot::compute(const Complex<T> c, const Complex<T> d) const {
+Complex<T> NthRoot::compute(const Complex<T> & c, const Complex<T> & d) const {
   if (c.a() >= 0 && c.b() == 0 && d.b() == 0) {
     return Complex<T>::Float(std::pow(c.a(), 1/d.a()));
   }

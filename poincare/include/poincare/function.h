@@ -33,10 +33,10 @@ public:
   int numberOfOperands() const override;
   Expression * clone() const override;
 protected:
-  virtual Complex<float> computeComplex(const Complex<float> c, AngleUnit angleUnit) const {
+  virtual Complex<float> computeComplex(const Complex<float> & c, AngleUnit angleUnit) const {
     return Complex<float>::Float(NAN);
   }
-  virtual Complex<double> computeComplex(const Complex<double> c, AngleUnit angleUnit) const {
+  virtual Complex<double> computeComplex(const Complex<double> & c, AngleUnit angleUnit) const {
     return Complex<double>::Float(NAN);
   }
   virtual Evaluation<float> * privateEvaluate(SinglePrecision p, Context& context, AngleUnit angleUnit) const override { return templatedEvaluate<float>(context, angleUnit); }

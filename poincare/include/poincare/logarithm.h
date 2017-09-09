@@ -17,13 +17,13 @@ private:
   Evaluation<double> * privateEvaluate(DoublePrecision p, Context& context, AngleUnit angleUnit) const override { return templatedEvaluate<double>(context, angleUnit); }
  template<typename T> Evaluation<T> * templatedEvaluate(Context& context, AngleUnit angleUnit) const;
   ExpressionLayout * privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const override;
-  Complex<float> computeComplex(const Complex<float> c, AngleUnit angleUnit) const override {
+  Complex<float> computeComplex(const Complex<float> & c, AngleUnit angleUnit) const override {
     return templatedComputeComplex(c);
   }
-  Complex<double> computeComplex(const Complex<double> c, AngleUnit angleUnit) const override {
+  Complex<double> computeComplex(const Complex<double> & c, AngleUnit angleUnit) const override {
     return templatedComputeComplex(c);
   }
-  template<typename T> Complex<T> templatedComputeComplex(const Complex<T> c) const;
+  template<typename T> Complex<T> templatedComputeComplex(const Complex<T> & c) const;
 };
 
 }
