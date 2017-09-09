@@ -54,7 +54,7 @@ float cosf(float x);
 float coshf(float x);
 float expf(float x);
 float expm1f(float x);
-float fabsf(float x);
+#define fabsf(x) __builtin_fabsf(x)
 float floorf(float x);
 float fmodf(float x, float y);
 float lgammaf(float x);
@@ -69,7 +69,7 @@ float roundf(float x);
 float scalbnf(float x, int n);
 float sinf(float x);
 float sinhf(float x);
-float sqrtf(float x);
+#define sqrtf(x) __builtin_sqrtf(x)
 float tanf(float x);
 float tanhf(float x);
 
@@ -117,7 +117,7 @@ double cos(double x);
 double cosh(double x);
 double exp(double x);
 double expm1(double x);
-double fabs(double x);
+#define fabs(x) __builtin_fabs(x)
 double floor(double x);
 double lgamma(double x);
 double lgamma_r(double x, int *signgamp);
@@ -129,7 +129,7 @@ double round(double x);
 double scalbn(double x, int n);
 double sin(double x);
 double sinh(double x);
-double sqrt(double x);
+#define sqrt(x) __builtin_sqrt(x)
 double tan(double x);
 double tanh(double x);
 

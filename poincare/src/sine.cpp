@@ -46,4 +46,7 @@ Complex<T> Sine::compute(const Complex<T> & c, AngleUnit angleUnit) {
   return Multiplication::compute(Complex<T>::Cartesian(0, -1), sinh);
 }
 
+template Poincare::Complex<float> Poincare::Sine::compute<float>(const Poincare::Complex<float> &, AngleUnit angleUnit);
+template Poincare::Complex<double> Poincare::Sine::compute<double>(const Poincare::Complex<double> &, AngleUnit angleUnit);
+
 }
