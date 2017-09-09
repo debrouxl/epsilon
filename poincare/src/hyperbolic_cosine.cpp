@@ -29,7 +29,7 @@ Expression * HyperbolicCosine::cloneWithDifferentOperands(Expression** newOperan
 }
 
 template<typename T>
-Complex<T> HyperbolicCosine::compute(const Complex<T> c) {
+Complex<T> HyperbolicCosine::compute(const Complex<T> & c) {
   if (c.b() == 0) {
     return Complex<T>::Float(std::cosh(c.a()));
   }
@@ -39,5 +39,10 @@ Complex<T> HyperbolicCosine::compute(const Complex<T> c) {
   Complex<T> sum = Addition::compute(exp1, exp2);
   return Fraction::compute(sum, Complex<T>::Float(2));
 }
+
+template class Poincare::Complex<float>;
+template class Poincare::Complex<double>;
+template Complex<double> HyperbolicCosine::compute(const Complex<double> & c);
+template Complex<float> HyperbolicCosine::compute(const Complex<float> & c);
 
 }

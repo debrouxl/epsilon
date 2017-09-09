@@ -26,7 +26,7 @@ Expression * Factorial::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Factorial::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> Factorial::templatedComputeComplex(const Complex<T> & c) const {
   T n = c.a();
   if (c.b() != 0 || isnan(n) || n != (int)n || n < 0) {
     return Complex<T>::Float(NAN);

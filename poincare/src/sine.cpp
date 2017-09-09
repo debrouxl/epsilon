@@ -27,7 +27,7 @@ Expression * Sine::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Sine::compute(const Complex<T> c, AngleUnit angleUnit) {
+Complex<T> Sine::compute(const Complex<T> & c, AngleUnit angleUnit) {
   if (c.b() == 0) {
     T input = c.a();
     if (angleUnit == AngleUnit::Degree) {

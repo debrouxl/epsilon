@@ -25,11 +25,6 @@ Expression * ReelPart::cloneWithDifferentOperands(Expression** newOperands,
   return rp;
 }
 
-template<typename T>
-Complex<T> ReelPart::templatedComputeComplex(const Complex<T> c) const {
-  return Complex<T>::Float(c.a());
-}
-
 }
 
 

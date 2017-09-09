@@ -27,7 +27,7 @@ Expression * Conjugate::cloneWithDifferentOperands(Expression** newOperands,
 }
 
 template<typename T>
-Complex<T> Conjugate::templatedComputeComplex(const Complex<T> c) const {
+Complex<T> Conjugate::templatedComputeComplex(const Complex<T> & c) const {
   return c.conjugate();
 }
 

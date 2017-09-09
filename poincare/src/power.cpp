@@ -33,7 +33,7 @@ ExpressionLayout * Power::privateCreateLayout(FloatDisplayMode floatDisplayMode,
 }
 
 template<typename T>
-Complex<T> Power::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Power::compute(const Complex<T> & c, const Complex<T> & d) {
   // c == c.r * e^(c.th*i)
   // d == d.a + d.b*i
   // c^d == e^(ln(c^d))
@@ -88,6 +88,6 @@ template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrices(Ev
   return new Complex<T>(Complex<T>::Float(NAN));
 }
 
-template Complex<float> Power::compute<float>(Complex<float>, Complex<float>);
-template Complex<double> Power::compute<double>(Complex<double>, Complex<double>);
+template Complex<float> Power::compute<float>(const Complex<float> &, const Complex<float> &);
+template Complex<double> Power::compute<double>(const Complex<double> &, const Complex<double> &);
 }

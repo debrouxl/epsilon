@@ -30,7 +30,7 @@ Expression::Type Tangent::type() const {
 }
 
 template<typename T>
-Complex<T> Tangent::templatedComputeComplex(const Complex<T> c, AngleUnit angleUnit) const {
+Complex<T> Tangent::templatedComputeComplex(const Complex<T> & c, AngleUnit angleUnit) const {
   Complex<T> result = Fraction::compute(Sine::compute(c, angleUnit), Cosine::compute(c, angleUnit));
   if (!isnan(result.a()) && !isnan(result.b())) {
     return result;

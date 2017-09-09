@@ -28,7 +28,7 @@ Expression::Type Fraction::type() const {
 }
 
 template<typename T>
-Complex<T> Fraction::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Fraction::compute(const Complex<T> & c, const Complex<T> & d) {
   // We want to avoid multiplies in the middle of the calculation that could overflow.
   // aa, ab, ba, bb, min, max = |d.a| <= |d.b| ? (c.a, c.b, -c.a, c.b, d.a, d.b) : (c.b, c.a, c.b, -c.a, d.b, d.a)
   // c    c.a+c.b*i   d.a-d.b*i   1/max    (c.a+c.b*i) * (d.a-d.b*i) / max
@@ -89,7 +89,7 @@ template<typename T> Evaluation<T> * Fraction::templatedComputeOnComplexMatrices
   return result;
 }
 
-template Complex<float> Fraction::compute(const Complex<float>, const Complex<float>);
-template Complex<double> Fraction::compute(const Complex<double>, const Complex<double>);
+template Complex<float> Fraction::compute(const Complex<float> &, const Complex<float> &);
+template Complex<double> Fraction::compute(const Complex<double> &, const Complex<double> &);
 
 }

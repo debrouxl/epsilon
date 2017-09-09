@@ -35,7 +35,7 @@ Expression * Multiplication::cloneWithDifferentOperands(Expression** newOperands
 }
 
 template<typename T>
-Complex<T> Multiplication::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Multiplication::compute(const Complex<T> & c, const Complex<T> & d) {
   return Complex<T>::Cartesian(c.a()*d.a()-c.b()*d.b(), c.b()*d.a() + c.a()*d.b());
 }
 
@@ -66,5 +66,5 @@ Evaluation<T> * Multiplication::computeOnMatrices(Evaluation<T> * m, Evaluation<
 template Poincare::Evaluation<float>* Poincare::Multiplication::computeOnComplexAndMatrix<float>(Poincare::Complex<float> const*, Poincare::Evaluation<float>*);
 template Poincare::Evaluation<double>* Poincare::Multiplication::computeOnComplexAndMatrix<double>(Poincare::Complex<double> const*, Poincare::Evaluation<double>*);
 }
-template Poincare::Complex<float> Poincare::Multiplication::compute<float>(Poincare::Complex<float>, Poincare::Complex<float>);
-template Poincare::Complex<double> Poincare::Multiplication::compute<double>(Poincare::Complex<double>, Poincare::Complex<double>);
+template Poincare::Complex<float> Poincare::Multiplication::compute<float>(const Poincare::Complex<float> &, const Poincare::Complex<float> &);
+template Poincare::Complex<double> Poincare::Multiplication::compute<double>(const Poincare::Complex<double> &, const Poincare::Complex<double> &);
