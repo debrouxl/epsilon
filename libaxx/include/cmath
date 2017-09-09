@@ -29,8 +29,8 @@ static inline double cosh(double x) { return ::cosh(x); }
 static inline float cosh(float x) { return ::coshf(x); }
 static inline double exp(double x) { return ::exp(x); }
 static inline float exp(float x) { return ::expf(x); }
-static inline double fabs(double x) { return ::fabs(x); }
-static inline float fabs(float x) { return ::fabsf(x); }
+static inline double fabs(double x) { return __builtin_fabs(x); }
+static inline float fabs(float x) { return __builtin_fabsf(x); }
 static inline double floor(double x) { return ::floor(x); }
 static inline float floor(float x) { return ::floorf(x); }
 static inline double lgamma(double x) { return ::lgamma(x); }
@@ -47,8 +47,8 @@ static inline double sin(double x) { return ::sin(x); }
 static inline float sin(float x) { return ::sinf(x); }
 static inline double sinh(double x) { return ::sinh(x); }
 static inline float sinh(float x) { return ::sinhf(x); }
-static inline double sqrt(double x) { return ::sqrt(x); }
-static inline float sqrt(float x) { return ::sqrtf(x); }
+static inline double sqrt(double x) { return __builtin_sqrt(x); }
+static inline float sqrt(float x) { return __builtin_sqrtf(x); }
 static inline double tan(double x) { return ::tan(x); }
 static inline float tan(float x) { return ::tanf(x); }
 static inline double tanh(double x) { return ::tanh(x); }
