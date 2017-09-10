@@ -35,15 +35,15 @@ Evaluation<T> * Sequence::templatedEvaluate(Context& context, AngleUnit angleUni
   delete aInput;
   delete bInput;
   if (isnan(start) || isnan(end) || start != (int)start || end != (int)end || end - start > k_maxNumberOfSteps) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   VariableContext<T> nContext = VariableContext<T>('n', &context);
   Symbol nSymbol = Symbol('n');
-  Evaluation<T> * result = new Complex<T>(Complex<T>::Float(emptySequenceValue()));
+  Evaluation<T> * result = Complex<T>::NFloat(emptySequenceValue());
   for (int i = (int)start; i <= (int)end; i++) {
     if (shouldStopProcessing()) {
       delete result;
-      return new Complex<T>(Complex<T>::Float(NAN));
+      return Complex<T>::NewFNAN();
     }
     Complex<T> iExpression = Complex<T>::Float(i);
     nContext.setExpressionForSymbolName(&iExpression, &nSymbol);

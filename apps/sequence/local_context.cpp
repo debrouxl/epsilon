@@ -8,8 +8,8 @@ namespace Sequence {
 template<typename T>
 LocalContext<T>::LocalContext(Context * parentContext) :
   VariableContext<T>('n', parentContext),
-  m_values{{Complex<T>::Float(NAN), Complex<T>::Float(NAN)},
-    {Complex<T>::Float(NAN), Complex<T>::Float(NAN)}}
+  m_values{{Complex<T>::FNAN(), Complex<T>::FNAN()},
+    {Complex<T>::FNAN(), Complex<T>::FNAN()}}
 {
 }
 

@@ -26,7 +26,7 @@ Expression * HyperbolicArcCosine::cloneWithDifferentOperands(Expression** newOpe
 template<typename T>
 Complex<T> HyperbolicArcCosine::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
-    return Complex<T>::Float(NAN);
+    return Complex<T>::FNAN();
   }
   return Complex<T>::Float(std::acosh(c.a()));
 }

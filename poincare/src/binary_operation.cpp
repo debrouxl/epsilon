@@ -62,7 +62,7 @@ template<typename T> Evaluation<T> * BinaryOperation::templatedEvaluate(Context&
   delete leftOperandEvalutation;
   delete rightOperandEvalutation;
   if (result == nullptr) {
-    result = new Complex<T>(Complex<T>::Float(NAN));
+    result = Complex<T>::NewFNAN();
   }
   return result;
 }

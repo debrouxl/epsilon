@@ -42,7 +42,7 @@ Complex<T> Multiplication::compute(const Complex<T> & c, const Complex<T> & d) {
 template<typename T>
 Evaluation<T> * Multiplication::computeOnMatrices(Evaluation<T> * m, Evaluation<T> * n) {
   if (m->numberOfColumns() != n->numberOfRows()) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   Complex<T> * operands = new Complex<T>[m->numberOfRows()*n->numberOfColumns()];
   for (int i = 0; i < m->numberOfRows(); i++) {

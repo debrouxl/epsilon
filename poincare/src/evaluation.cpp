@@ -32,7 +32,7 @@ const Expression * Evaluation<T>::operand(int i) const {
 template<typename T>
 Evaluation<T> * Evaluation<T>::createTrace() const {
   if (numberOfRows() != numberOfColumns()) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   int dim = numberOfRows();
   Complex<T> c = Complex<T>::Float(0);
@@ -46,7 +46,7 @@ template<typename T>
 // TODO: implement determinant for complex matrix?
 Evaluation<T> * Evaluation<T>::createDeterminant() const {
   if (numberOfRows() != numberOfColumns()) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   int dim = numberOfRows();
   T ** tempMat = new T*[dim];
@@ -77,7 +77,7 @@ Evaluation<T> * Evaluation<T>::createDeterminant() const {
         free(tempMat[i]);
       }
       free(tempMat);
-      return new Complex<T>(Complex<T>::Float(0.0f));
+      return new Complex<T>();
     }
     /* Switch rows to have the pivot row as first row */
     if (rowWithPivot != i) {
@@ -102,13 +102,13 @@ Evaluation<T> * Evaluation<T>::createDeterminant() const {
     delete[] tempMat[i];
   }
   delete[] tempMat;
-  return new Complex<T>(Complex<T>::Float(det));
+  return Complex<T>::NFloat(det);
 }
 
 template<typename T>
 Evaluation<T> * Evaluation<T>::createInverse() const {
   if (numberOfRows() != numberOfColumns()) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   int dim = numberOfRows();
   /* Create the matrix inv = (A|I) with A the input matrix and I the dim identity matrix */
@@ -140,7 +140,7 @@ Evaluation<T> * Evaluation<T>::createInverse() const {
         free(inv[i]);
       }
       free(inv);
-      return new Complex<T>(Complex<T>::Float(NAN));
+      return Complex<T>::NewFNAN();
     }
     /* Switch rows to have the pivot row as first row */
     if (rowWithPivot != i) {

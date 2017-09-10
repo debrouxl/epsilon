@@ -35,16 +35,16 @@ Evaluation<T> * PermuteCoefficient::templatedEvaluate(Context& context, AngleUni
   delete kInput;
   if (isnan(n) || isnan(k) || n != (int)n || k != (int)k || n < 0.0f || k < 0.0f) {
 
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   if (k > n) {
-    return new Complex<T>(Complex<T>::Float(0));
+    return new Complex<T>();
   }
   T result = 1;
   for (int i = (int)n-(int)k+1; i <= (int)n; i++) {
     result *= i;
   }
-  return new Complex<T>(Complex<T>::Float(std::round(result)));
+  return Complex<T>::NFloat(std::round(result));
 }
 
 }

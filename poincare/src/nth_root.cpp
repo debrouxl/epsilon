@@ -38,7 +38,7 @@ template<typename T>
 Evaluation<T> * NthRoot::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   Evaluation<T> * base = m_args[0]->evaluate<T>(context, angleUnit);
   Evaluation<T> * index = m_args[1]->evaluate<T>(context, angleUnit);
-  Complex<T> result = Complex<T>::Float(NAN);
+  Complex<T> result = Complex<T>::FNAN();
   if (base->numberOfOperands() == 1 || index->numberOfOperands() == 1) {
     result = compute(*(base->complexOperand(0)), *(index->complexOperand(0)));
   }

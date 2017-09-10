@@ -41,14 +41,14 @@ Evaluation<T> * Integral::templatedEvaluate(Context & context, AngleUnit angleUn
   T b = bInput->toScalar();
   delete bInput;
   if (isnan(a) || isnan(b)) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
 #ifdef LAGRANGE_METHOD
   T result = lagrangeGaussQuadrature<T>(a, b, xContext, angleUnit);
 #else
   T result = adaptiveQuadrature<T>(a, b, 0.1, k_maxNumberOfIterations, xContext, angleUnit);
 #endif
-  return new Complex<T>(Complex<T>::Float(result));
+  return Complex<T>::NFloat(result);
 }
 
 ExpressionLayout * Integral::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {

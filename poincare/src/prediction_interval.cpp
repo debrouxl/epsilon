@@ -33,7 +33,7 @@ Evaluation<T> * PredictionInterval::templatedEvaluate(Context& context, AngleUni
   delete pInput;
   delete nInput;
   if (isnan(p) || isnan(n) || n != (int)n || n < 0 || p < 0 || p > 1) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   Complex<T> operands[2];
   operands[0] = Complex<T>::Float(p - 1.96*std::sqrt(p*(1.0-p))/std::sqrt(n));

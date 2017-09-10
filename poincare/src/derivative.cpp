@@ -43,7 +43,7 @@ Evaluation<T> * Derivative::templatedEvaluate(Context& context, AngleUnit angleU
 
   // No complex/matrix version of Derivative
   if (isnan(x) || isnan(functionValue)) {
-  return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
 
   /* Ridders' Algorithm
@@ -101,13 +101,13 @@ Evaluation<T> * Derivative::templatedEvaluate(Context& context, AngleUnit angleU
   }
   /* if the error is too big regarding the value, do not return the answer */
   if (err/ans > k_maxErrorRateOnApproximation || isnan(err)) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   if (err < min) {
-    return new Complex<T>(Complex<T>::Float(ans));
+    return Complex<T>::NFloat(ans);
   }
   err = std::pow((T)10, std::floor(std::log10(std::fabs(err)))+2);
-  return new Complex<T>(Complex<T>::Float(std::round(ans/err)*err));
+  return Complex<T>::NFloat(std::round(ans/err)*err);
 }
 
 template<typename T>

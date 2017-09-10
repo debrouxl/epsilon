@@ -34,7 +34,7 @@ Evaluation<T> * GreatCommonDivisor::templatedEvaluate(Context& context, AngleUni
   delete f1Input;
   delete f2Input;
   if (isnan(f1) || isnan(f2) || f1 != (int)f1 || f2 != (int)f2) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   int a = (int)f2;
   int b = (int)f1;
@@ -48,7 +48,7 @@ Evaluation<T> * GreatCommonDivisor::templatedEvaluate(Context& context, AngleUni
     a = b;
     b = r;
   }
-  return new Complex<T>(Complex<T>::Float(std::round((T)a)));
+  return Complex<T>::NFloat(std::round((T)a));
 }
 
 }

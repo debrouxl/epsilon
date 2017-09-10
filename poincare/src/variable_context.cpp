@@ -10,7 +10,7 @@ namespace Poincare {
 template<typename T>
 VariableContext<T>::VariableContext(char name, Context * parentContext) :
   m_name(name),
-  m_value(Complex<T>::Float(NAN)),
+  m_value(Complex<T>::FNAN()),
   m_parentContext(parentContext)
 {
 }

@@ -38,13 +38,13 @@ Evaluation<T> * BinomialCoefficient::templatedEvaluate(Context& context, AngleUn
   delete nInput;
   delete kInput;
   if (isnan(n) || isnan(k) || n != (int)n || k != (int)k || k > n || k < 0 || n < 0) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   T result = 1;
   for (int i = 0; i < (int)k; i++) {
     result *= (n-(T)i)/(k-(T)i);
   }
-  return new Complex<T>(Complex<T>::Float(std::round(result)));
+  return Complex<T>::NFloat(std::round(result));
 }
 
 ExpressionLayout * BinomialCoefficient::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
