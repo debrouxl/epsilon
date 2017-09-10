@@ -26,12 +26,8 @@ Expression * Round::cloneWithDifferentOperands(Expression** newOperands,
 
 template<typename T>
 Evaluation<T> * Round::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * f1Entry = m_args[0]->evaluate<T>(context, angleUnit);
-  T f1 = f1Entry->toScalar();
-  delete f1Entry;
-  Evaluation<T> * f2Entry = m_args[1]->evaluate<T>(context, angleUnit);
-  T f2 = f2Entry->toScalar();
-  delete f2Entry;
+  T f1 = m_args[0]->approximate<T>(context, angleUnit);
+  T f2 = m_args[1]->approximate<T>(context, angleUnit);
   if (isnan(f2) || f2 != (int)f2) {
     return Complex<T>::NewFNAN();
   }

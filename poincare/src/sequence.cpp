@@ -29,12 +29,8 @@ ExpressionLayout * Sequence::privateCreateLayout(FloatDisplayMode floatDisplayMo
 
 template<typename T>
 Evaluation<T> * Sequence::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * aInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T start = aInput->toScalar();
-  delete aInput;
-  Evaluation<T> * bInput = m_args[2]->evaluate<T>(context, angleUnit);
-  T end = bInput->toScalar();
-  delete bInput;
+  T start = m_args[1]->approximate<T>(context, angleUnit);
+  T end = m_args[2]->approximate<T>(context, angleUnit);
   if (isnan(start) || isnan(end) || start != (int)start || end != (int)end || end - start > k_maxNumberOfSteps) {
     return Complex<T>::NewFNAN();
   }

@@ -27,12 +27,8 @@ Expression * GreatCommonDivisor::cloneWithDifferentOperands(Expression** newOper
 
 template<typename T>
 Evaluation<T> * GreatCommonDivisor::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * f1Input = m_args[0]->evaluate<T>(context, angleUnit);
-  T f1 = f1Input->toScalar();
-  delete f1Input;
-  Evaluation<T> * f2Input = m_args[1]->evaluate<T>(context, angleUnit);
-  T f2 = f2Input->toScalar();
-  delete f2Input;
+  T f1 = m_args[0]->approximate<T>(context, angleUnit);
+  T f2 = m_args[1]->approximate<T>(context, angleUnit);
   if (isnan(f1) || isnan(f2) || f1 != (int)f1 || f2 != (int)f2) {
     return Complex<T>::NewFNAN();
   }

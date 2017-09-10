@@ -31,12 +31,8 @@ Expression * BinomialCoefficient::cloneWithDifferentOperands(Expression** newOpe
 
 template<typename T>
 Evaluation<T> * BinomialCoefficient::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * nInput = m_args[0]->evaluate<T>(context, angleUnit);
-  T n = nInput->toScalar();
-  delete nInput;
-  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T k = kInput->toScalar();
-  delete kInput;
+  T n = m_args[0]->approximate<T>(context, angleUnit);
+  T k = m_args[1]->approximate<T>(context, angleUnit);
   if (isnan(n) || isnan(k) || n != (int)n || k != (int)k || k > n || k < 0 || n < 0) {
     return Complex<T>::NewFNAN();
   }
