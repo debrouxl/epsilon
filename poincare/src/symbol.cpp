@@ -49,7 +49,7 @@ Evaluation<T> * Symbol::templatedEvaluate(Context& context, AngleUnit angleUnit)
   if (context.expressionForSymbol(this) != nullptr) {
     return context.expressionForSymbol(this)->evaluate<T>(context, angleUnit);
   }
-  return new Complex<T>(Complex<T>::Float(NAN));
+  return Complex<T>::NewFNAN();
 }
 
 Expression::Type Symbol::type() const {

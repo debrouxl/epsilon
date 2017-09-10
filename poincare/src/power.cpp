@@ -54,11 +54,11 @@ Complex<T> Power::compute(const Complex<T> & c, const Complex<T> & d) {
 
 template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrixAndComplex(Evaluation<T> * m, const Complex<T> * d) const {
  if (m->numberOfRows() != m->numberOfColumns()) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   T power = d->toScalar();
   if (std::isnan(power) || std::isinf(power) || power != (int)power || std::fabs(power) > k_maxNumberOfSteps) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   if (power < 0) {
     Evaluation<T> * inverse = m->createInverse();
@@ -72,7 +72,7 @@ template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrixAndCo
   for (int k = 0; k < (int)power; k++) {
     if (shouldStopProcessing()) {
       delete result;
-      return new Complex<T>(Complex<T>::Float(NAN));
+      return Complex<T>::NewFNAN();
     }
     result = Multiplication::computeOnMatrices(result, m);
   }
@@ -80,11 +80,11 @@ template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrixAndCo
 }
 
 template<typename T> Evaluation<T> * Power::templatedComputeOnComplexAndComplexMatrix(const Complex<T> * c, Evaluation<T> * n) const {
-  return new Complex<T>(Complex<T>::Float(NAN));
+  return Complex<T>::NewFNAN();
 }
 
 template<typename T> Evaluation<T> * Power::templatedComputeOnComplexMatrices(Evaluation<T> * m, Evaluation<T> * n) const {
-  return new Complex<T>(Complex<T>::Float(NAN));
+  return Complex<T>::NewFNAN();
 }
 
 template Complex<float> Power::compute<float>(const Complex<float> &, const Complex<float> &);

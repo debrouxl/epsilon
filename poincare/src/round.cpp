@@ -33,10 +33,10 @@ Evaluation<T> * Round::templatedEvaluate(Context& context, AngleUnit angleUnit) 
   delete f1Entry;
   delete f2Entry;
   if (std::isnan(f2) || f2 != (int)f2) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   T err = std::pow(10, std::floor(f2));
-  return new Complex<T>(Complex<T>::Float(std::round(f1*err)/err));
+  return Complex<T>::NFloat(std::round(f1*err)/err);
 }
 
 }

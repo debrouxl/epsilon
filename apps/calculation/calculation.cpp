@@ -72,7 +72,7 @@ Evaluation<double> * Calculation::output(Context * context) {
       m_output = exp->evaluate<double>(*context);
       delete exp;
     } else {
-      m_output = new Complex<double>(Complex<double>::Float(NAN));
+      m_output = Complex<double>::NewFNAN();
     }
   }
   return m_output;

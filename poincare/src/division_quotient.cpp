@@ -33,9 +33,9 @@ Evaluation<T> * DivisionQuotient::templatedEvaluate(Context& context, AngleUnit 
   delete f1Input;
   delete f2Input;
   if (std::isnan(f1) || std::isnan(f2) || f1 != (int)f1 || f2 != (int)f2) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
-  return new Complex<T>(Complex<T>::Float(std::floor(f1/f2)));
+  return Complex<T>::NFloat(std::floor(f1/f2));
 }
 
 }
