@@ -25,11 +25,19 @@ template<typename T>
 class Complex final : public Evaluation<T> {
 public:
   Complex() : m_a(0), m_b(0) {}
+  Complex(T a, T b) : m_a(a), m_b(b)
+  {
+  }
   static Complex<T> Float(T x);
+  static Complex<T> * NFloat(T x);
   static Complex<T> Cartesian(T a, T b) {
     return Complex(a,b);
   }
   static Complex<T> Polar(T r, T theta);
+  static Complex<T> FNAN();
+  static Complex<T> * NewFNAN();
+  static Complex<T> FINF();
+  static Complex<T> * NFINF();
   Complex(const char * integralPart, int integralPartLength, bool integralNegative,
         const char * fractionalPart, int fractionalPartLength,
         const char * exponent, int exponentLength, bool exponentNegative);
@@ -77,9 +85,6 @@ public:
    * in buffer (excluding the last \O character) */
   static int convertFloatToText(T d, char * buffer, int bufferSize, int numberOfSignificantDigits, Expression::FloatDisplayMode mode = Expression::FloatDisplayMode::Default);
 private:
-  Complex(T a, T b) : m_a(a), m_b(b)
-  {
-  }
   const Complex<T> * complexOperand(int i) const override {
     return this;
   }

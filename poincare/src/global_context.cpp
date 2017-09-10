@@ -92,7 +92,7 @@ void GlobalContext::setExpressionForSymbolName(Expression * expression, const Sy
   if (evaluation->numberOfOperands() == 1) {
     m_expressions[index] = new Complex<double>(*(evaluation->complexOperand(0)));
   } else {
-    m_expressions[index] = new Complex<double>(Complex<double>::Float(NAN));
+    m_expressions[index] = Complex<double>::NewFNAN();
   }
   delete evaluation;
 }

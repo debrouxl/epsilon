@@ -34,7 +34,7 @@ Evaluation<T> * LeastCommonMultiple::templatedEvaluate(Context& context, AngleUn
   delete f1Input;
   delete f2Input;
   if (std::isnan(f1) || std::isnan(f2) || f1 != (int)f1 || f2 != (int)f2 || f1 == 0.0f || f2 == 0.0f) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   int a = (int)f2;
   int b = (int)f1;
@@ -49,7 +49,7 @@ Evaluation<T> * LeastCommonMultiple::templatedEvaluate(Context& context, AngleUn
     a = b;
     b = r;
   }
-  return new Complex<T>(Complex<T>::Float(std::round((T)(product/a))));
+  return Complex<T>::NFloat(std::round((T)(product/a)));
 }
 
 }

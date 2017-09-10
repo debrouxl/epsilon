@@ -47,7 +47,7 @@ Expression * Function::clone() const {
 template<typename T>
 Evaluation<T> * Function::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   if (m_numberOfArguments != 1) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   Evaluation<T> * input = m_args[0]->evaluate<T>(context, angleUnit);
   Complex<T> * operands = new Complex<T>[input->numberOfRows()*input->numberOfColumns()];

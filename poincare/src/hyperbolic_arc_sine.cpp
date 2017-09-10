@@ -26,7 +26,7 @@ Expression * HyperbolicArcSine::cloneWithDifferentOperands(Expression** newOpera
 template<typename T>
 Complex<T> HyperbolicArcSine::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
-    return Complex<T>::Float(NAN);
+    return Complex<T>::FNAN();
   }
   return Complex<T>::Float(std::asinh(c.a()));
 }

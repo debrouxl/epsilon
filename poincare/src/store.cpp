@@ -81,7 +81,7 @@ Evaluation<T> * Store::templatedEvaluate(Context& context, AngleUnit angleUnit) 
   if (context.expressionForSymbol(m_symbol) != nullptr) {
     return context.expressionForSymbol(m_symbol)->evaluate<T>(context, angleUnit);
   }
-  return new Complex<T>(Complex<T>::Float(NAN));
+  return Complex<T>::NewFNAN();
 }
 
 }

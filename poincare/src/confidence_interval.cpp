@@ -34,7 +34,7 @@ Evaluation<T> * ConfidenceInterval::templatedEvaluate(Context& context, AngleUni
   delete fInput;
   delete nInput;
   if (std::isnan(f) || std::isnan(n) || n != (int)n || n < 0 || f < 0 || f > 1) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   Complex<T> operands[2];
   operands[0] = Complex<T>::Float(f - 1/std::sqrt(n));

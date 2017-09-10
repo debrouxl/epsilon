@@ -28,7 +28,7 @@ Expression * Floor::cloneWithDifferentOperands(Expression** newOperands,
 template<typename T>
 Complex<T> Floor::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
-    return Complex<T>::Float(NAN);
+    return Complex<T>::FNAN();
   }
   return Complex<T>::Float(std::floor(c.a()));
 }

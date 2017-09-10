@@ -69,7 +69,7 @@ Evaluation<T> * ExpressionMatrix::templatedEvaluate(Context& context, AngleUnit 
   for (int i = 0; i < numberOfOperands(); i++) {
     Evaluation<T> * operandEvaluation = operand(i)->evaluate<T>(context, angleUnit);
     if (operandEvaluation->numberOfOperands() != 1) {
-      operands[i] = Complex<T>::Float(NAN);
+      operands[i] = Complex<T>::FNAN();
     } else {
       operands[i] = *(operandEvaluation->complexOperand(0));
     }

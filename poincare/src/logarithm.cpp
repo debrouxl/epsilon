@@ -44,7 +44,7 @@ Expression * Logarithm::cloneWithDifferentOperands(Expression** newOperands,
 template<typename T>
 Complex<T> Logarithm::templatedComputeComplex(const Complex<T> & c) const {
   if (c.b() != 0) {
-    return Complex<T>::Float(NAN);
+    return Complex<T>::FNAN();
   }
   return Complex<T>::Float(std::log10(c.a()));
 }
@@ -57,7 +57,7 @@ Evaluation<T> * Logarithm::templatedEvaluate(Context& context, AngleUnit angleUn
   Evaluation<T> * x = m_args[0]->evaluate<T>(context, angleUnit);
   Evaluation<T> * n = m_args[1]->evaluate<T>(context, angleUnit);
   if (x->numberOfRows() != 1 || x->numberOfColumns() != 1 || n->numberOfRows() != 1 || n->numberOfColumns() != 1) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   Complex<T> result = Fraction::compute<T>(templatedComputeComplex(*(n->complexOperand(0))), templatedComputeComplex(*(x->complexOperand(0))));
   delete x;
