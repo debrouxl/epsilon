@@ -7,52 +7,52 @@ extern "C" {
 
 namespace std {
 
-static inline double acos(double x) { return ::acos(x); }
-static inline float acos(float x) { return ::acosf(x); }
-static inline double acosh(double x) { return ::acosh(x); }
-static inline float acosh(float x) { return ::acoshf(x); }
-static inline double asin(double x) { return ::asin(x); }
-static inline float asin(float x) { return ::asinf(x); }
-static inline double asinh(double x) { return ::asinh(x); }
-static inline float asinh(float x) { return ::asinhf(x); }
-static inline double atan(double x) { return ::atan(x); }
-static inline float atan(float x) { return ::atanf(x); }
-static inline double atanh(double x) { return ::atanh(x); }
-static inline float atanh(float x) { return ::atanhf(x); }
-static inline double ceil(double x) { return ::ceil(x); }
-static inline float ceil(float x) { return ::ceilf(x); }
-static inline double copysign(double x, double y) { return ::copysign(x, y); }
-static inline float copysign(float x, float y) { return ::copysignf(x, y); }
-static inline double cos(double x) { return ::cos(x); }
-static inline float cos(float x) { return ::cosf(x); }
-static inline double cosh(double x) { return ::cosh(x); }
-static inline float cosh(float x) { return ::coshf(x); }
-static inline double exp(double x) { return ::exp(x); }
-static inline float exp(float x) { return ::expf(x); }
+static inline double acos(double x) { return __builtin_acos(x); }
+static inline float acos(float x) { return __builtin_acosf(x); }
+static inline double acosh(double x) { return __builtin_acosh(x); }
+static inline float acosh(float x) { return __builtin_acoshf(x); }
+static inline double asin(double x) { return __builtin_asin(x); }
+static inline float asin(float x) { return __builtin_asinf(x); }
+static inline double asinh(double x) { return __builtin_asinh(x); }
+static inline float asinh(float x) { return __builtin_asinhf(x); }
+static inline double atan(double x) { return __builtin_atan(x); }
+static inline float atan(float x) { return __builtin_atanf(x); }
+static inline double atanh(double x) { return __builtin_atanh(x); }
+static inline float atanh(float x) { return __builtin_atanhf(x); }
+static inline double ceil(double x) { return __builtin_ceil(x); }
+static inline float ceil(float x) { return __builtin_ceilf(x); }
+static inline double copysign(double x, double y) { return __builtin_copysign(x, y); }
+static inline float copysign(float x, float y) { return __builtin_copysignf(x, y); }
+static inline double cos(double x) { return __builtin_cos(x); }
+static inline float cos(float x) { return __builtin_cosf(x); }
+static inline double cosh(double x) { return __builtin_cosh(x); }
+static inline float cosh(float x) { return __builtin_coshf(x); }
+static inline double exp(double x) { return __builtin_exp(x); }
+static inline float exp(float x) { return __builtin_expf(x); }
 static inline double fabs(double x) { return __builtin_fabs(x); }
 static inline float fabs(float x) { return __builtin_fabsf(x); }
-static inline double floor(double x) { return ::floor(x); }
-static inline float floor(float x) { return ::floorf(x); }
-static inline double lgamma(double x) { return ::lgamma(x); }
-static inline float lgamma(float x) { return ::lgammaf(x); }
-static inline double log10(double x) { return ::log10(x); }
-static inline float log10(float x) { return ::log10f(x); }
-static inline double log(double x) { return ::log(x); }
-static inline float log(float x) { return ::logf(x); }
-static inline double pow(double x, double y) { return ::pow(x, y); }
-static inline float pow(float x, float y) { return ::powf(x, y); }
-static inline double round(double x) { return ::round(x); }
-static inline float round(float x) { return ::roundf(x); }
-static inline double sin(double x) { return ::sin(x); }
-static inline float sin(float x) { return ::sinf(x); }
-static inline double sinh(double x) { return ::sinh(x); }
-static inline float sinh(float x) { return ::sinhf(x); }
+static inline double floor(double x) { return __builtin_floor(x); }
+static inline float floor(float x) { return __builtin_floorf(x); }
+static inline double lgamma(double x) { return __builtin_lgamma(x); }
+static inline float lgamma(float x) { return __builtin_lgammaf(x); }
+static inline double log10(double x) { return __builtin_log10(x); }
+static inline float log10(float x) { return __builtin_log10f(x); }
+static inline double log(double x) { return __builtin_log(x); }
+static inline float log(float x) { return __builtin_logf(x); }
+static inline double pow(double x, double y) { return __builtin_pow(x, y); }
+static inline float pow(float x, float y) { return __builtin_powf(x, y); }
+static inline double round(double x) { return __builtin_round(x); }
+static inline float round(float x) { return __builtin_roundf(x); }
+static inline double sin(double x) { return __builtin_sin(x); }
+static inline float sin(float x) { return __builtin_sinf(x); }
+static inline double sinh(double x) { return __builtin_sinh(x); }
+static inline float sinh(float x) { return __builtin_sinhf(x); }
 static inline double sqrt(double x) { return __builtin_sqrt(x); }
 static inline float sqrt(float x) { return __builtin_sqrtf(x); }
-static inline double tan(double x) { return ::tan(x); }
-static inline float tan(float x) { return ::tanf(x); }
-static inline double tanh(double x) { return ::tanh(x); }
-static inline float tanh(float x) { return ::tanhf(x); }
+static inline double tan(double x) { return __builtin_tan(x); }
+static inline float tan(float x) { return __builtin_tanf(x); }
+static inline double tanh(double x) { return __builtin_tanh(x); }
+static inline float tanh(float x) { return __builtin_tanhf(x); }
 
 }
 
