@@ -34,12 +34,8 @@ Expression * Integral::cloneWithDifferentOperands(Expression** newOperands,
 template<typename T>
 Evaluation<T> * Integral::templatedEvaluate(Context & context, AngleUnit angleUnit) const {
   VariableContext<T> xContext = VariableContext<T>('x', &context);
-  Evaluation<T> * aInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T a = aInput->toScalar();
-  delete aInput;
-  Evaluation<T> * bInput = m_args[2]->evaluate<T>(context, angleUnit);
-  T b = bInput->toScalar();
-  delete bInput;
+  T a = m_args[1]->approximate<T>(context, angleUnit);
+  T b = m_args[2]->approximate<T>(context, angleUnit);
   if (std::isnan(a) || std::isnan(b)) {
     return Complex<T>::NewFNAN();
   }
@@ -66,9 +62,7 @@ T Integral::functionValueAtAbscissa(T x, VariableContext<T> xContext, AngleUnit 
   Complex<T> e = Complex<T>::Float(x);
   Symbol xSymbol = Symbol('x');
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  Evaluation<T> * f = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T result = f->toScalar();
-  delete f;
+  T result = m_args[0]->approximate<T>(xContext, angleUnit);
   return result;
 }
 

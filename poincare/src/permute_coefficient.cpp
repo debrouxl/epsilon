@@ -27,14 +27,9 @@ Expression * PermuteCoefficient::cloneWithDifferentOperands(Expression** newOper
 
 template<typename T>
 Evaluation<T> * PermuteCoefficient::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * nInput = m_args[0]->evaluate<T>(context, angleUnit);
-  T n = nInput->toScalar();
-  delete nInput;
-  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T k = kInput->toScalar();
-  delete kInput;
+  T n = m_args[0]->approximate<T>(context, angleUnit);
+  T k = m_args[1]->approximate<T>(context, angleUnit);
   if (std::isnan(n) || std::isnan(k) || n != (int)n || k != (int)k || n < 0.0f || k < 0.0f) {
-
     return Complex<T>::NewFNAN();
   }
   if (k > n) {

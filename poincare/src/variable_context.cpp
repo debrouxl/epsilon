@@ -19,10 +19,8 @@ void VariableContext<T>::setExpressionForSymbolName(Expression * expression, con
     if (expression == nullptr) {
       return;
     }
-    Evaluation<T> * evaluation = expression->evaluate<T>(*m_parentContext);
     /* WARNING: We assume that the evaluation of expression is a real */
-    m_value = Complex<T>::Float(evaluation->toScalar());
-    delete evaluation;
+    m_value = Complex<T>::Float(expression->approximate<T>(*m_parentContext));
   } else {
     m_parentContext->setExpressionForSymbolName(expression, symbol);
   }

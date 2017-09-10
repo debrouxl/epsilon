@@ -27,12 +27,8 @@ Expression * ConfidenceInterval::cloneWithDifferentOperands(Expression** newOper
 
 template<typename T>
 Evaluation<T> * ConfidenceInterval::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * fInput = m_args[0]->evaluate<T>(context, angleUnit);
-  T f = fInput->toScalar();
-  delete fInput;
-  Evaluation<T> * nInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T n = nInput->toScalar();
-  delete nInput;
+  T f = m_args[0]->approximate<T>(context, angleUnit);
+  T n = m_args[1]->approximate<T>(context, angleUnit);
   if (std::isnan(f) || std::isnan(n) || n != (int)n || n < 0 || f < 0 || f > 1) {
     return Complex<T>::NewFNAN();
   }

@@ -26,12 +26,8 @@ Expression * PredictionInterval::cloneWithDifferentOperands(Expression** newOper
 
 template<typename T>
 Evaluation<T> * PredictionInterval::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
-  Evaluation<T> * pInput = m_args[0]->evaluate<T>(context, angleUnit);
-  T p = pInput->toScalar();
-  delete pInput;
-  Evaluation<T> * nInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T n = nInput->toScalar();
-  delete nInput;
+  T p = m_args[0]->approximate<T>(context, angleUnit);
+  T n = m_args[1]->approximate<T>(context, angleUnit);
   if (std::isnan(p) || std::isnan(n) || n != (int)n || n < 0 || p < 0 || p > 1) {
     return Complex<T>::NewFNAN();
   }

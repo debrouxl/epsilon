@@ -32,14 +32,10 @@ Evaluation<T> * Derivative::templatedEvaluate(Context& context, AngleUnit angleU
   static T max = sizeof(T) == sizeof(double) ? DBL_MAX : FLT_MAX;
   VariableContext<T> xContext = VariableContext<T>('x', &context);
   Symbol xSymbol = Symbol('x');
-  Evaluation<T> * xInput = m_args[1]->evaluate<T>(context, angleUnit);
-  T x = xInput->toScalar();
-  delete xInput;
+  T x = m_args[1]->approximate<T>(context, angleUnit);
   Complex<T> e = Complex<T>::Float(x);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  Evaluation<T> * fInput = m_args[1]->evaluate<T>(xContext, angleUnit);
-  T functionValue = fInput->toScalar();
-  delete fInput;
+  T functionValue = m_args[1]->approximate<T>(xContext, angleUnit);
 
   // No complex/matrix version of Derivative
   if (std::isnan(x) || std::isnan(functionValue)) {
@@ -115,14 +111,10 @@ T Derivative::growthRateAroundAbscissa(T x, T h, VariableContext<T> xContext, An
   Symbol xSymbol = Symbol('x');
   Complex<T> e = Complex<T>::Float(x + h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  Evaluation<T> * fInput = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T expressionPlus = fInput->toScalar();
-  delete fInput;
+  T expressionPlus = m_args[0]->approximate<T>(xContext, angleUnit);
   e = Complex<T>::Float(x-h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  fInput = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T expressionMinus = fInput->toScalar();
-  delete fInput;
+  T expressionMinus = m_args[0]->approximate<T>(xContext, angleUnit);
   return (expressionPlus - expressionMinus)/(2*h);
 }
 
@@ -131,19 +123,13 @@ T Derivative::approximateDerivate2(T x, T h, VariableContext<T> xContext, AngleU
   Symbol xSymbol = Symbol('x');
   Complex<T> e = Complex<T>::Float(x + h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  Evaluation<T> * fInput = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T expressionPlus = fInput->toScalar();
-  delete fInput;
+  T expressionPlus = m_args[0]->approximate<T>(xContext, angleUnit);
   e = Complex<T>::Float(x);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  fInput = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T expression = fInput->toScalar();
-  delete fInput;
+  T expression = m_args[0]->approximate<T>(xContext, angleUnit);
   e = Complex<T>::Float(x-h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
-  fInput = m_args[0]->evaluate<T>(xContext, angleUnit);
-  T expressionMinus = fInput->toScalar();
-  delete fInput;
+  T expressionMinus = m_args[0]->approximate<T>(xContext, angleUnit);
   return expressionPlus - 2.0*expression + expressionMinus;
 }
 
