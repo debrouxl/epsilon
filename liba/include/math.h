@@ -26,21 +26,22 @@ LIBA_BEGIN_DECLS
  * We're chosing isinff/isnanf for single-precision functions, and isinfd/isnand
  * for double-precision functions. */
 
-/*#define isinff(x) __builtin_isinff(x)
+#define isinff(x) __builtin_isinff(x)
 #define isinfd(x) __builtin_isinf(x)
-#define isinf(x) (sizeof(x) == sizeof(float) ? isinff(x) : isinfd(x))*/
-int isinff(float x);
-int isinfd(double d);
 #define isinf(x) (sizeof(x) == sizeof(float) ? isinff(x) : isinfd(x))
-/*#define isnanf(x) __builtin_isnanf(x)
+/*int isinff(float x);
+int isinfd(double d);
+#define isinf(x) (sizeof(x) == sizeof(float) ? isinff(x) : isinfd(x))*/
+#define isnanf(x) __builtin_isnanf(x)
 #define isnand(x) __builtin_isnan(x)
-#define isnan(x) (sizeof(x) == sizeof(float) ? isnanf(x) : isnand(x))*/
-int isnanf(float x);
-int isnand(double x);
 #define isnan(x) (sizeof(x) == sizeof(float) ? isnanf(x) : isnand(x))
-int __fpclassifyf(float x);
+/*int isnanf(float x);
+int isnand(double x);
+#define isnan(x) (sizeof(x) == sizeof(float) ? isnanf(x) : isnand(x))*/
+#define fpclassify(x) __builtin_fpclassify(FP_NAN, FP_INFINITE, FP_NORMAL, FP_SUBNORMAL, FP_ZERO, x)
+/*int __fpclassifyf(float x);
 int __fpclassify(double x);
-#define fpclassify(x) ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) :  __fpclassify(x))
+#define fpclassify(x) ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) :  __fpclassify(x))*/
 
 #define acosf(x) __builtin_acosf(x)
 #define acoshf(x) __builtin_acoshf(x)
