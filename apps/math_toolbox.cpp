@@ -51,29 +51,6 @@ const ToolboxNode toolboxModel = ToolboxNode(I18n::Message::Toolbox, I18n::Messa
 const ToolboxNode toolboxModel = ToolboxNode(I18n::Message::Toolbox, I18n::Message::Default, I18n::Message::Default, menu, 10);
 #endif
 
-/* State */
-
-MathToolbox::Stack::State::State(int selectedRow, KDCoordinate verticalScroll) :
-  m_selectedRow(selectedRow),
-  m_verticalScroll(verticalScroll)
-{
-}
-
-int MathToolbox::Stack::State::selectedRow() {
-  return m_selectedRow;
-}
-
-KDCoordinate MathToolbox::Stack::State::verticalScroll() {
-  return m_verticalScroll;
-}
-
-bool MathToolbox::Stack::State::isNull(){
-  if (m_selectedRow == -1) {
-    return true;
-  }
-  return false;
-}
-
 /* Stack */
 
 void MathToolbox::Stack::push(int selectedRow, KDCoordinate verticalScroll) {
@@ -83,10 +60,6 @@ void MathToolbox::Stack::push(int selectedRow, KDCoordinate verticalScroll) {
   }
   assert(m_statesStack[i].isNull());
   m_statesStack[i] = State(selectedRow, verticalScroll);
-}
-
-MathToolbox::Stack::State * MathToolbox::Stack::stateAtIndex(int index) {
-  return &m_statesStack[index];
 }
 
 int MathToolbox::Stack::depth() {
@@ -113,17 +86,6 @@ void MathToolbox::Stack::resetStack() {
 
 /* List Controller */
 
-MathToolbox::ListController::ListController(Responder * parentResponder, SelectableTableView * tableView) :
-  ViewController(parentResponder),
-  m_selectableTableView(tableView),
-  m_firstSelectedRow(0)
-{
-}
-
-View * MathToolbox::ListController::view() {
-  return m_selectableTableView;
-}
-
 const char * MathToolbox::ListController::title() {
   return I18n::translate(toolboxModel.label());
 }
@@ -132,10 +94,6 @@ void MathToolbox::ListController::didBecomeFirstResponder() {
   m_selectableTableView->reloadData();
   m_selectableTableView->selectCellAtLocation(0, m_firstSelectedRow);
   app()->setFirstResponder(m_selectableTableView);
-}
-
-void MathToolbox::ListController::setFirstSelectedRow(int firstSelectedRow) {
-  m_firstSelectedRow = firstSelectedRow;
 }
 
 /* MathToolbox */

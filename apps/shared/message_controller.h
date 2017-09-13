@@ -7,7 +7,9 @@
 class MessageController : public ViewController {
 public:
   MessageController(I18n::Message * messages, KDColor * colors);
-  View * view() override;
+  View * view() override {
+    return &m_contentView;
+  }
   bool handleEvent(Ion::Events::Event event) override;
 private:
   class ContentView : public View {

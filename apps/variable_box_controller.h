@@ -8,18 +8,28 @@
 #include "variable_box_leaf_cell.h"
 #include "i18n.h"
 
-class VariableBoxController : public StackViewController {
+class VariableBoxController final : public StackViewController {
 public:
   VariableBoxController(Poincare::GlobalContext * context);
   void didBecomeFirstResponder() override;
-  void setTextFieldCaller(TextField * textField);
+  void setTextFieldCaller(TextField * textField) {
+    m_contentViewController.setTextFieldCaller(textField);
+  }
   void viewWillAppear() override;
-  void viewDidDisappear() override;
+  using StackViewController::viewDidDisappear;
 private:
-  class ContentViewController : public ViewController, public ListViewDataSource, public SelectableTableViewDataSource {
+  class ContentViewController final : public ViewController, public ListViewDataSource, public SelectableTableViewDataSource {
   public:
-    ContentViewController(Responder * parentResponder, Poincare::GlobalContext * context);
-    View * view() override;
+    ContentViewController(Responder * parentResponder, Poincare::GlobalContext * context) :
+      ViewController(parentResponder),
+      m_context(context),
+      m_firstSelectedRow(0),
+      m_previousSelectedRow(0),
+      m_currentPage(Page::RootMenu),
+      m_selectableTableView(this, this, 0, 1, 0, 0, 0, 0, this, nullptr, false) {}
+    View * view() override {
+      return &m_selectableTableView;
+    }
     const char * title() override;
     void didBecomeFirstResponder() override;
     bool handleEvent(Ion::Events::Event event) override;
@@ -31,8 +41,12 @@ private:
     KDCoordinate cumulatedHeightFromIndex(int j) override;
     int indexFromCumulatedHeight(KDCoordinate offsetY) override;
     int typeAtLocation(int i, int j) override;
-    void setTextFieldCaller(TextField * textField);
-    void reloadData();
+    void setTextFieldCaller(TextField * textField) {
+      m_textFieldCaller = textField;
+    }
+    void reloadData() {
+      m_selectableTableView.reloadData();
+    }
     void resetPage();
     void viewDidDisappear() override;
   private:

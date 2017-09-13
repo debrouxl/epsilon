@@ -24,14 +24,6 @@ void FunctionGraphView::drawRect(KDContext * ctx, KDRect rect) const {
   drawLabels(ctx, rect, Axis::Vertical, true);
 }
 
-void FunctionGraphView::setContext(Context * context) {
-  m_context = context;
-}
-
-Context * FunctionGraphView::context() const {
-  return m_context;
-}
-
 char * FunctionGraphView::label(Axis axis, int index) const {
   return (axis == Axis::Horizontal ? (char *)m_xLabels[index] : (char *)m_yLabels[index]);
 }

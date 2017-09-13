@@ -13,8 +13,12 @@ public:
   FunctionGraphView(InteractiveCurveViewRange * graphRange, CurveViewCursor * cursor,
     BannerView * bannerView, View * cursorView);
   void drawRect(KDContext * ctx, KDRect rect) const override;
-  void setContext(Poincare::Context * context);
-  Poincare::Context * context() const;
+  void setContext(Poincare::Context * context) {
+    m_context = context;
+  }
+  Poincare::Context * context() const {
+    return m_context;
+  }
 private:
   char * label(Axis axis, int index) const override;
   char m_xLabels[k_maxNumberOfXLabels][Poincare::PrintFloat::bufferSizeForFloatsWithPrecision(Constant::ShortNumberOfSignificantDigits)];

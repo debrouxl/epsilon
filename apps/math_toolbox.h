@@ -33,34 +33,52 @@ protected:
   SelectableTableView m_selectableTableView;
   constexpr static int k_maxNumberOfDisplayedRows = 6; //240/40
 private:
-  class Stack {
+  class Stack final {
   public:
-    class State {
+    class State final {
     public:
-      State(int selectedRow = -1, KDCoordinate verticalScroll = 0);
-      bool isNull();
-      int selectedRow();
-      KDCoordinate verticalScroll();
+      State(int selectedRow = -1, KDCoordinate verticalScroll = 0) : m_selectedRow(selectedRow), m_verticalScroll(verticalScroll) {}
+      bool isNull() {
+        if (m_selectedRow == -1) {
+          return true;
+        }
+        return false;
+      }
+      int selectedRow() {
+        return m_selectedRow;
+      }
+      KDCoordinate verticalScroll() {
+        return m_verticalScroll;
+      }
     private:
       int m_selectedRow;
       KDCoordinate m_verticalScroll;
     };
     void push(int selectedRow, KDCoordinate verticalScroll);
     void pop();
-    State * stateAtIndex(int index);
+    State * stateAtIndex(int index) {
+      return &m_statesStack[index];
+    }
     int depth();
     void resetStack();
   private:
     constexpr static int k_maxModelTreeDepth = 2;
     State m_statesStack[k_maxModelTreeDepth];
   };
-  class ListController : public ViewController {
+  class ListController final : public ViewController {
   public:
-    ListController(Responder * parentResponder, SelectableTableView * tableView);
+    ListController(Responder * parentResponder, SelectableTableView * tableView) :
+      ViewController(parentResponder),
+      m_selectableTableView(tableView),
+      m_firstSelectedRow(0) {}
     const char * title() override;
-    View * view() override;
+    View * view() override {
+      return m_selectableTableView;
+    }
     void didBecomeFirstResponder() override;
-    void setFirstSelectedRow(int firstSelectedRow);
+    void setFirstSelectedRow(int firstSelectedRow) {
+      m_firstSelectedRow = firstSelectedRow;
+    }
   private:
     SelectableTableView * m_selectableTableView;
     int m_firstSelectedRow;
