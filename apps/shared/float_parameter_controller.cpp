@@ -167,18 +167,6 @@ TextFieldDelegateApp * FloatParameterController::textFieldDelegateApp() {
   return (TextFieldDelegateApp *)app();
 }
 
-int FloatParameterController::activeCell() {
-  return selectedRow();
-}
-
-StackViewController * FloatParameterController::stackController() {
-  return (StackViewController *)parentResponder();
-}
-
-SelectableTableView * FloatParameterController::selectableTableView() {
-  return (SelectableTableView *)view();
-}
-
 void FloatParameterController::buttonAction() {
   StackViewController * stack = stackController();
   stack->pop();

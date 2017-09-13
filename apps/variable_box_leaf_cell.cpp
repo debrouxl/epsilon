@@ -14,13 +14,8 @@ VariableBoxLeafCell::VariableBoxLeafCell() :
 }
 
 VariableBoxLeafCell::~VariableBoxLeafCell() {
-  if (m_expressionLayout != nullptr) {
-    delete m_expressionLayout;
-    m_expressionLayout = nullptr;
-  }
-}
-void VariableBoxLeafCell::displayExpression(bool displayExpression) {
-  m_displayExpression = displayExpression;
+  delete m_expressionLayout;
+  m_expressionLayout = nullptr;
 }
 
 int VariableBoxLeafCell::numberOfSubviews() const {
@@ -74,20 +69,14 @@ void VariableBoxLeafCell::reloadCell() {
   m_expressionView.setBackgroundColor(backgroundColor);
 }
 
-void VariableBoxLeafCell::setLabel(const char * text) {
-  m_labelView.setText(text);
-}
-
 void VariableBoxLeafCell::setSubtitle(const char * text) {
   m_subtitleView.setText(text);
   layoutSubviews();
 }
 
 void VariableBoxLeafCell::setExpression(const Expression * expression) {
-  if(m_expressionLayout != nullptr) {
-    delete m_expressionLayout;
-    m_expressionLayout = nullptr;
-  }
+  delete m_expressionLayout;
+  m_expressionLayout = nullptr;
   if (expression) {
     m_expressionLayout = expression->createLayout();
   }

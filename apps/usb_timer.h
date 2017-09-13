@@ -5,9 +5,9 @@
 
 class AppsContainer;
 
-class USBTimer : public Timer {
+class USBTimer final : public Timer {
 public:
-  USBTimer(AppsContainer * container);
+  constexpr USBTimer(AppsContainer * container) : Timer(1), m_container(container), m_previousPluggedState(false) {}
 private:
   bool fire() override;
   AppsContainer * m_container;

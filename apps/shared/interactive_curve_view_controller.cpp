@@ -34,14 +34,6 @@ InteractiveCurveViewController::InteractiveCurveViewController(Responder * paren
 {
 }
 
-const char * InteractiveCurveViewController::title() {
-  return I18n::translate(I18n::Message::GraphTab);
-}
-
-View * InteractiveCurveViewController::view() {
-  return curveView();
-}
-
 bool InteractiveCurveViewController::handleEvent(Ion::Events::Event event) {
   if (!curveView()->isMainViewSelected()) {
     if (event == Ion::Events::Down) {
@@ -102,14 +94,6 @@ void InteractiveCurveViewController::didBecomeFirstResponder() {
   if (!curveView()->isMainViewSelected()) {
     header()->setSelectedButton(0);
   }
-}
-
-ViewController * InteractiveCurveViewController::rangeParameterController() {
-  return &m_rangeParameterController;
-}
-
-ViewController * InteractiveCurveViewController::zoomParameterController() {
-  return &m_zoomParameterController;
 }
 
 int InteractiveCurveViewController::numberOfButtons(ButtonRowController::Position) const {

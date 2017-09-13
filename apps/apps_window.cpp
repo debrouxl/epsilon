@@ -3,46 +3,11 @@ extern "C" {
 #include <assert.h>
 }
 
-AppsWindow::AppsWindow() :
-  Window(),
-  m_titleBarView(),
-  m_hideTitleBarView(false)
-{
-}
-
-void AppsWindow::setTitle(I18n::Message title) {
-  m_titleBarView.setTitle(title);
-}
-
-bool AppsWindow::updateBatteryLevel() {
-  return m_titleBarView.setChargeState(Ion::Battery::level());
-}
-
-bool AppsWindow::updateIsChargingState() {
-  return m_titleBarView.setIsCharging(Ion::Battery::isCharging());
-}
-
-bool AppsWindow::updatePluggedState() {
-  return m_titleBarView.setIsPlugged(Ion::USB::isPlugged());
-}
-
-void AppsWindow::refreshPreferences() {
-  m_titleBarView.refreshPreferences();
-}
-
-bool AppsWindow::updateAlphaLock() {
-  return m_titleBarView.setShiftAlphaLockStatus(Ion::Events::shiftAlphaStatus());
-}
-
 void AppsWindow::hideTitleBarView(bool hide) {
   if (m_hideTitleBarView != hide) {
     m_hideTitleBarView = hide;
     layoutSubviews();
   }
-}
-
-void AppsWindow::reloadTitleBar() {
-  m_titleBarView.reload();
 }
 
 int AppsWindow::numberOfSubviews() const {

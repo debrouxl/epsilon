@@ -3,14 +3,21 @@
 
 #include <escher.h>
 
-class ExamPopUpController : public ViewController {
+class ExamPopUpController final : public ViewController {
 public:
-  ExamPopUpController();
-  View * view() override;
+  ExamPopUpController() :
+    ViewController(nullptr),
+    m_contentView(this),
+    m_isActivatingExamMode(false) {}
+  View * view() override {
+    return &m_contentView;
+  }
   void didBecomeFirstResponder() override;
   bool handleEvent(Ion::Events::Event event) override;
   void setActivatingExamMode(bool activingExamMode);
-  bool isActivatingExamMode();
+  bool isActivatingExamMode() {
+    return m_isActivatingExamMode;
+  }
 private:
   class ContentView : public View {
   public:

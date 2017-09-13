@@ -25,10 +25,6 @@ const char * ValuesFunctionParameterController::title() {
   return m_pageTitle;
 }
 
-View * ValuesFunctionParameterController::view() {
-  return &m_selectableTableView;
-}
-
 void ValuesFunctionParameterController::setFunction(Function * function) {
   m_function = function;
 }
