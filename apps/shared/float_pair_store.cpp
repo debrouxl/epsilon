@@ -6,12 +6,6 @@
 
 namespace Shared {
 
-FloatPairStore::FloatPairStore() :
-  m_numberOfPairs(0),
-  m_data{}
-{
-}
-
 double FloatPairStore::get(int i, int j) {
   assert(j < m_numberOfPairs);
   return m_data[i][j];
@@ -27,10 +21,6 @@ void FloatPairStore::set(double f, int i, int j) {
     m_data[otherI][j] = defaultValue(otherI);
     m_numberOfPairs++;
   }
-}
-
-int FloatPairStore::numberOfPairs() {
-  return m_numberOfPairs;
 }
 
 void FloatPairStore::deletePairAtIndex(int i) {
@@ -76,10 +66,6 @@ uint32_t FloatPairStore::storeChecksum() {
   size_t dataLengthInBytes = k_maxNumberOfPairs*2*sizeof(double);
   assert((dataLengthInBytes & 0x3) == 0); // Assert that dataLengthInBytes is a multiple of 4
   return Ion::crc32((uint32_t *)m_data, dataLengthInBytes/sizeof(uint32_t));
-}
-
-double FloatPairStore::defaultValue(int i) {
-  return 0.0;
 }
 
 }

@@ -14,7 +14,9 @@ class FunctionGraphController : public InteractiveCurveViewController, public In
 public:
   FunctionGraphController(Responder * parentResponder, ButtonRowController * header,  InteractiveCurveViewRange * interactiveRange, CurveView * curveView, CurveViewCursor * cursor, uint32_t * modelVersion, uint32_t * rangeVersion, Poincare::Expression::AngleUnit * angleUnitVersion);
   bool isEmpty() const override;
-  ViewController * initialisationParameterController() override;
+  ViewController * initialisationParameterController() override {
+    return &m_initialisationParameterController;
+  }
   void viewWillAppear() override;
 protected:
   constexpr static float k_cursorTopMarginRatio = 0.068f;   // (cursorHeight/2)/graphViewHeight
@@ -36,9 +38,15 @@ private:
 
   void initRangeParameters() override;
   bool moveCursorVertically(int direction) override;
-  CurveView * curveView() override;
-  uint32_t modelVersion() override;
-  uint32_t rangeVersion() override;
+  CurveView * curveView() override {
+    return functionGraphView();
+  }
+  uint32_t modelVersion() override {
+    return functionStore()->storeChecksum();
+  }
+  uint32_t rangeVersion() override {
+    return interactiveCurveViewRange()->rangeChecksum();
+  }
   bool isCursorVisible() override;
   virtual FunctionStore * functionStore() const = 0;
   virtual FunctionGraphView * functionGraphView() = 0;

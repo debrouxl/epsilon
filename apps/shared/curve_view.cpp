@@ -39,31 +39,11 @@ void CurveView::reload() {
   layoutSubviews();
 }
 
-bool CurveView::isMainViewSelected() const {
-  return m_mainViewSelected;
-}
-
 void CurveView::selectMainView(bool mainViewSelected) {
   if (m_mainViewSelected != mainViewSelected) {
     m_mainViewSelected = mainViewSelected;
     reload();
   }
-}
-
-void CurveView::setCurveViewRange(CurveViewRange * curveViewRange) {
-  m_curveViewRange = curveViewRange;
-}
-
-void CurveView::setCursorView(View * cursorView) {
-  m_cursorView = cursorView;
-}
-
-void CurveView::setBannerView(View * bannerView) {
-  m_bannerView = bannerView;
-}
-
-void CurveView::setOkView(View * okView) {
-  m_okView = okView;
 }
 
 float CurveView::resolution() const {
@@ -387,10 +367,6 @@ int CurveView::numberOfLabels(Axis axis) const {
 
 float CurveView::evaluateModelWithParameter(Model * curve, float t) const {
   return 0.0f;
-}
-
-KDSize CurveView::cursorSize() {
-  return KDSize(k_cursorSize, k_cursorSize);
 }
 
 void CurveView::jointDots(KDContext * ctx, KDRect rect, Model * curve, float x, float y, float u, float v, KDColor color, int maxNumberOfRecursion) const {

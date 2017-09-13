@@ -21,14 +21,24 @@ public:
     BannerView * bannerView = nullptr, View * cursorView = nullptr, View * okView = nullptr);
   virtual void reload();
   // When the main view is selected, the banner view is visible
-  bool isMainViewSelected() const;
+  bool isMainViewSelected() const {
+    return m_mainViewSelected;
+  }
   void selectMainView(bool mainViewSelected);
-  void setCursorView(View * cursorView);
-  void setBannerView(View * bannerView);
-  void setOkView(View * okView);
+  void setCursorView(View * cursorView) {
+    m_cursorView = cursorView;
+  }
+  void setBannerView(View * bannerView) {
+    m_bannerView = bannerView;
+  }
+  void setOkView(View * okView) {
+    m_okView = okView;
+  }
   float resolution() const;
 protected:
-  void setCurveViewRange(CurveViewRange * curveViewRange);
+  void setCurveViewRange(CurveViewRange * curveViewRange) {
+    m_curveViewRange = curveViewRange;
+  }
   // Drawing methods
   virtual float samplingRatio() const;
   constexpr static KDCoordinate k_labelMargin =  4;
@@ -54,7 +64,9 @@ protected:
     bool fillBar, KDColor defaultColor, KDColor highlightColor,  float highlightLowerBound = INFINITY, float highlightUpperBound = -INFINITY) const;
   void computeLabels(Axis axis);
   void drawLabels(KDContext * ctx, KDRect rect, Axis axis, bool shiftOrigin) const;
-  virtual KDSize cursorSize();
+  virtual KDSize cursorSize() {
+    return KDSize(k_cursorSize, k_cursorSize);
+  }
   View * m_bannerView;
 private:
   /* The window bounds are deduced from the model bounds but also take into

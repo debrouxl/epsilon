@@ -2,13 +2,6 @@
 #include "global_preferences.h"
 #include "apps_container.h"
 
-USBTimer::USBTimer(AppsContainer * container) :
-  Timer(1),
-  m_container(container),
-  m_previousPluggedState(false)
-{
-}
-
 bool USBTimer::fire() {
   bool needRedrawing = false;
   if (Ion::USB::isPlugged()) {

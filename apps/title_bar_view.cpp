@@ -26,30 +26,6 @@ void TitleBarView::reload() {
   markRectAsDirty(bounds());
 }
 
-void TitleBarView::setTitle(I18n::Message title) {
-  m_titleView.setMessage(title);
-}
-
-bool TitleBarView::setChargeState(Ion::Battery::Charge chargeState) {
-  return m_batteryView.setChargeState(chargeState);
-}
-
-bool TitleBarView::setIsCharging(bool isCharging) {
-  return m_batteryView.setIsCharging(isCharging);
-}
-
-bool TitleBarView::setIsPlugged(bool isPlugged) {
-  return m_batteryView.setIsPlugged(isPlugged);
-}
-
-bool TitleBarView::setShiftAlphaLockStatus(Ion::Events::ShiftAlphaStatus status) {
-  return m_shiftAlphaLockView.setStatus(status);
-}
-
-int TitleBarView::numberOfSubviews() const {
-  return 5;
-}
-
 View * TitleBarView::subviewAtIndex(int index) {
   if (index == 0) {
     return &m_titleView;

@@ -5,7 +5,7 @@
 
 namespace Shared {
 
-class OkView : public View {
+class OkView final : public View {
 public:
   using View::View;
   void drawRect(KDContext * ctx, KDRect rect) const override;
