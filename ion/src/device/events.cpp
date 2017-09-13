@@ -40,14 +40,14 @@ Event::Event(Keyboard::Key key, bool shift, bool alpha) {
 
   m_data = 255;// Undefined. FIXME
 
-  int noFallbackOffsets[] = {0};
-  int alphaFallbackOffsets[] = {2*k_eventPageSize, 0};
-  int shiftFallbackOffsets[] = {k_eventPageSize, 0};
-  int shiftAlphaFallbackOffsets[] = {3*k_eventPageSize, 2*k_eventPageSize, 0};
+  static const int noFallbackOffsets[] = {0};
+  static const int alphaFallbackOffsets[] = {2*k_eventPageSize, 0};
+  static const int shiftFallbackOffsets[] = {k_eventPageSize, 0};
+  static const int shiftAlphaFallbackOffsets[] = {3*k_eventPageSize, 2*k_eventPageSize, 0};
 
-  int * fallbackOffsets[] = {noFallbackOffsets, shiftFallbackOffsets, alphaFallbackOffsets, shiftAlphaFallbackOffsets};
+  static const int * fallbackOffsets[] = {noFallbackOffsets, shiftFallbackOffsets, alphaFallbackOffsets, shiftAlphaFallbackOffsets};
 
-  int * fallbackOffset = fallbackOffsets[shift+2*alpha];
+  static const int * fallbackOffset = fallbackOffsets[shift+2*alpha];
   int i=0;
   int offset = 0;
   do {
