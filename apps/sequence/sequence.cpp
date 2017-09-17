@@ -342,6 +342,7 @@ void Sequence::resetBuffer() const {
   m_indexBufferDouble[1] = -1;
 }
 
+template float Sequence::Sequence::templatedEvaluateAtAbscissa<float>(float, Poincare::Context*) const;
 template double Sequence::Sequence::templatedEvaluateAtAbscissa<double>(double, Poincare::Context*) const;
 
 }

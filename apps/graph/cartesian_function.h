@@ -5,7 +5,7 @@
 
 namespace Graph {
 
-class CartesianFunction : public Shared::Function {
+class CartesianFunction final : public Shared::Function {
 public:
   using Shared::Function::Function;
   CartesianFunction(const char * text = nullptr, KDColor color = KDColorBlack);
