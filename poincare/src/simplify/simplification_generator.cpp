@@ -30,4 +30,40 @@ Expression * SimplificationGenerator::MultiplyIntegers(Expression ** parameters,
   return result;
 }
 
+Expression * SimplificationGenerator::AndIntegers(Expression ** parameters, int numberOfParameters) {
+  Integer * result = new Integer((native_int_t)-1);
+  for (int i=0; i<numberOfParameters; i++) {
+    assert(parameters[i]->type() == Expression::Type::Integer);
+    *result = result->and_with(*(Integer *)parameters[i]);
+    /* Note We have to delete the parameters as they have been cloned before and
+     * we are the last ones to use them here. */
+    delete parameters[i];
+  }
+  return result;
+}
+
+Expression * SimplificationGenerator::OrIntegers(Expression ** parameters, int numberOfParameters) {
+  Integer * result = new Integer((native_int_t)0);
+  for (int i=0; i<numberOfParameters; i++) {
+    assert(parameters[i]->type() == Expression::Type::Integer);
+    *result = result->or_with(*(Integer *)parameters[i]);
+    /* Note We have to delete the parameters as they have been cloned before and
+     * we are the last ones to use them here. */
+    delete parameters[i];
+  }
+  return result;
+}
+
+Expression * SimplificationGenerator::XorIntegers(Expression ** parameters, int numberOfParameters) {
+  Integer * result = new Integer((native_int_t)0);
+  for (int i=0; i<numberOfParameters; i++) {
+    assert(parameters[i]->type() == Expression::Type::Integer);
+    *result = result->xor_with(*(Integer *)parameters[i]);
+    /* Note We have to delete the parameters as they have been cloned before and
+     * we are the last ones to use them here. */
+    delete parameters[i];
+  }
+  return result;
+}
+
 }

@@ -14,7 +14,7 @@ extern "C" {
 namespace Poincare {
 
 uint8_t log2(native_uint_t v) {
-  assert(NATIVE_UINT_BIT_COUNT < 256); // Otherwise uint8_t isn't OK
+  static_assert(NATIVE_UINT_BIT_COUNT < 256, "Wrong NATIVE_UINT_BIT_COUNT"); // Otherwise uint8_t isn't OK
   for (uint8_t i=0; i<NATIVE_UINT_BIT_COUNT; i++) {
     if (v < ((native_uint_t)1<<i)) {
       return i;
@@ -40,7 +40,7 @@ Integer::Integer(Integer&& other) {
 }
 
 Integer::Integer(native_int_t i) {
-  assert(sizeof(native_int_t) <= sizeof(native_uint_t));
+  static_assert(sizeof(native_int_t) <= sizeof(native_uint_t), "Improper type definitions");
   m_negative = (i<0);
   m_numberOfDigits = 1;
   m_digits = new native_uint_t[1];
@@ -120,11 +120,25 @@ bool Integer::operator<(const Integer &other) const {
   return (sign(m_negative)*ucmp(other) < 0);
 }
 
+bool Integer::operator>(const Integer &other) const {
+  if (m_negative != other.m_negative) {
+    return m_negative;
+  }
+  return (sign(m_negative)*ucmp(other) > 0);
+}
+
 bool Integer::operator==(const Integer &other) const {
   if (m_negative != other.m_negative) {
     return false;
   }
   return (ucmp(other) == 0);
+}
+
+bool Integer::operator!=(const Integer &other) const {
+  if (m_negative != other.m_negative) {
+    return false;
+  }
+  return (ucmp(other) != 0);
 }
 
 Integer& Integer::operator=(Integer&& other) {
@@ -195,7 +209,7 @@ Integer Integer::usum(const Integer &other, bool subtract, bool output_negative)
 }
 
 Integer Integer::multiply_by(const Integer &other) const {
-  assert(sizeof(double_native_uint_t) == 2*sizeof(native_uint_t));
+  static_assert(sizeof(double_native_uint_t) == 2*sizeof(native_uint_t), "Improper type definitions");
   uint16_t productSize = other.m_numberOfDigits + m_numberOfDigits;
   native_uint_t * digits = new native_uint_t [productSize];
   memset(digits, 0, productSize*sizeof(native_uint_t));
@@ -224,6 +238,40 @@ Integer Integer::multiply_by(const Integer &other) const {
 
   return Integer(digits, productSize, m_negative != other.m_negative);
 }
+
+Integer Integer::and_with(const Integer &other) const {
+  uint16_t size = MAX(m_numberOfDigits, other.m_numberOfDigits);
+  native_uint_t * digits = new native_uint_t [size];
+
+  return Integer(0);
+}
+
+Integer Integer::or_with(const Integer &other) const {
+  uint16_t size = MAX(m_numberOfDigits, other.m_numberOfDigits);
+  native_uint_t * digits = new native_uint_t [size];
+
+  return Integer(0);
+}
+
+Integer Integer::xor_with(const Integer &other) const {
+  uint16_t size = MAX(m_numberOfDigits, other.m_numberOfDigits);
+  native_uint_t * digits = new native_uint_t [size];
+
+  return Integer(0);
+}
+  /*for (uint16_t i = 0; i<size; i++) {
+    native_uint_t a = (i >= m_numberOfDigits ? 0 : m_digits[i]);
+    native_uint_t b = (i >= other.m_numberOfDigits ? 0 : other.m_digits[i]);
+    native_uint_t result = a & b;
+    digits[i] = result;
+  }
+  while (digits[size-1] == 0 && size>1) {
+    size--;
+    // We could realloc digits to a smaller size. Probably not worth the trouble.
+  }
+  return Integer(digits, size, output_negative);
+
+  return Integer(digits, productSize, m_negative != other.m_negative);*/
 
 Division::Division(const Integer &numerator, const Integer &denominator) :
 m_quotient(Integer((native_int_t)0)),
@@ -267,7 +315,7 @@ Evaluation<float> * Integer::privateEvaluate(SinglePrecision p, Context& context
     uint32_t uint_result;
     float float_result;
   };
-  assert(sizeof(float) == 4);
+  static_assert(sizeof(float) == 4, "Unsupported size for float");
   /* We're generating an IEEE 754 compliant float.
   * Theses numbers are 32-bit values, stored as follow:
   * sign (1 bit)
@@ -331,7 +379,7 @@ Evaluation<double> * Integer::privateEvaluate(DoublePrecision p, Context& contex
     uint64_t uint_result;
     double double_result;
   };
-  assert(sizeof(double) == 8);
+  static_assert(sizeof(double) == 8, "Unsupported size for double");
   /* We're generating an IEEE 754 compliant double.
   * Theses numbers are 64-bit values, stored as follow:
   * sign (1 bit)

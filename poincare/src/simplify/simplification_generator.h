@@ -9,6 +9,9 @@ class SimplificationGenerator {
 public:
   static Expression * AddIntegers(Expression ** parameters, int numberOfParameters);
   static Expression * MultiplyIntegers(Expression ** parameters, int numberOfParameters);
+  static Expression * AndIntegers(Expression ** parameters, int numberOfParameters);
+  static Expression * OrIntegers(Expression ** parameters, int numberOfParameters);
+  static Expression * XorIntegers(Expression ** parameters, int numberOfParameters);
 };
 
 }

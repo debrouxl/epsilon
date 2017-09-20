@@ -28,8 +28,14 @@ public:
   Integer multiply_by(const Integer &other) const;
   Integer divide_by(const Integer &other) const;
 
+  Integer and_with(const Integer &other) const;
+  Integer or_with(const Integer &other) const;
+  Integer xor_with(const Integer &other) const;
+
   bool operator<(const Integer &other) const;
+  bool operator>(const Integer &other) const;
   bool operator==(const Integer &other) const;
+  bool operator!=(const Integer &other) const;
 
   bool valueEquals(const Expression * e) const override;
 

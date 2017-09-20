@@ -6,6 +6,7 @@
 #include <new>
 #include <poincare/absolute_value.h>
 #include <poincare/addition.h>
+#include <poincare/and.h>
 #include <poincare/arc_cosine.h>
 #include <poincare/arc_sine.h>
 #include <poincare/arc_tangent.h>
@@ -53,6 +54,7 @@
 #include <poincare/naperian_logarithm.h>
 #include <poincare/nth_root.h>
 #include <poincare/opposite.h>
+#include <poincare/or.h>
 #include <poincare/parenthesis.h>
 #include <poincare/permute_coefficient.h>
 #include <poincare/power.h>
@@ -69,5 +71,6 @@
 #include <poincare/symbol.h>
 #include <poincare/tangent.h>
 #include <poincare/variable_context.h>
+#include <poincare/xor.h>
 
 #endif

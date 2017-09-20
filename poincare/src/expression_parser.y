@@ -70,6 +70,9 @@ void poincare_expression_yyerror(Poincare::Expression ** expressionOutput, char 
 %token EE
 %token ICOMPLEX
 %token STO
+%token AND
+%token OR
+%token XOR
 %token UNDEFINED_SYMBOL
 
 /* Make the operators left associative.
@@ -177,6 +180,12 @@ exp:
   | exp exp %prec IMPLICIT_MULTIPLY  { Poincare::Expression * terms[2] = {$1,$2}; $$ = new Poincare::Multiplication(terms, false);  }
   | exp DIVIDE exp   { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Fraction(terms, false); }
   | exp POW exp      { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Power(terms, false); }
+  | exp AND exp      { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::And(terms, false); }
+  | exp OR exp       { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Or(terms, false); }
+  | exp XOR exp      { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Xor(terms, false); }
+/*  | exp AND exp      { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::And(terms, false); }
+  | exp OR exp       { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Or(terms, false); }
+  | exp XOR exp      { Poincare::Expression * terms[2] = {$1,$3}; $$ = new Poincare::Xor(terms, false); }*/
   | MINUS exp %prec UNARY_MINUS           { $$ = new Poincare::Opposite($2, false); }
   | LEFT_PARENTHESIS exp RIGHT_PARENTHESIS     { $$ = new Poincare::Parenthesis($2, false); }
 /* MATRICES_ARE_DEFINED */

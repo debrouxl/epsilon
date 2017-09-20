@@ -5,6 +5,7 @@ include poincare/src/simplify/Makefile
 objs += $(addprefix poincare/src/,\
   absolute_value.o\
   addition.o\
+  and.o\
   arc_cosine.o\
   arc_sine.o\
   arc_tangent.o\
@@ -56,6 +57,7 @@ objs += $(addprefix poincare/src/,\
   naperian_logarithm.o\
   nth_root.o\
   opposite.o\
+  or.o\
   parenthesis.o\
   permute_coefficient.o\
   power.o\
@@ -73,6 +75,7 @@ objs += $(addprefix poincare/src/,\
   symbol.o\
   tangent.o\
   variable_context.o\
+  xor.o\
 )
 objs += $(addprefix poincare/src/layout/,\
   baseline_relative_layout.o\

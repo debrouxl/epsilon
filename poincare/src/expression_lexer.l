@@ -157,5 +157,8 @@ inf { poincare_expression_yylval.expression = Complex<double>::NFINF(); return U
 \] { return RIGHT_BRACKET; }
 \, { return COMMA; }
 \. { return DOT; }
+and { return AND; }
+or { return OR; }
+xor { return XOR; }
 
 %%

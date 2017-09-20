@@ -15,6 +15,7 @@ public:
   enum class Type : uint8_t {
     AbsoluteValue,
     Addition,
+    And,
     ArcCosine,
     ArcSine,
     ArcTangent,
@@ -55,6 +56,7 @@ public:
     NthRoot,
     Evaluation,
     Opposite,
+    Or,
     PredictionInterval,
     Fraction,
     Parenthesis,
@@ -70,6 +72,7 @@ public:
     Subtraction,
     Symbol,
     Tangent,
+    Xor,
   };
   enum class AngleUnit {
     Degree = 0,
