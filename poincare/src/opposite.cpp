@@ -75,9 +75,10 @@ Evaluation<T> * Opposite::templatedEvaluate(Context& context, AngleUnit angleUni
 ExpressionLayout * Opposite::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * children_layouts[2];
-  children_layouts[0] = new StringLayout("-", 1);
-  children_layouts[1] = m_operand->type() == Type::Opposite ? new ParenthesisLayout(m_operand->createLayout(floatDisplayMode, complexFormat)) : m_operand->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout * children_layouts[2] = {
+    new StringLayout("-", 1),
+    m_operand->type() == Type::Opposite ? new ParenthesisLayout(m_operand->createLayout(floatDisplayMode, complexFormat)) : m_operand->createLayout(floatDisplayMode, complexFormat)
+  };
   return new HorizontalLayout(children_layouts, 2);
 }
 
