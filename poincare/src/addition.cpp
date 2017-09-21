@@ -19,12 +19,12 @@ Expression::Type Addition::type() const {
 ExpressionLayout * Addition::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout** children_layouts = new ExpressionLayout * [3];
-  children_layouts[0] = m_operands[0]->createLayout(floatDisplayMode, complexFormat);
-  children_layouts[1] = new StringLayout("+", 1);
-  children_layouts[2] = m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout* children_layouts[3] = {
+    m_operands[0]->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout("+", 1),
+    m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat)
+  };
   ExpressionLayout * layout = new HorizontalLayout(children_layouts, 3);
-  delete[] children_layouts;
   return layout;
 }
 

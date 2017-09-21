@@ -27,9 +27,10 @@ Expression * MatrixDimension::cloneWithDifferentOperands(Expression** newOperand
 template<typename T>
 Evaluation<T> * MatrixDimension::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   Evaluation<T> * input = m_args[0]->evaluate<T>(context, angleUnit);
-  Complex<T> operands[2];
-  operands[0] = Complex<T>::Float((T)input->numberOfRows());
-  operands[1] = Complex<T>::Float((T)input->numberOfColumns());
+  Complex<T> operands[2] = {
+    Complex<T>::Float((T)input->numberOfRows()),
+    Complex<T>::Float((T)input->numberOfColumns())
+  };
   delete input;
   return new ComplexMatrix<T>(operands, 1, 2);
 }
