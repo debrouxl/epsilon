@@ -75,7 +75,7 @@ ExpressionLayout * Logarithm::privateCreateLayout(FloatDisplayMode floatDisplayM
     new BaselineRelativeLayout(new StringLayout(m_name, strlen(m_name)), m_args[0]->createLayout(floatDisplayMode, complexFormat), BaselineRelativeLayout::Type::Subscript),
     new ParenthesisLayout(m_args[1]->createLayout(floatDisplayMode, complexFormat))
   };
-  return new HorizontalLayout(childrenLayouts, 2);
+  return new HorizontalLayout(childrenLayouts, 2, false);
 }
 
 }

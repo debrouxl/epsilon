@@ -54,8 +54,7 @@ Evaluation<T> * Opposite::computeOnMatrix(Evaluation<T> * m) {
     Complex<T> entry = *(m->complexOperand(i));
     operands[i] = Complex<T>::Cartesian(-entry.a(), -entry.b());
   }
-  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns());
-  delete[] operands;
+  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns(), true);
   return matrix;
 }
 
@@ -79,7 +78,7 @@ ExpressionLayout * Opposite::privateCreateLayout(FloatDisplayMode floatDisplayMo
     new StringLayout("-", 1),
     m_operand->type() == Type::Opposite ? new ParenthesisLayout(m_operand->createLayout(floatDisplayMode, complexFormat)) : m_operand->createLayout(floatDisplayMode, complexFormat)
   };
-  return new HorizontalLayout(children_layouts, 2);
+  return new HorizontalLayout(children_layouts, 2, false);
 }
 
 Expression::Type Opposite::type() const {

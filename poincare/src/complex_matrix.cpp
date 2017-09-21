@@ -13,20 +13,26 @@ extern "C" {
 namespace Poincare {
 
 template<typename T>
-ComplexMatrix<T>::ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns) :
+ComplexMatrix<T>::ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns, bool borrow) :
   m_numberOfRows(numberOfRows),
   m_numberOfColumns(numberOfColumns)
 {
   assert(complexes != nullptr);
-  m_values = new Complex<T>[numberOfRows*numberOfColumns];
-  for (int i = 0; i < numberOfRows*numberOfColumns; i++) {
-    m_values[i] = complexes[i];
+  if (borrow) {
+    m_values = const_cast<Complex<T> *>(complexes);
+  }
+  else {
+    m_values = new Complex<T>[numberOfRows*numberOfColumns];
+    for (int i = 0; i < numberOfRows*numberOfColumns; i++) {
+      m_values[i] = complexes[i];
+    }
   }
 }
 
 template<typename T>
 ComplexMatrix<T>::~ComplexMatrix() {
   delete[] m_values;
+  m_values = nullptr;
 }
 
 template<typename T>
@@ -57,14 +63,14 @@ const Complex<T> * ComplexMatrix<T>::complexOperand(int i) const {
 
 template<typename T>
 ComplexMatrix<T> * ComplexMatrix<T>::clone() const {
-  return new ComplexMatrix<T>(m_values, m_numberOfRows, m_numberOfColumns);
+  return new ComplexMatrix<T>(m_values, m_numberOfRows, m_numberOfColumns, false);
 }
 
 template<typename T>
 ComplexMatrix<T> * ComplexMatrix<T>::cloneWithDifferentOperands(Expression** newOperands,
     int numberOfOperands, bool cloneOperands) const {
   assert(newOperands != nullptr);
-  return new ComplexMatrix((Complex<T> *)newOperands[0], m_numberOfRows, m_numberOfColumns);
+  return new ComplexMatrix((Complex<T> *)newOperands[0], m_numberOfRows, m_numberOfColumns, false);
 }
 
 template<typename T>
@@ -79,8 +85,7 @@ Evaluation<T> * ComplexMatrix<T>::createIdentity(int dim) {
       }
     }
   }
-  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, dim, dim);
-  delete [] operands;
+  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, dim, dim, true);
   return matrix;
 }
 
@@ -91,8 +96,7 @@ Evaluation<U> * ComplexMatrix<T>::templatedEvaluate(Context& context, Expression
   for (int i = 0; i < m_numberOfRows*m_numberOfColumns; i++) {
     values[i] = Complex<U>::Cartesian(m_values[i].a(), m_values[i].b());
   }
-  Evaluation<U> * result = new ComplexMatrix<U>(values, m_numberOfRows, m_numberOfColumns);
-  delete [] values;
+  Evaluation<U> * result = new ComplexMatrix<U>(values, m_numberOfRows, m_numberOfColumns, true);
   return result;
 
 }

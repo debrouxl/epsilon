@@ -176,8 +176,7 @@ Evaluation<T> * Evaluation<T>::createInverse() const {
   }
   delete[] inv;
   // Intentionally swapping dimensions for inverse, although it doesn't make a difference because it is square
-  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfColumns(), numberOfRows());
-  delete[] operands;
+  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfColumns(), numberOfRows(), true);
   return matrix;
 }
 
@@ -190,8 +189,7 @@ Evaluation<T> * Evaluation<T>::createTranspose() const {
     }
   }
   // Intentionally swapping dimensions for transpose
-  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfColumns(), numberOfRows());
-  delete[] operands;
+  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfColumns(), numberOfRows(), true);
   return matrix;
 }
 

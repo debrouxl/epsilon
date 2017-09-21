@@ -32,7 +32,7 @@ Evaluation<T> * MatrixDimension::templatedEvaluate(Context& context, AngleUnit a
     Complex<T>::Float((T)input->numberOfColumns())
   };
   delete input;
-  return new ComplexMatrix<T>(operands, 1, 2);
+  return new ComplexMatrix<T>(operands, 1, 2, false);
 }
 
 }

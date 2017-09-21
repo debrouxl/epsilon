@@ -30,7 +30,7 @@ ExpressionLayout * Subtraction::privateCreateLayout(FloatDisplayMode floatDispla
     new StringLayout("-", 1),
     m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat)
   };
-  return new HorizontalLayout(children_layouts, 3);
+  return new HorizontalLayout(children_layouts, 3, false);
 }
 
 template<typename T>
