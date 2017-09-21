@@ -71,7 +71,7 @@ void GlobalContext::setExpressionForSymbolName(Expression * expression, const Sy
     if (expression != nullptr) {
       Evaluation<double> * evaluation = expression->evaluate<double>(*this);
       if (evaluation->numberOfOperands() == 1) {
-        m_matrixExpressions[indexMatrix] = new ComplexMatrix<double>(evaluation->complexOperand(0), 1, 1);
+        m_matrixExpressions[indexMatrix] = new ComplexMatrix<double>(evaluation->complexOperand(0), 1, 1, false);
         delete evaluation;
       } else {
         m_matrixExpressions[indexMatrix] = (ComplexMatrix<double> *)evaluation;

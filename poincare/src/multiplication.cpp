@@ -25,7 +25,7 @@ ExpressionLayout * Multiplication::privateCreateLayout(FloatDisplayMode floatDis
     new StringLayout("*", 1),
     m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat)
   };
-  return new HorizontalLayout(children_layouts, 3);
+  return new HorizontalLayout(children_layouts, 3, false);
 }
 
 Expression * Multiplication::cloneWithDifferentOperands(Expression** newOperands,
@@ -59,8 +59,7 @@ Evaluation<T> * Multiplication::computeOnMatrices(Evaluation<T> * m, Evaluation<
       operands[i*n->numberOfColumns()+j] = Complex<T>::Cartesian(a, b);
     }
   }
-  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), n->numberOfColumns());
-  delete[] operands;
+  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), n->numberOfColumns(), true);
   return result;
 }
 

@@ -8,7 +8,7 @@ namespace Poincare {
 template<typename T>
 class ComplexMatrix final : public Evaluation<T> {
 public:
-  ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns);
+  ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns, bool borrow);
   ~ComplexMatrix();
   ComplexMatrix(const ComplexMatrix& other) = delete;
   ComplexMatrix(ComplexMatrix&& other) = delete;

@@ -76,8 +76,7 @@ template<typename T> Evaluation<T> * BinaryOperation::templatedComputeOnComplexM
   for (int i = 0; i < m->numberOfOperands(); i++) {
     operands[i] = privateCompute(*(m->complexOperand(i)), *d);
   }
-  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns());
-  delete[] operands;
+  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns(), true);
   return result;
 }
 
@@ -89,8 +88,7 @@ template<typename T> Evaluation<T> * BinaryOperation::templatedComputeOnComplexM
   for (int i = 0; i < m->numberOfOperands(); i++) {
     operands[i] = privateCompute(*(m->complexOperand(i)), *(n->complexOperand(i)));
   }
-  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns());
-  delete[] operands;
+  Evaluation<T> * result = new ComplexMatrix<T>(operands, m->numberOfRows(), m->numberOfColumns(), true);
   return result;
 }
 

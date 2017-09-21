@@ -24,7 +24,7 @@ ExpressionLayout * Sequence::privateCreateLayout(FloatDisplayMode floatDisplayMo
     new StringLayout("n=", 2),
     m_args[1]->createLayout(floatDisplayMode, complexFormat)
   };
-  return createSequenceLayoutWithArgumentLayouts(new HorizontalLayout(childrenLayouts, 2), m_args[2]->createLayout(floatDisplayMode, complexFormat), m_args[0]->createLayout(floatDisplayMode, complexFormat));
+  return createSequenceLayoutWithArgumentLayouts(new HorizontalLayout(childrenLayouts, 2, false), m_args[2]->createLayout(floatDisplayMode, complexFormat), m_args[0]->createLayout(floatDisplayMode, complexFormat));
 }
 
 template<typename T>

@@ -24,7 +24,7 @@ ExpressionLayout * Addition::privateCreateLayout(FloatDisplayMode floatDisplayMo
     new StringLayout("+", 1),
     m_operands[1]->type() == Type::Opposite ? new ParenthesisLayout(m_operands[1]->createLayout(floatDisplayMode, complexFormat)) : m_operands[1]->createLayout(floatDisplayMode, complexFormat)
   };
-  ExpressionLayout * layout = new HorizontalLayout(children_layouts, 3);
+  ExpressionLayout * layout = new HorizontalLayout(children_layouts, 3, false);
   return layout;
 }
 

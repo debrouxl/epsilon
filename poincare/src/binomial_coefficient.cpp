@@ -50,7 +50,7 @@ ExpressionLayout * BinomialCoefficient::privateCreateLayout(FloatDisplayMode flo
     m_args[0]->createLayout(floatDisplayMode, complexFormat),
     m_args[1]->createLayout(floatDisplayMode, complexFormat)
   };
-  return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1));
+  return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1, false));
 }
 
 }

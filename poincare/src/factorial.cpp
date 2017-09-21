@@ -48,7 +48,7 @@ ExpressionLayout * Factorial::privateCreateLayout(FloatDisplayMode floatDisplayM
     m_args[0]->createLayout(floatDisplayMode, complexFormat),
     new StringLayout("!", 1)
   };
-  return new HorizontalLayout(childrenLayouts, 2);
+  return new HorizontalLayout(childrenLayouts, 2, false);
 }
 
 }

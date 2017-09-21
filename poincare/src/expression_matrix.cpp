@@ -75,8 +75,7 @@ Evaluation<T> * ExpressionMatrix::templatedEvaluate(Context& context, AngleUnit 
     }
     delete operandEvaluation;
   }
-  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfRows(), numberOfColumns());
-  delete[] operands;
+  Evaluation<T> * matrix = new ComplexMatrix<T>(operands, numberOfRows(), numberOfColumns(), true);
   return matrix;
 }
 

@@ -70,7 +70,7 @@ ExpressionLayout * Store::privateCreateLayout(FloatDisplayMode floatDisplayMode,
     new StringLayout(stoSymbol, 1),
     m_symbol->createLayout(floatDisplayMode, complexFormat)
   };
-  return new HorizontalLayout(childrenLayouts, 3);
+  return new HorizontalLayout(childrenLayouts, 3, false);
 }
 
 
