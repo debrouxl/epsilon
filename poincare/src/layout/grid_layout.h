@@ -8,7 +8,19 @@ namespace Poincare {
 
 class GridLayout final : public ExpressionLayout {
 public:
-  GridLayout(ExpressionLayout ** entryLayouts, int numberOfRows, int numberOfColumns);
+  GridLayout(ExpressionLayout ** entryLayouts, int numberOfRows, int numberOfColumns, bool borrow) :
+  ExpressionLayout(),
+  m_entryLayouts(borrow ? entryLayouts : new ExpressionLayout *[numberOfColumns*numberOfRows]),
+  m_numberOfRows(numberOfRows),
+  m_numberOfColumns(numberOfColumns)
+{
+  for (int i = 0; i < m_numberOfRows*m_numberOfColumns; i++) {
+    m_entryLayouts[i] = entryLayouts[i];
+    m_entryLayouts[i]->setParent(this);
+  }
+  m_baseline = height()/2 + KDText::charSize().height()/2;
+}
+
   ~GridLayout();
   GridLayout(const GridLayout& other) = delete;
   GridLayout(GridLayout&& other) = delete;

@@ -8,7 +8,7 @@ namespace Poincare {
 
 class HorizontalLayout final : public ExpressionLayout {
 public:
-  HorizontalLayout(ExpressionLayout ** layouts, int number_of_children);
+  HorizontalLayout(ExpressionLayout ** layouts, int number_of_children, bool borrow);
   ~HorizontalLayout();
   HorizontalLayout(const HorizontalLayout& other) = delete;
   HorizontalLayout(HorizontalLayout&& other) = delete;

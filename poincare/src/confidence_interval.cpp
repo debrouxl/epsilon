@@ -36,7 +36,7 @@ Evaluation<T> * ConfidenceInterval::templatedEvaluate(Context& context, AngleUni
     Complex<T>::Float(f - 1/std::sqrt(n)),
     Complex<T>::Float(f + 1/std::sqrt(n))
   };
-  return new ComplexMatrix<T>(operands, 1, 2);
+  return new ComplexMatrix<T>(operands, 1, 2, false);
 }
 
 }

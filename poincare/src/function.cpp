@@ -61,11 +61,11 @@ Evaluation<T> * Function::templatedEvaluate(Context& context, AngleUnit angleUni
   Evaluation<T> * result = nullptr;
   if (input->numberOfOperands() == 1) {
     result = new Complex<T>(operands[0]);
+    delete[] operands;
   } else {
-    result = new ComplexMatrix<T>(operands, input->numberOfRows(), input->numberOfColumns());
+    result = new ComplexMatrix<T>(operands, input->numberOfRows(), input->numberOfColumns(), true);
   }
   delete input;
-  delete[] operands;
   return result;
 }
 
@@ -79,13 +79,12 @@ ExpressionLayout * Function::privateCreateLayout(FloatDisplayMode floatDisplayMo
     grandChildrenLayouts[layoutIndex++] = new StringLayout(",", 1);
     grandChildrenLayouts[layoutIndex++] = m_args[i]->createLayout(floatDisplayMode, complexFormat);
   }
-  ExpressionLayout * argumentLayouts = new HorizontalLayout(grandChildrenLayouts, 2*m_numberOfArguments-1);
-  delete [] grandChildrenLayouts;
+  ExpressionLayout * argumentLayouts = new HorizontalLayout(grandChildrenLayouts, 2*m_numberOfArguments-1, true);
   ExpressionLayout * childrenLayouts[2] = {
     new StringLayout(m_name, strlen(m_name)),
     new ParenthesisLayout(argumentLayouts)
   };
-  return new HorizontalLayout(childrenLayouts, 2);
+  return new HorizontalLayout(childrenLayouts, 2, false);
 }
 
 void Function::build(Expression ** args, int numberOfArguments, bool clone) {
