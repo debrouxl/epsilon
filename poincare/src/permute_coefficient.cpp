@@ -28,10 +28,10 @@ Expression * PermuteCoefficient::cloneWithDifferentOperands(Expression** newOper
 template<typename T>
 Evaluation<T> * PermuteCoefficient::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   Evaluation<T> * nInput = m_args[0]->evaluate<T>(context, angleUnit);
-  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
   T n = nInput->toScalar();
-  T k = kInput->toScalar();
   delete nInput;
+  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
+  T k = kInput->toScalar();
   delete kInput;
   if (isnan(n) || isnan(k) || n != (int)n || k != (int)k || n < 0.0f || k < 0.0f) {
 

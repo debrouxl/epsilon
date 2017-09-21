@@ -27,10 +27,10 @@ Expression * Round::cloneWithDifferentOperands(Expression** newOperands,
 template<typename T>
 Evaluation<T> * Round::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   Evaluation<T> * f1Entry = m_args[0]->evaluate<T>(context, angleUnit);
-  Evaluation<T> * f2Entry = m_args[1]->evaluate<T>(context, angleUnit);
   T f1 = f1Entry->toScalar();
-  T f2 = f2Entry->toScalar();
   delete f1Entry;
+  Evaluation<T> * f2Entry = m_args[1]->evaluate<T>(context, angleUnit);
+  T f2 = f2Entry->toScalar();
   delete f2Entry;
   if (isnan(f2) || f2 != (int)f2) {
     return Complex<T>::NewFNAN();

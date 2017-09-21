@@ -54,9 +54,10 @@ Evaluation<T> * Integral::templatedEvaluate(Context & context, AngleUnit angleUn
 ExpressionLayout * Integral::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = m_args[0]->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = new StringLayout("dx", 2);
+  ExpressionLayout * childrenLayouts[2] = {
+    m_args[0]->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout("dx", 2)
+  };
   return new IntegralLayout(m_args[1]->createLayout(floatDisplayMode, complexFormat), m_args[2]->createLayout(floatDisplayMode, complexFormat), new HorizontalLayout(childrenLayouts, 2));
 }
 

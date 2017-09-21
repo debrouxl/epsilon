@@ -44,9 +44,10 @@ Complex<T> Factorial::templatedComputeComplex(const Complex<T> & c) const {
 ExpressionLayout * Factorial::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = m_args[0]->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = new StringLayout("!", 1);
+  ExpressionLayout * childrenLayouts[2] = {
+    m_args[0]->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout("!", 1)
+  };
   return new HorizontalLayout(childrenLayouts, 2);
 }
 

@@ -32,10 +32,10 @@ Expression * BinomialCoefficient::cloneWithDifferentOperands(Expression** newOpe
 template<typename T>
 Evaluation<T> * BinomialCoefficient::templatedEvaluate(Context& context, AngleUnit angleUnit) const {
   Evaluation<T> * nInput = m_args[0]->evaluate<T>(context, angleUnit);
-  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
   T n = nInput->toScalar();
-  T k = kInput->toScalar();
   delete nInput;
+  Evaluation<T> * kInput = m_args[1]->evaluate<T>(context, angleUnit);
+  T k = kInput->toScalar();
   delete kInput;
   if (isnan(n) || isnan(k) || n != (int)n || k != (int)k || k > n || k < 0 || n < 0) {
     return Complex<T>::NewFNAN();
@@ -50,11 +50,11 @@ Evaluation<T> * BinomialCoefficient::templatedEvaluate(Context& context, AngleUn
 ExpressionLayout * BinomialCoefficient::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = m_args[0]->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = m_args[1]->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout * childrenLayouts[2] = {
+    m_args[0]->createLayout(floatDisplayMode, complexFormat),
+    m_args[1]->createLayout(floatDisplayMode, complexFormat)
+  };
   return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1));
 }
 
 }
-
