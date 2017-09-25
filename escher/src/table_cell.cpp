@@ -1,12 +1,6 @@
 #include <escher/table_cell.h>
 #include <escher/palette.h>
 
-TableCell::TableCell(Layout layout) :
-  HighlightCell(),
-  m_layout(layout)
-{
-}
-
 View * TableCell::labelView() const {
   return nullptr;
 }

@@ -5,14 +5,20 @@
 #include <escher/message_table_cell.h>
 #include <escher/responder.h>
 
-class MessageTableCellWithEditableText : public Responder, public MessageTableCell {
+class MessageTableCellWithEditableText final : public Responder, public MessageTableCell {
 public:
   MessageTableCellWithEditableText(Responder * parentResponder, TextFieldDelegate * textFieldDelegate, char * draftTextBuffer, I18n::Message message = (I18n::Message)0);
   View * accessoryView() const override;
-  const char * editedText() const;
+  const char * editedText() const {
+    return m_textField.text();
+  }
   void didBecomeFirstResponder() override;
-  bool isEditing();
-  void setEditing(bool isEditing);
+  bool isEditing() {
+    return m_textField.isEditing();
+  }
+  void setEditing(bool isEditing) {
+    m_textField.setEditing(isEditing);
+  }
   void setHighlighted(bool highlight) override;
   void setAccessoryText(const char * text);
   void setTextColor(KDColor color) override;

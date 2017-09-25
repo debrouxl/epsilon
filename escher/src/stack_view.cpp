@@ -3,11 +3,6 @@ extern "C" {
 #include <assert.h>
 }
 
-StackView::StackView() :
-  View()
-{
-}
-
 void StackView::setTextColor(KDColor textColor) {
   m_textColor = textColor;
   markRectAsDirty(bounds());

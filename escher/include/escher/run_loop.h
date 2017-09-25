@@ -6,7 +6,7 @@
 
 class RunLoop {
 public:
-  RunLoop();
+  RunLoop() : m_time(0) {}
   void run();
 protected:
   virtual bool dispatchEvent(Ion::Events::Event e) = 0;

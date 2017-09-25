@@ -21,10 +21,6 @@ TextField::ContentView::ContentView(char * textBuffer, char * draftTextBuffer, s
   assert(m_textBufferSize <= k_maxBufferSize);
 }
 
-void TextField::ContentView::setDraftTextBuffer(char * draftTextBuffer) {
-  m_draftTextBuffer = draftTextBuffer;
-}
-
 void TextField::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   KDColor bckCol = m_backgroundColor;
   if (m_isEditing) {
@@ -46,10 +42,6 @@ void TextField::ContentView::reload() {
   markRectAsDirty(dirtyZone);
 }
 
-bool TextField::ContentView::isEditing() const {
-  return m_isEditing;
-}
-
 const char * TextField::ContentView::text() const {
   if (m_isEditing) {
     return (const char *)m_draftTextBuffer;
@@ -60,22 +52,6 @@ const char * TextField::ContentView::text() const {
 int TextField::ContentView::textLength() const {
   assert(strlen(text()) == m_currentTextLength);
   return m_currentTextLength;
-}
-
-int TextField::ContentView::cursorLocation() const{
-  return m_currentCursorLocation;
-}
-
-char * TextField::ContentView::textBuffer() {
-  return m_textBuffer;
-}
-
-char * TextField::ContentView::draftTextBuffer() {
-  return m_draftTextBuffer;
-}
-
-int TextField::ContentView::bufferSize() {
-  return m_textBufferSize;
 }
 
 void TextField::ContentView::setText(const char * text) {
@@ -92,10 +68,6 @@ void TextField::ContentView::setText(const char * text) {
 void TextField::ContentView::setBackgroundColor(KDColor backgroundColor) {
   m_backgroundColor = backgroundColor;
   markRectAsDirty(bounds());
-}
-
-KDColor TextField::ContentView::backgroundColor() const {
-  return m_backgroundColor;
 }
 
 void TextField::ContentView::setTextColor(KDColor textColor) {
@@ -169,7 +141,6 @@ KDCoordinate TextField::ContentView::charWidth() {
   return textSize.width();
 }
 
-
 void TextField::ContentView::deleteCharPrecedingCursor() {
   if (cursorLocation() <= 0) {
     return;
@@ -228,35 +199,11 @@ TextField::TextField(Responder * parentResponder, char * textBuffer, char * draf
 {
 }
 
-void TextField::setDelegate(TextFieldDelegate * delegate) {
-  m_delegate = delegate;
-}
-
-void TextField::setDraftTextBuffer(char * draftTextBuffer) {
-  m_contentView.setDraftTextBuffer(draftTextBuffer);
-}
-
 Toolbox * TextField::toolbox() {
   if (m_delegate) {
     return m_delegate->toolboxForTextField(this);
   }
   return nullptr;
-}
-
-bool TextField::isEditing() const {
-  return m_contentView.isEditing();
-}
-
-const char * TextField::text() const {
-  return m_contentView.text();
-}
-
-int TextField::textLength() const {
-  return m_contentView.textLength();
-}
-
-int TextField::cursorLocation() const{
-  return m_contentView.cursorLocation();
 }
 
 void TextField::setText(const char * text) {
@@ -265,22 +212,6 @@ void TextField::setText(const char * text) {
   if (isEditing()) {
     setCursorLocation(textLength());
   }
-}
-
-void TextField::setBackgroundColor(KDColor backgroundColor) {
-  m_contentView.setBackgroundColor(backgroundColor);
-}
-
-KDColor TextField::backgroundColor() const {
-  return m_contentView.backgroundColor();
-}
-
-void TextField::setTextColor(KDColor textColor) {
-  m_contentView.setTextColor(textColor);
-}
-
-void TextField::setAlignment(float horizontalAlignment, float verticalAlignment) {
-  m_contentView.setAlignment(horizontalAlignment, verticalAlignment);
 }
 
 void TextField::setEditing(bool isEditing, bool reinitDrafBuffer) {
@@ -437,7 +368,6 @@ bool TextField::handleEvent(Ion::Events::Event event) {
     setCursorLocation(nextCursorLocation);
     return true;
   }
-
 
   return false;
 }

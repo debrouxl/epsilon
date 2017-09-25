@@ -3,12 +3,6 @@
 #include <assert.h>
 #include <cmath>
 
-ButtonRowDelegate::ButtonRowDelegate(ButtonRowController * header, ButtonRowController * footer) :
-  m_header(header),
-  m_footer(footer)
-{
-}
-
 int ButtonRowDelegate::numberOfButtons(ButtonRowController::Position position) const {
   return 0;
 }
@@ -16,14 +10,6 @@ int ButtonRowDelegate::numberOfButtons(ButtonRowController::Position position) c
 Button * ButtonRowDelegate::buttonAtIndex(int index, ButtonRowController::Position position) const {
   assert(false);
   return nullptr;
-}
-
-ButtonRowController * ButtonRowDelegate::footer() {
-  return m_footer;
-}
-
-ButtonRowController * ButtonRowDelegate::header() {
-  return m_header;
 }
 
 ButtonRowController::ContentView::ContentView(ViewController * mainViewController, ButtonRowDelegate * delegate, Position position, Style style) :
@@ -163,18 +149,6 @@ bool ButtonRowController::ContentView::setSelectedButton(int selectedButton, App
     return true;
   }
   return false;
-}
-
-int ButtonRowController::ContentView::selectedButton() {
-  return m_selectedButton;
-}
-
-ViewController * ButtonRowController::ContentView::mainViewController() const {
-  return m_mainViewController;
-}
-
-ButtonRowDelegate * ButtonRowController::ContentView::buttonRowDelegate() const {
-  return m_delegate;
 }
 
 ButtonRowController::ButtonRowController(Responder * parentResponder, ViewController * mainViewController, ButtonRowDelegate * delegate, Position position, Style style) :

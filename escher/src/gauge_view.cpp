@@ -21,10 +21,6 @@ GaugeView::GaugeView() :
 {
 }
 
-float GaugeView::level() {
-  return m_level;
-}
-
 void GaugeView::setLevel(float level) {
   if (m_level != level) {
     level = level < 0 ? 0 : level;
