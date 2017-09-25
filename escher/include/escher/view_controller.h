@@ -30,7 +30,7 @@ extern "C" {
 
 class ViewController : public Responder {
 public:
-  ViewController(Responder * parentResponder);
+  ViewController(Responder * parentResponder) : Responder(parentResponder) {}
   virtual const char * title();
   virtual View * view() = 0;
   virtual void viewWillAppear();

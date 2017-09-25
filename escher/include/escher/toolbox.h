@@ -6,9 +6,11 @@
 class Toolbox : public StackViewController {
 public:
   Toolbox(Responder * parentResponder, ViewController * rootViewController);
-  void setSender(Responder * sender);
-  void viewWillAppear() override;
-  void viewDidDisappear() override;
+  void setSender(Responder * sender) {
+    m_sender = sender;
+  }
+  using StackViewController::viewWillAppear;
+  using StackViewController::viewDidDisappear;
 protected:
   virtual Responder * sender();
 private:

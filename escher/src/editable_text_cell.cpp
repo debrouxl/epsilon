@@ -11,30 +11,10 @@ EditableTextCell::EditableTextCell(Responder * parentResponder, TextFieldDelegat
 {
 }
 
-void EditableTextCell::setTextFieldDelegate(TextFieldDelegate * delegate) {
-  m_textField.setDelegate(delegate);
-}
-
-void EditableTextCell::setTextFieldDraftTextBuffer(char * draftTextBuffer) {
-  m_textField.setDraftTextBuffer(draftTextBuffer);
-}
-
-TextField * EditableTextCell::textField() {
-  return &m_textField;
-}
-
 void EditableTextCell::setHighlighted(bool highlight) {
   HighlightCell::setHighlighted(highlight);
   KDColor backgroundColor = highlight? Palette::Select : KDColorWhite;
   m_textField.setBackgroundColor(backgroundColor);
-}
-
-const char * EditableTextCell::text() const {
-  return m_textField.text();
-}
-
-void EditableTextCell::setText(const char * text) {
-  m_textField.setText(text);
 }
 
 int EditableTextCell::numberOfSubviews() const {
@@ -52,14 +32,6 @@ void EditableTextCell::layoutSubviews() {
 
 void EditableTextCell::didBecomeFirstResponder() {
   app()->setFirstResponder(&m_textField);
-}
-
-bool EditableTextCell::isEditing() {
-  return m_textField.isEditing();
-}
-
-void EditableTextCell::setEditing(bool isEditing) {
-  m_textField.setEditing(isEditing);
 }
 
 KDSize EditableTextCell::minimalSizeForOptimalDisplay() const {

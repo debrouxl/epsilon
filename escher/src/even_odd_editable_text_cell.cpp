@@ -9,10 +9,6 @@ EvenOddEditableTextCell::EvenOddEditableTextCell(Responder * parentResponder, Te
 {
 }
 
-EditableTextCell * EvenOddEditableTextCell::editableTextCell() {
-  return &m_editableCell;
-}
-
 void EvenOddEditableTextCell::setHighlighted(bool highlight) {
   EvenOddCell::setHighlighted(highlight);
   m_editableCell.textField()->setBackgroundColor(backgroundColor());
@@ -21,14 +17,6 @@ void EvenOddEditableTextCell::setHighlighted(bool highlight) {
 void EvenOddEditableTextCell::setEven(bool even) {
   EvenOddCell::setEven(even);
   m_editableCell.textField()->setBackgroundColor(backgroundColor());
-}
-
-const char * EvenOddEditableTextCell::text() const {
-  return m_editableCell.text();
-}
-
-void EvenOddEditableTextCell::setText(const char * textContent) {
-  m_editableCell.setText(textContent);
 }
 
 int EvenOddEditableTextCell::numberOfSubviews() const {
@@ -46,12 +34,4 @@ void EvenOddEditableTextCell::layoutSubviews() {
 
 void EvenOddEditableTextCell::didBecomeFirstResponder() {
   app()->setFirstResponder(&m_editableCell);
-}
-
-bool EvenOddEditableTextCell::isEditing() {
-  return m_editableCell.isEditing();
-}
-
-void EvenOddEditableTextCell::setEditing(bool isEditing) {
-  m_editableCell.setEditing(isEditing);
 }

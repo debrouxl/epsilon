@@ -2,11 +2,6 @@
 #include <poincare/complex.h>
 #include <string.h>
 
-ViewController::ViewController(Responder * parentResponder) :
-  Responder(parentResponder)
-{
-}
-
 const char * ViewController::title() {
   return nullptr;
 }
