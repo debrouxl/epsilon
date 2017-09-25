@@ -10,7 +10,7 @@
 
 class ButtonRowDelegate;
 
-class ButtonRowController : public ViewController {
+class ButtonRowController final : public ViewController {
 public:
   enum class Position {
     Top,
@@ -39,9 +39,15 @@ private:
     void layoutSubviews() override;
     void drawRect(KDContext * ctx, KDRect rect) const override;
     bool setSelectedButton(int selectedButton, App * app);
-    int selectedButton();
-    ViewController * mainViewController() const;
-    ButtonRowDelegate * buttonRowDelegate() const;
+    int selectedButton() {
+      return m_selectedButton;
+    }
+    ViewController * mainViewController() const {
+      return m_mainViewController;
+    }
+    ButtonRowDelegate * buttonRowDelegate() const {
+      return m_delegate;
+    }
   private:
     constexpr static KDCoordinate k_plainStyleHeight = 20;
     constexpr static KDCoordinate k_embossedStyleHeight = 36;
@@ -59,11 +65,15 @@ private:
 
 class ButtonRowDelegate {
 public:
-  ButtonRowDelegate(ButtonRowController * header, ButtonRowController * footer);
+  ButtonRowDelegate(ButtonRowController * header, ButtonRowController * footer) : m_header(header), m_footer(footer) {}
   virtual int numberOfButtons(ButtonRowController::Position position) const;
   virtual Button * buttonAtIndex(int index, ButtonRowController::Position position) const;
-  ButtonRowController * header();
-  ButtonRowController * footer();
+  ButtonRowController * header() {
+    return m_header;
+  }
+  ButtonRowController * footer() {
+    return m_footer;
+  }
 private:
   ButtonRowController * m_header;
   ButtonRowController * m_footer;

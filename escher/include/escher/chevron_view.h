@@ -3,9 +3,9 @@
 
 #include <escher/view.h>
 
-class ChevronView : public View {
+class ChevronView final : public View {
 public:
-  ChevronView();
+  ChevronView() : View() {}
   void drawRect(KDContext * ctx, KDRect rect) const override;
   KDSize minimalSizeForOptimalDisplay() const override;
   /* k_chevronHeight and k_chevronWidth are the dimensions of the chevron. */

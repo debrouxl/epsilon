@@ -30,6 +30,3 @@ void MessageTableCellWithMessage::setTextColor(KDColor color) {
   MessageTableCell::setTextColor(color);
 }
 
-void MessageTableCellWithMessage::setAccessoryTextColor(KDColor color) {
-  m_accessoryView.setTextColor(color);
-}

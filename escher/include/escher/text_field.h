@@ -11,18 +11,38 @@ public:
   TextField(Responder * parentResponder, char * textBuffer, char * draftTextBuffer, size_t textBufferSize,
     TextFieldDelegate * delegate = nullptr, bool hasTwoBuffers = true, KDText::FontSize size = KDText::FontSize::Large, float horizontalAlignment = 0.0f,
     float verticalAlignment = 0.5f, KDColor textColor = KDColorBlack, KDColor = KDColorWhite);
-  void setDelegate(TextFieldDelegate * delegate);
-  void setDraftTextBuffer(char * draftTextBuffer);
+  void setDelegate(TextFieldDelegate * delegate) {
+    m_delegate = delegate;
+  }
+  void setDraftTextBuffer(char * draftTextBuffer) {
+    m_contentView.setDraftTextBuffer(draftTextBuffer);
+  }
   Toolbox * toolbox() override;
-  bool isEditing() const;
-  const char * text() const;
-  int textLength() const;
-  int cursorLocation() const;
+  bool isEditing() const {
+    return m_contentView.isEditing();
+  }
+  const char * text() const {
+    return m_contentView.text();
+  }
+  int textLength() const {
+    return m_contentView.textLength();
+  }
+  int cursorLocation() const {
+    return m_contentView.cursorLocation();
+  }
   void setText(const char * text);
-  void setBackgroundColor(KDColor backgroundColor);
-  KDColor backgroundColor() const;
-  void setTextColor(KDColor textColor);
-  void setAlignment(float horizontalAlignment, float verticalAlignment);
+  void setBackgroundColor(KDColor backgroundColor) {
+    m_contentView.setBackgroundColor(backgroundColor);
+  }
+  KDColor backgroundColor() const {
+    return m_contentView.backgroundColor();
+  }
+  void setTextColor(KDColor textColor) {
+    m_contentView.setTextColor(textColor);
+  }
+  void setAlignment(float horizontalAlignment, float verticalAlignment) {
+    m_contentView.setAlignment(horizontalAlignment, verticalAlignment);
+  }
   virtual void setEditing(bool isEditing, bool reinitDraftBuffer = true);
   void setCursorLocation(int location);
   /* If the text to be appended is too long to be added without overflowing the
@@ -33,26 +53,40 @@ public:
   bool handleEvent(Ion::Events::Event event) override;
   bool textFieldShouldFinishEditing(Ion::Events::Event event);
   constexpr static int maxBufferSize() {
-     return ContentView::k_maxBufferSize;
+    return ContentView::k_maxBufferSize;
   }
 protected:
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
     ContentView(char * textBuffer, char * draftTextBuffer, size_t textBufferSize, KDText::FontSize size, float horizontalAlignment = 0.0f,
     float verticalAlignment = 0.5f, KDColor textColor = KDColorBlack, KDColor = KDColorWhite);
-    void setDraftTextBuffer(char * draftTextBuffer);
+    void setDraftTextBuffer(char * draftTextBuffer) {
+      m_draftTextBuffer = draftTextBuffer;
+    }
     void drawRect(KDContext * ctx, KDRect rect) const override;
     void reload();
-    bool isEditing() const;
+    bool isEditing() const {
+      return m_isEditing;
+    }
     const char * text() const;
     int textLength() const;
-    int cursorLocation() const;
-    char * textBuffer();
-    char * draftTextBuffer();
-    int bufferSize();
+    int cursorLocation() const {
+      return m_currentCursorLocation;
+    }
+    char * textBuffer() {
+      return m_textBuffer;
+    }
+    char * draftTextBuffer() {
+      return m_draftTextBuffer;
+    }
+    int bufferSize() {
+      return m_textBufferSize;
+    }
     void setText(const char * text);
     void setBackgroundColor(KDColor backgroundColor);
-    KDColor backgroundColor() const;
+    KDColor backgroundColor() const {
+      return m_backgroundColor;
+    }
     void setTextColor(KDColor textColor);
     void setAlignment(float horizontalAlignment, float verticalAlignment);
     void setEditing(bool isEditing, bool reinitDraftBuffer);
