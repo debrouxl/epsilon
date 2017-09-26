@@ -42,13 +42,6 @@ void mp_hal_stdout_tx_strn_cooked(const char * str, size_t len) {
   sCurrentView->print(str);
 }
 
-ExecutorController::ContentView::ContentView(Program * program) :
-  View(),
-  m_program(program),
-  m_printLocation(KDPointZero)
-{
-}
-
 void ExecutorController::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   assert(ctx == KDIonContext::sharedContext());
   clearScreen(ctx);
@@ -94,16 +87,6 @@ void ExecutorController::ContentView::runPython() const {
 
 void ExecutorController::ContentView::clearScreen(KDContext * ctx) const {
   ctx->fillRect(bounds(), KDColorWhite);
-}
-
-ExecutorController::ExecutorController(Program * program) :
-  ViewController(nullptr),
-  m_view(program)
-{
-}
-
-View * ExecutorController::view() {
-  return &m_view;
 }
 
 bool ExecutorController::handleEvent(Ion::Events::Event event) {

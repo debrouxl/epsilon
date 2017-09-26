@@ -5,11 +5,15 @@
 
 namespace Graph {
 
-class BannerView : public Shared::BannerView {
+class BannerView final : public Shared::BannerView {
 public:
   BannerView();
-  void setDisplayDerivative(bool displayDerivative);
-  bool displayDerivative();
+  void setDisplayDerivative(bool displayDerivative) {
+    m_displayDerivative = displayDerivative;
+  }
+  bool displayDerivative() {
+    return m_displayDerivative;
+  }
 private:
   int numberOfSubviews() const override;
   TextView * textViewAtIndex(int i) const override;

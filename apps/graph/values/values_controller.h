@@ -32,9 +32,13 @@ private:
   EvenOddBufferTextCell * m_floatCells[k_maxNumberOfCells];
   EvenOddBufferTextCell * floatCells(int j) override;
   CartesianFunctionStore * m_functionStore;
-  CartesianFunctionStore * functionStore() const override;
+  CartesianFunctionStore * functionStore() const override {
+    return m_functionStore;
+  }
   FunctionParameterController m_functionParameterController;
-  FunctionParameterController * functionParameterController() override;
+  FunctionParameterController * functionParameterController() override {
+    return &m_functionParameterController;
+  }
   View * loadView() override;
   void unloadView(View * view) override;
   Shared::IntervalParameterController m_intervalParameterController;

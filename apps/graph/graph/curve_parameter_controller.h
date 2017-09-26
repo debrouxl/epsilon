@@ -6,7 +6,7 @@
 
 namespace Graph {
 
-class CurveParameterController : public Shared::FunctionCurveParameterController {
+class CurveParameterController final : public Shared::FunctionCurveParameterController {
 public:
   CurveParameterController(Shared::InteractiveCurveViewRange * graphRange, BannerView * bannerView, Shared::CurveViewCursor * cursor);
   const char * title() override;

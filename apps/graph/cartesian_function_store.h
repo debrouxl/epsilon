@@ -8,7 +8,7 @@
 
 namespace Graph {
 
-class CartesianFunctionStore : public Shared::FunctionStore {
+class CartesianFunctionStore final : public Shared::FunctionStore {
 public:
   CartesianFunctionStore();
   uint32_t storeChecksum() override;

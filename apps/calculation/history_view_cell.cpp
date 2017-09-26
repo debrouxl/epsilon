@@ -77,14 +77,6 @@ void HistoryViewCell::didBecomeFirstResponder() {
   }
 }
 
-HistoryViewCell::SubviewType HistoryViewCell::selectedSubviewType() {
-  return m_selectedSubviewType;
-}
-
-void HistoryViewCell::setSelectedSubviewType(HistoryViewCell::SubviewType subviewType) {
-  m_selectedSubviewType = subviewType;
-}
-
 bool HistoryViewCell::handleEvent(Ion::Events::Event event) {
   if ((event == Ion::Events::Down && m_selectedSubviewType == SubviewType::Input) ||
     (event == Ion::Events::Up && m_selectedSubviewType == SubviewType::Output)) {

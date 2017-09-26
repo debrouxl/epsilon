@@ -10,14 +10,6 @@ BannerView::BannerView() :
 {
 }
 
-void BannerView::setDisplayDerivative(bool displayDerivative) {
-  m_displayDerivative = displayDerivative;
-}
-
-bool BannerView::displayDerivative() {
-  return m_displayDerivative;
-}
-
 int BannerView::numberOfSubviews() const {
   if (m_displayDerivative) {
     return 3;

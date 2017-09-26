@@ -11,19 +11,29 @@
 
 namespace Graph {
 
-class GraphController : public Shared::FunctionGraphController {
+class GraphController final : public Shared::FunctionGraphController {
 public:
   GraphController(Responder * parentResponder, CartesianFunctionStore * functionStore, Shared::InteractiveCurveViewRange * curveViewRange, Shared::CurveViewCursor * cursor, uint32_t * modelVersion, uint32_t * rangeVersion, Poincare::Expression::AngleUnit * angleUnitVersion, ButtonRowController * header);
   I18n::Message emptyMessage() override;
 private:
-  BannerView * bannerView() override;
+  BannerView * bannerView() override {
+    return &m_bannerView;
+  }
   void reloadBannerView() override;
   bool moveCursorHorizontally(int direction) override;
   void initCursorParameters() override;
-  Shared::InteractiveCurveViewRange * interactiveCurveViewRange() override;
-  CartesianFunctionStore * functionStore() const override;
-  GraphView * functionGraphView() override;
-  CurveParameterController * curveParameterController() override;
+  Shared::InteractiveCurveViewRange * interactiveCurveViewRange() override {
+    return m_graphRange;
+  }
+  CartesianFunctionStore * functionStore() const override {
+    return m_functionStore;
+  }
+  GraphView * functionGraphView() override {
+    return &m_view;
+  }
+  CurveParameterController * curveParameterController() override {
+    return &m_curveParameterController;
+  }
   BannerView m_bannerView;
   GraphView m_view;
   Shared::InteractiveCurveViewRange * m_graphRange;

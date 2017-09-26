@@ -6,16 +6,6 @@ extern "C" {
 
 namespace Home {
 
-Controller::ContentView::ContentView(Controller * controller, SelectableTableViewDataSource * selectionDataSource) :
-  m_selectableTableView(controller, controller, 0, 0, 0, k_sideMargin, 0, k_sideMargin, selectionDataSource, controller, true, false,
-    KDColorBlack, k_indicatorThickness, Palette::GreyDark, Palette::GreyMiddle, k_indicatorMargin)
-{
-}
-
-SelectableTableView * Controller::ContentView::selectableTableView() {
-  return &m_selectableTableView;
-}
-
 void Controller::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   ctx->fillRect(bounds(), KDColorWhite);
 }
@@ -38,14 +28,6 @@ void Controller::ContentView::layoutSubviews() {
   m_selectableTableView.setFrame(bounds());
 }
 
-Controller::Controller(Responder * parentResponder, ::AppsContainer * container, SelectableTableViewDataSource * selectionDataSource) :
-  ViewController(parentResponder),
-  m_container(container),
-  m_view(this, selectionDataSource),
-  m_selectionDataSource(selectionDataSource)
-{
-}
-
 bool Controller::handleEvent(Ion::Events::Event event) {
   if (event == Ion::Events::OK || event == Ion::Events::EXE) {
     m_container->switchTo(m_container->appSnapshotAtIndex(m_selectionDataSource->selectedRow()*k_numberOfColumns+m_selectionDataSource->selectedColumn()+1));
@@ -66,10 +48,6 @@ void Controller::didBecomeFirstResponder() {
 void Controller::viewWillAppear() {
 }
 
-View * Controller::view() {
-  return &m_view;
-}
-
 int Controller::numberOfRows() {
   return ((numberOfIcons()-1)/k_numberOfColumns)+1;
 }
@@ -84,10 +62,6 @@ KDCoordinate Controller::cellHeight() {
 
 KDCoordinate Controller::cellWidth() {
   return k_cellWidth;
-}
-
-HighlightCell * Controller::reusableCell(int index) {
-  return &m_cells[index];
 }
 
 int Controller::reusableCellCount() {
