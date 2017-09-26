@@ -8,11 +8,13 @@ namespace Graph {
 
 class ValuesController;
 
-class DerivativeParameterController : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
+class DerivativeParameterController final : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
 public:
   DerivativeParameterController(ValuesController * valuesController);
 
-  View * view() override;
+  View * view() override {
+    return &m_selectableTableView;
+  }
   const char * title() override;
   bool handleEvent(Ion::Events::Event event) override;
   void didBecomeFirstResponder() override;

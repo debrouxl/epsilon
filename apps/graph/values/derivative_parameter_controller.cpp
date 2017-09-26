@@ -28,10 +28,6 @@ const char * DerivativeParameterController::title() {
   return m_pageTitle;
 }
 
-View * DerivativeParameterController::view() {
-  return &m_selectableTableView;
-}
-
 void DerivativeParameterController::setFunction(CartesianFunction * function) {
   m_function = function;
 }

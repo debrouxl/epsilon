@@ -5,10 +5,13 @@
 
 namespace OnBoarding {
 
-class UpdateController : public MessageController {
+class UpdateController final : public MessageController {
 public:
-  UpdateController();
+  UpdateController() : MessageController(sOnBoardingMessages, sOnBoardingColors) {}
   bool handleEvent(Ion::Events::Event event) override;
+private:
+  static I18n::Message sOnBoardingMessages[];
+  static KDColor sOnBoardingColors[];
 };
 
 }

@@ -8,10 +8,6 @@ EditorController::EditorController(Program * program) :
 {
 }
 
-View * EditorController::view() {
-  return &m_view;
-}
-
 bool EditorController::handleEvent(Ion::Events::Event event) {
   if (event == Ion::Events::OK) {
     app()->dismissModalViewController();

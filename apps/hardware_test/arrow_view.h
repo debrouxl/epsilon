@@ -5,7 +5,7 @@
 
 namespace HardwareTest {
 
-class ArrowView : public View {
+class ArrowView final : public View {
 public:
   ArrowView();
   void drawRect(KDContext * ctx, KDRect rect) const override;
