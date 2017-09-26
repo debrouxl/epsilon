@@ -6,14 +6,16 @@
 
 namespace Code {
 
-class ExecutorController : public ViewController {
+class ExecutorController final : public ViewController {
 public:
-  ExecutorController(Program * program);
-  View * view() override;
+  ExecutorController(Program * program) : ViewController(nullptr), m_view(program) {}
+  View * view() override {
+    return &m_view;
+  }
   bool handleEvent(Ion::Events::Event event) override;
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
-    ContentView(Program * program);
+    ContentView(Program * program) : View(), m_program(program), m_printLocation(KDPointZero) {}
     void drawRect(KDContext * ctx, KDRect rect) const override;
     void print(const char * str) const;
   private:

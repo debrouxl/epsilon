@@ -8,10 +8,12 @@
 
 namespace Code {
 
-class MenuController : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
+class MenuController final : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
 public:
   MenuController(Responder * parentResponder, Program * program);
-  View * view() override;
+  View * view() override {
+    return &m_selectableTableView;
+  }
   bool handleEvent(Ion::Events::Event event) override;
   void didBecomeFirstResponder() override;
   int numberOfRows() override;

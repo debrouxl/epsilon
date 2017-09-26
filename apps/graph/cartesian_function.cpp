@@ -8,14 +8,6 @@ CartesianFunction::CartesianFunction(const char * text, KDColor color) :
 {
 }
 
-bool CartesianFunction::displayDerivative() {
-  return m_displayDerivative;
-}
-
-void CartesianFunction::setDisplayDerivative(bool display) {
-  m_displayDerivative = display;
-}
-
 double CartesianFunction::approximateDerivative(double x, Poincare::Context * context) const {
   Poincare::Complex<double> abscissa = Poincare::Complex<double>::Float(x);
   Poincare::Expression * args[2] = {expression(), &abscissa};

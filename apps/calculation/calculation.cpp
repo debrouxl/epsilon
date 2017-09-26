@@ -16,22 +16,14 @@ Calculation::Calculation() :
 }
 
 Calculation::~Calculation() {
-  if (m_inputLayout != nullptr) {
-    delete m_inputLayout;
-    m_inputLayout = nullptr;
-  }
-  if (m_input != nullptr) {
-    delete m_input;
-    m_input = nullptr;
-  }
-  if (m_output != nullptr) {
-    delete m_output;
-    m_output = nullptr;
-  }
-  if (m_outputLayout != nullptr) {
-    delete m_outputLayout;
-    m_outputLayout = nullptr;
-  }
+  delete m_inputLayout;
+  m_inputLayout = nullptr;
+  delete m_input;
+  m_input = nullptr;
+  delete m_output;
+  m_output = nullptr;
+  delete m_outputLayout;
+  m_outputLayout = nullptr;
 }
 
 Calculation& Calculation::operator=(const Calculation& other) {
@@ -55,14 +47,6 @@ void Calculation::setContent(const char * c, Context * context) {
   Evaluation<double> * evaluation = input()->evaluate<double>(*context);
   evaluation->writeTextInBuffer(m_outputText, sizeof(m_outputText));
   delete evaluation;
-}
-
-const char * Calculation::inputText() {
-  return m_inputText;
-}
-
-const char * Calculation::outputText() {
-  return m_outputText;
 }
 
 Expression * Calculation::input() {

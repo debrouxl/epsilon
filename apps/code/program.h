@@ -5,7 +5,7 @@
 
 namespace Code {
 
-class Program {
+class Program final {
 public:
   Program();
   const char * readOnlyContent() const;

@@ -12,10 +12,6 @@ MenuController::MenuController(Responder * parentResponder, Program * program) :
 {
 }
 
-View * MenuController::view() {
-  return &m_selectableTableView;
-}
-
 void MenuController::didBecomeFirstResponder() {
   m_selectableTableView.selectCellAtLocation(0, 0);
   app()->setFirstResponder(&m_selectableTableView);
@@ -32,8 +28,7 @@ bool MenuController::handleEvent(Ion::Events::Event event) {
 
 int MenuController::numberOfRows() {
   return k_totalNumberOfCells;
-};
-
+}
 
 HighlightCell * MenuController::reusableCell(int index) {
   assert(index >= 0);
@@ -51,7 +46,7 @@ KDCoordinate MenuController::cellHeight() {
 
 void MenuController::willDisplayCellForIndex(HighlightCell * cell, int index) {
   MessageTableCell * myCell = (MessageTableCell *)cell;
-  I18n::Message titles[k_totalNumberOfCells] = {I18n::Message::EditProgram, I18n::Message::ExecuteProgram};
+  static const I18n::Message titles[k_totalNumberOfCells] = {I18n::Message::EditProgram, I18n::Message::ExecuteProgram};
   myCell->setMessage(titles[index]);
 }
 

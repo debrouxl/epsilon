@@ -7,7 +7,7 @@
 
 namespace Calculation {
 
-class HistoryViewCell : public ::EvenOddCell, public Responder {
+class HistoryViewCell final : public ::EvenOddCell, public Responder {
 public:
   enum class SubviewType {
     Input,
@@ -24,8 +24,12 @@ public:
   bool handleEvent(Ion::Events::Event event) override;
   constexpr static KDCoordinate k_digitHorizontalMargin = 10;
   constexpr static KDCoordinate k_digitVerticalMargin = 5;
-  SubviewType selectedSubviewType();
-  void setSelectedSubviewType(HistoryViewCell::SubviewType subviewType);
+  SubviewType selectedSubviewType()  {
+    return m_selectedSubviewType;
+  }
+  void setSelectedSubviewType(HistoryViewCell::SubviewType subviewType) {
+    m_selectedSubviewType = subviewType;
+  }
 private:
   constexpr static KDCoordinate k_resultWidth = 80;
   ScrollableExpressionView m_inputView;
