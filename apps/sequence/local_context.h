@@ -7,7 +7,7 @@
 namespace Sequence {
 
 template<typename T>
-class LocalContext : public Poincare::VariableContext<T> {
+class LocalContext final : public Poincare::VariableContext<T> {
 public:
   LocalContext(Poincare::Context * parentContext);
   const Poincare::Expression * expressionForSymbol(const Poincare::Symbol * symbol) override;

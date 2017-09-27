@@ -1,22 +1,11 @@
 #include "app.h"
 #include "../apps_container.h"
-#include "sequence_icon.h"
 
 using namespace Poincare;
 
 namespace Sequence {
 
-I18n::Message App::Descriptor::name() {
-  return I18n::Message::SequenceApp;
-}
-
-I18n::Message App::Descriptor::upperName() {
-  return I18n::Message::SequenceAppCapital;
-}
-
-const Image * App::Descriptor::icon() {
-  return ImageStore::SequenceIcon;
-}
+App::Descriptor App::Snapshot::s_descriptor;
 
 App::Snapshot::Snapshot() :
   Shared::FunctionApp::Snapshot::Snapshot(),
@@ -25,27 +14,10 @@ App::Snapshot::Snapshot() :
 {
 }
 
-App * App::Snapshot::unpack(Container * container) {
-  return new App(container, this);
-}
-
 void App::Snapshot::reset() {
   FunctionApp::Snapshot::reset();
   m_graphRange.setDefault();
   m_sequenceStore.removeAll();
-}
-
-App::Descriptor * App::Snapshot::descriptor() {
-  static Descriptor descriptor;
-  return &descriptor;
-}
-
-SequenceStore * App::Snapshot::sequenceStore() {
-  return &m_sequenceStore;
-}
-
-CurveViewRange * App::Snapshot::graphRange() {
-  return &m_graphRange;
 }
 
 void App::Snapshot::tidy() {
@@ -71,10 +43,6 @@ App::App(Container * container, Snapshot * snapshot) :
   m_tabViewController(&m_inputViewController, snapshot, &m_listStackViewController, &m_graphStackViewController, &m_valuesStackViewController),
   m_inputViewController(&m_modalViewController, &m_tabViewController, &m_listController)
 {
-}
-
-InputViewController * App::inputViewController() {
-  return &m_inputViewController;
 }
 
 Context * App::localContext() {

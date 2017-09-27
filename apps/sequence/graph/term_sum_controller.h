@@ -9,11 +9,13 @@
 
 namespace Sequence {
 
-class TermSumController : public ViewController {
+class TermSumController final : public ViewController {
 public:
   TermSumController(Responder * parentResponder, GraphView * graphView, CurveViewRange * graphRange, Shared::CurveViewCursor * cursor);
   const char * title() override;
-  View * view() override;
+  View * view() override {
+    return m_graphView;
+  }
   void viewWillAppear() override;
   bool handleEvent(Ion::Events::Event event) override;
   bool moveCursorHorizontallyToPosition(int position);
@@ -23,7 +25,7 @@ private:
   constexpr static float k_cursorRightMarginRatio = 0.04f; // (cursorWidth/2)/graphViewWidth
   constexpr static float k_cursorBottomMarginRatio = 0.28f; // (cursorHeight/2+bannerHeigh)/graphViewHeight
   constexpr static float k_cursorLeftMarginRatio = 0.04f;  // (cursorWidth/2)/graphViewWidth
-  class LegendView : public View {
+  class LegendView final : public View {
   public:
     LegendView();
     ~LegendView();

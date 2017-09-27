@@ -137,10 +137,6 @@ void ListController::editExpression(Sequence * sequence, int sequenceDefinition,
   }
 }
 
-ListParameterController * ListController::parameterController() {
-  return &m_parameterController;
-}
-
 int ListController::maxNumberOfRows() {
   return k_maxNumberOfRows;
 }

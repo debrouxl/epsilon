@@ -2,6 +2,8 @@
 #define STAT_APP_H
 
 #include <escher.h>
+#include "stat_icon.h"
+#include "../i18n.h"
 #include "box_controller.h"
 #include "calculation_controller.h"
 #include "store.h"
@@ -11,33 +13,56 @@
 
 namespace Statistics {
 
-class App : public Shared::TextFieldDelegateApp {
+class App final : public Shared::TextFieldDelegateApp {
 public:
-  class Descriptor : public ::App::Descriptor {
+  class Descriptor final : public ::App::Descriptor {
   public:
-    I18n::Message name() override;
-    I18n::Message upperName() override;
-    const Image * icon() override;
+    I18n::Message name() override {
+      return I18n::Message::StatsApp;
+    }
+    I18n::Message upperName() override {
+      return I18n::Message::StatsAppCapital;
+    }
+    const Image * icon() override {
+      return ImageStore::StatIcon;
+    }
   };
-  class Snapshot : public ::App::Snapshot, public TabViewDataSource {
+  class Snapshot final : public ::App::Snapshot, public TabViewDataSource {
   public:
-    Snapshot();
-    App * unpack(Container * container) override;
+    Snapshot() : m_store(), m_storeVersion(0), m_barVersion(0), m_rangeVersion(0), m_selectedHistogramBarIndex(0), m_selectedBoxQuantile(BoxView::Quantile::Min) {}
+    App * unpack(Container * container) override {
+      return new App(container, this);
+    }
     void reset() override;
-    Descriptor * descriptor() override;
-    Store * store();
-    uint32_t * storeVersion();
-    uint32_t * barVersion();
-    uint32_t * rangeVersion();
-    int * selectedHistogramBarIndex();
-    BoxView::Quantile * selectedBoxQuantile();
+    Descriptor * descriptor() override {
+      return &s_descriptor;
+    }
+    Store * store() {
+      return &m_store;
+    }
+    uint32_t * storeVersion() {
+      return &m_storeVersion;
+    }
+    uint32_t * barVersion() {
+      return &m_barVersion;
+    }
+    uint32_t * rangeVersion() {
+      return &m_rangeVersion;
+    }
+    int * selectedHistogramBarIndex() {
+      return &m_selectedHistogramBarIndex;
+    }
+    BoxView::Quantile * selectedBoxQuantile() {
+      return &m_selectedBoxQuantile;
+    }
   private:
     Store m_store;
     uint32_t m_storeVersion;
-    uint32_t  m_barVersion;
+    uint32_t m_barVersion;
     uint32_t m_rangeVersion;
     int m_selectedHistogramBarIndex;
     BoxView::Quantile m_selectedBoxQuantile;
+    static Descriptor s_descriptor;
   };
 private:
   App(Container * container, Snapshot * snapshot);

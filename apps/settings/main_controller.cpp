@@ -53,17 +53,8 @@ MainController::MainController(Responder * parentResponder) :
 }
 
 MainController::~MainController() {
-  if (m_complexFormatLayout) {
-    delete m_complexFormatLayout;
-    m_complexFormatLayout = nullptr;
-  }
-}
-const char * MainController::title() {
-  return I18n::translate(m_nodeModel->label());
-}
-
-View * MainController::view() {
-  return &m_selectableTableView;
+  delete m_complexFormatLayout;
+  m_complexFormatLayout = nullptr;
 }
 
 void MainController::didBecomeFirstResponder() {
@@ -178,11 +169,11 @@ void MainController::willDisplayCellForIndex(HighlightCell * cell, int index) {
       m_complexFormatLayout = nullptr;
     }
     if (Preferences::sharedPreferences()->complexFormat() == Expression::ComplexFormat::Cartesian) {
-      const char text[] = {'a','+', Ion::Charset::IComplex, 'b', ' '};
+      static const char text[] = {'a','+', Ion::Charset::IComplex, 'b', ' '};
       m_complexFormatLayout = new StringLayout(text, sizeof(text), KDText::FontSize::Small);
     } else {
-      const char base[] = {'r', Ion::Charset::Exponential};
-      const char superscript[] = {Ion::Charset::IComplex, Ion::Charset::SmallTheta, ' '};
+      static const char base[] = {'r', Ion::Charset::Exponential};
+      static const char superscript[] = {Ion::Charset::IComplex, Ion::Charset::SmallTheta, ' '};
       m_complexFormatLayout = new BaselineRelativeLayout(new StringLayout(base, sizeof(base), KDText::FontSize::Small), new StringLayout(superscript, sizeof(superscript), KDText::FontSize::Small), BaselineRelativeLayout::Type::Superscript);
     }
     MessageTableCellWithChevronAndExpression * myExpCell = (MessageTableCellWithChevronAndExpression *)cell;

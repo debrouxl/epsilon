@@ -6,12 +6,14 @@
 
 namespace Sequence {
 
-class GraphView : public Shared::FunctionGraphView {
+class GraphView final : public Shared::FunctionGraphView {
 public:
   GraphView(SequenceStore * sequenceStore, Shared::InteractiveCurveViewRange * graphRange,
     Shared::CurveViewCursor * cursor, Shared::BannerView * bannerView, View * cursorView);
   void drawRect(KDContext * ctx, KDRect rect) const override;
-  void setVerticalCursor(bool verticalCursor);
+  void setVerticalCursor(bool verticalCursor) {
+    m_verticalCursor = verticalCursor;
+  }
   void reload() override;
   void selectSequence(Sequence * sequence);
   void setHighlight(int start, int end);

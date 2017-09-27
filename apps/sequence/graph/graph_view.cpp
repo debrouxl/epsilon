@@ -46,10 +46,6 @@ void GraphView::drawRect(KDContext * ctx, KDRect rect) const {
   }
 }
 
-void GraphView::setVerticalCursor(bool verticalCursor) {
-  m_verticalCursor = verticalCursor;
-}
-
 void GraphView::reload() {
   FunctionGraphView::reload();
   if (m_highlightedDotStart >= 0) {

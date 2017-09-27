@@ -8,11 +8,14 @@ namespace Probability {
 
 class CalculationController;
 
-class ImageCell : public HighlightCell {
+class ImageCell final : public HighlightCell {
 public:
-  ImageCell();
+  ImageCell() : HighlightCell(), m_icon(nullptr), m_focusedIcon(nullptr) {}
   void reloadCell() override;
-  void setImage(const Image * image, const Image * focusedImage);
+  void setImage(const Image * image, const Image * focusedImage) {
+    m_icon = image;
+    m_focusedIcon = focusedImage;
+  }
   constexpr static KDCoordinate k_width = 39;
   constexpr static KDCoordinate k_height = 23;
 private:
@@ -24,7 +27,7 @@ private:
   const Image * m_focusedIcon;
 };
 
-class ImageTableView : public View, public Responder, public SimpleListViewDataSource, public SelectableTableViewDataSource {
+class ImageTableView final : public View, public Responder, public SimpleListViewDataSource, public SelectableTableViewDataSource {
 public:
   ImageTableView(Responder * parentResponder, Law * law, Calculation * calculation, CalculationController * calculationController);
   void drawRect(KDContext * ctx, KDRect rect) const override;

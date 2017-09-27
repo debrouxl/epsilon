@@ -10,11 +10,15 @@
 
 namespace Probability {
 
-class CalculationController : public ViewController, public Shared::TextFieldDelegate {
+class CalculationController final : public ViewController, public Shared::TextFieldDelegate {
 public:
   CalculationController(Responder * parentResponder, Law * law, Calculation * calculation);
-  View * view() override;
-  const char * title() override;
+  View * view() override {
+    return &m_contentView;
+  }
+  const char * title() override {
+    return m_titleBuffer;
+  }
   void reload();
   void setCalculationAccordingToIndex(int index, bool forceReinitialisation = false);
   bool handleEvent(Ion::Events::Event event) override;
@@ -28,15 +32,21 @@ private:
   void updateTitle();
   Shared::TextFieldDelegateApp * textFieldDelegateApp() override;
   Calculation * m_calculation;
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
     ContentView(Responder * parentResponder, CalculationController * calculationController, Calculation * Calculation, Law * law);
     void setCalculation(Calculation * calculation, int index);
     void layoutSubviews() override;
     void drawRect(KDContext * ctx, KDRect rect) const override;
-    LawCurveView * lawCurveView();
-    ImageTableView * imageTableView();
-    EditableTextCell * calculationCellAtIndex(int index);
+    LawCurveView * lawCurveView() {
+      return &m_lawCurveView;
+    }
+    ImageTableView * imageTableView() {
+      return &m_imageTableView;
+    }
+    EditableTextCell * calculationCellAtIndex(int index) {
+      return &m_calculationCell[index];
+    }
     void willDisplayEditableCellAtIndex(int index);
     constexpr static int k_maxNumberOfEditableFields = 3;
   private:
