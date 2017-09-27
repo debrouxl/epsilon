@@ -10,7 +10,7 @@ namespace Sequence {
 
 class ListController;
 
-class ListParameterController : public Shared::ListParameterController {
+class ListParameterController final : public Shared::ListParameterController {
 public:
   ListParameterController(ListController * list, SequenceStore * sequenceStore);
   const char * title() override;

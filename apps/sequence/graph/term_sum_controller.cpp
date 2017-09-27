@@ -33,10 +33,6 @@ const char * TermSumController::title() {
   return I18n::translate(I18n::Message::TermSum);
 }
 
-View * TermSumController::view() {
-  return m_graphView;
-}
-
 void TermSumController::viewWillAppear() {
   m_graphRange->panToMakePointVisible(m_cursor->x(), m_cursor->y(), k_cursorTopMarginRatio, k_cursorRightMarginRatio, k_cursorBottomMarginRatio, k_cursorLeftMarginRatio);
   m_graphView->setVerticalCursor(true);
@@ -173,10 +169,8 @@ TermSumController::LegendView::LegendView() :
 }
 
 TermSumController::LegendView::~LegendView() {
-  if (m_sumLayout != nullptr) {
-    delete m_sumLayout;
-    m_sumLayout = nullptr;
-  }
+  delete m_sumLayout;
+  m_sumLayout = nullptr;
 }
 
 void TermSumController::LegendView::drawRect(KDContext * ctx, KDRect rect) const {
@@ -195,10 +189,8 @@ void TermSumController::LegendView::setLegendMessage(I18n::Message message) {
 static const char sigma[2] = {' ', Ion::Charset::CapitalSigma};
 
 void TermSumController::LegendView::setSumSubscript(float start) {
-  if (m_sumLayout) {
-    delete m_sumLayout;
-    m_sumLayout = nullptr;
-  }
+  delete m_sumLayout;
+  m_sumLayout = nullptr;
   char buffer[PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits)];
   Complex<float>::convertFloatToText(start, buffer, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits), Constant::LargeNumberOfSignificantDigits, Expression::FloatDisplayMode::Decimal);
   m_sumLayout = new CondensedSumLayout(new StringLayout(sigma, sizeof(sigma)), new StringLayout(buffer, strlen(buffer), KDText::FontSize::Small), nullptr);
