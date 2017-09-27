@@ -5,14 +5,14 @@
 
 namespace Settings {
 
-class SettingsNode : public Node {
+class SettingsNode final : public Node {
 public:
   constexpr SettingsNode(I18n::Message label = I18n::Message::Default, const SettingsNode * children = nullptr, int numberOfChildren = 0) :
     Node(label, numberOfChildren),
-    m_children(children)
-  {
-  };
-  const Node * children(int index) const override;
+    m_children(children) {}
+  const Node * children(int index) const override {
+    return &m_children[index];
+  }
 private:
   const SettingsNode * m_children;
 };

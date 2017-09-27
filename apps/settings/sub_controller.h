@@ -7,7 +7,7 @@
 
 namespace Settings {
 
-class SubController : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
+class SubController final : public ViewController, public SimpleListViewDataSource, public SelectableTableViewDataSource {
 public:
   SubController(Responder * parentResponder);
   ~SubController();
@@ -15,7 +15,9 @@ public:
   SubController(SubController&& other) = delete;
   SubController& operator=(const SubController& other) = delete;
   SubController& operator=(SubController&& other) = delete;
-  View * view() override;
+  View * view() override {
+    return &m_selectableTableView;
+  }
   const char * title() override;
   bool handleEvent(Ion::Events::Event event) override;
   void didEnterResponderChain(Responder * previousFirstResponder) override;
@@ -24,7 +26,9 @@ public:
   HighlightCell * reusableCell(int index) override;
   int reusableCellCount() override;
   void willDisplayCellForIndex(HighlightCell * cell, int index) override;
-  void setNodeModel(const Node * nodeModel);
+  void setNodeModel(const Node * nodeModel) {
+    m_nodeModel = (Node *)nodeModel;
+  }
   void viewWillAppear() override;
   void viewDidDisappear() override;
 private:
