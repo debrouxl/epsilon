@@ -8,8 +8,22 @@ namespace Poincare {
 template<typename T>
 class ComplexMatrix final : public Evaluation<T> {
 public:
-  ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns, bool borrow);
-  ~ComplexMatrix();
+  ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns) :
+    m_values(new Complex<T>[numberOfRows*numberOfColumns]),
+    m_numberOfRows(numberOfRows),
+    m_numberOfColumns(numberOfColumns) {
+    for (int i = 0; i < numberOfRows*numberOfColumns; i++) {
+      m_values[i] = complexes[i];
+    }
+  }
+  ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns, bool borrow) :
+    m_values(const_cast<Complex<T> *>(complexes)),
+    m_numberOfRows(numberOfRows),
+    m_numberOfColumns(numberOfColumns) {}
+  ~ComplexMatrix() {
+    delete[] m_values;
+    m_values = nullptr;
+  }
   ComplexMatrix(const ComplexMatrix& other) = delete;
   ComplexMatrix(ComplexMatrix&& other) = delete;
   ComplexMatrix& operator=(const ComplexMatrix& other) = delete;
