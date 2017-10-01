@@ -13,29 +13,6 @@ extern "C" {
 namespace Poincare {
 
 template<typename T>
-ComplexMatrix<T>::ComplexMatrix(const Complex<T> * complexes, int numberOfRows, int numberOfColumns, bool borrow) :
-  m_numberOfRows(numberOfRows),
-  m_numberOfColumns(numberOfColumns)
-{
-  assert(complexes != nullptr);
-  if (borrow) {
-    m_values = const_cast<Complex<T> *>(complexes);
-  }
-  else {
-    m_values = new Complex<T>[numberOfRows*numberOfColumns];
-    for (int i = 0; i < numberOfRows*numberOfColumns; i++) {
-      m_values[i] = complexes[i];
-    }
-  }
-}
-
-template<typename T>
-ComplexMatrix<T>::~ComplexMatrix() {
-  delete[] m_values;
-  m_values = nullptr;
-}
-
-template<typename T>
 T ComplexMatrix<T>::toScalar() const {
   if (m_numberOfRows != 1 || m_numberOfColumns != 1) {
     return NAN;
@@ -103,5 +80,10 @@ Evaluation<U> * ComplexMatrix<T>::templatedEvaluate(Context& context, Expression
 
 template class Poincare::ComplexMatrix<float>;
 template class Poincare::ComplexMatrix<double>;
+
+template Poincare::Evaluation<double>* Poincare::ComplexMatrix<float>::templatedEvaluate<double>(Poincare::Context&, Poincare::Expression::AngleUnit) const;
+template Poincare::Evaluation<float>* Poincare::ComplexMatrix<float>::templatedEvaluate<float>(Poincare::Context&, Poincare::Expression::AngleUnit) const;
+template Poincare::Evaluation<double>* Poincare::ComplexMatrix<double>::templatedEvaluate<double>(Poincare::Context&, Poincare::Expression::AngleUnit) const;
+template Poincare::Evaluation<float>* Poincare::ComplexMatrix<double>::templatedEvaluate<float>(Poincare::Context&, Poincare::Expression::AngleUnit) const;
 
 }
