@@ -10,4 +10,4 @@ else
 OPTIM_SFLAGS += -fdata-sections -ffunction-sections
 LDFLAGS = --gc-sections
 endif
-SFLAGS = -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16
+SFLAGS = -mthumb -march=armv7e-m -mfloat-abi=hard -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -fno-math-errno
