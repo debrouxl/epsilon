@@ -31,7 +31,7 @@ Complex<T> ArcCosine::templatedComputeComplex(const Complex<T> & c, AngleUnit an
   }
   T result = std::acos(c.a());
   if (angleUnit == AngleUnit::Degree) {
-    return Complex<T>::Float(result*180/M_PI);
+    return Complex<T>::Float(result*(T)180/(T)M_PI);
   }
   return Complex<T>::Float(result);
 }

@@ -32,8 +32,8 @@ Evaluation<T> * PredictionInterval::templatedEvaluate(Context& context, AngleUni
     return Complex<T>::NewFNAN();
   }
   Complex<T> operands[2] = {
-    Complex<T>::Float(p - 1.96*std::sqrt(p*(1.0-p))/std::sqrt(n)),
-    Complex<T>::Float(p + 1.96*std::sqrt(p*(1.0-p))/std::sqrt(n))
+    Complex<T>::Float(p - (T)1.96*std::sqrt(p*((T)1-p))/std::sqrt(n)),
+    Complex<T>::Float(p + (T)1.96*std::sqrt(p*((T)1-p))/std::sqrt(n))
   };
   return new ComplexMatrix<T>(operands, 1, 2, false);
 }

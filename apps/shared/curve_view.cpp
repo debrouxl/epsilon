@@ -349,7 +349,7 @@ void CurveView::drawHistogram(KDContext * ctx, KDRect rect, Model * model, float
       binRect = KDRect(pxf, floatToPixel(Axis::Vertical, 0.0f), pixelBarWidth+1, pyf - floatToPixel(Axis::Vertical, 0.0f));
     }
     KDColor binColor = defaultColor;
-    bool shouldColorBin = fillBar ? centerX >= highlightLowerBound && centerX <= highlightUpperBound : pxf >= floorf(pHighlightLowerBound) && pxf <= floorf(pHighlightUpperBound);
+    bool shouldColorBin = fillBar ? centerX >= highlightLowerBound && centerX <= highlightUpperBound : pxf >= std::floor(pHighlightLowerBound) && pxf <= std::floor(pHighlightUpperBound);
     if (shouldColorBin) {
       binColor = highlightColor;
     }

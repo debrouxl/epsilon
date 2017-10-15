@@ -115,7 +115,7 @@ T Derivative::growthRateAroundAbscissa(T x, T h, VariableContext<T> xContext, An
   e = Complex<T>::Float(x-h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
   T expressionMinus = m_args[0]->approximate<T>(xContext, angleUnit);
-  return (expressionPlus - expressionMinus)/(2*h);
+  return (expressionPlus - expressionMinus)/((T)2*h);
 }
 
 template<typename T>
@@ -130,7 +130,7 @@ T Derivative::approximateDerivate2(T x, T h, VariableContext<T> xContext, AngleU
   e = Complex<T>::Float(x-h);
   xContext.setExpressionForSymbolName(&e, &xSymbol);
   T expressionMinus = m_args[0]->approximate<T>(xContext, angleUnit);
-  return expressionPlus - 2.0*expression + expressionMinus;
+  return expressionPlus - (T)2*expression + expressionMinus;
 }
 
 }
