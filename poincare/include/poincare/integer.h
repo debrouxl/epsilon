@@ -12,7 +12,7 @@ namespace Poincare {
 
 struct IntegerDivision;
 
-class Integer {
+class Integer final {
 public:
   typedef uint16_t half_native_uint_t;
   typedef int32_t native_int_t;

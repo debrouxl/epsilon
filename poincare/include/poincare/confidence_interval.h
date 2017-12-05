@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class ConfidenceInterval : public StaticHierarchy<2> {
+class ConfidenceInterval final : public StaticHierarchy<2> {
   using StaticHierarchy<2>::StaticHierarchy;
 public:
   Type type() const override;

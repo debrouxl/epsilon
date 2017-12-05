@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class SumLayout : public SequenceLayout {
+class SumLayout final : public SequenceLayout {
 public:
   using SequenceLayout::SequenceLayout;
 private:

@@ -61,12 +61,6 @@ ParenthesisLayout::ParenthesisLayout(ExpressionLayout * operandLayout) :
   }
 }
 
-ParenthesisLayout::~ParenthesisLayout() {
-  if (m_operandLayout) {
-    delete m_operandLayout;
-  }
-}
-
 KDColor s_parenthesisWorkingBuffer[ParenthesisLayout::k_parenthesisCurveHeight*ParenthesisLayout::k_parenthesisCurveWidth];
 
 void ParenthesisLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {

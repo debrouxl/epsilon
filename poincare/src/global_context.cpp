@@ -22,15 +22,11 @@ GlobalContext::GlobalContext() :
 
 GlobalContext::~GlobalContext() {
   for (int i = 0; i < k_maxNumberOfScalarExpressions; i++) {
-    if (m_expressions[i] != nullptr) {
-      delete m_expressions[i];
-    }
+    delete m_expressions[i];
     m_expressions[i] = nullptr;
   }
   for (int i = 0; i < k_maxNumberOfMatrixExpressions; i++) {
-    if (m_matrixExpressions[i] != nullptr) {
-      delete m_matrixExpressions[i];
-    }
+    delete m_matrixExpressions[i];
     m_matrixExpressions[i] = nullptr;
   }
 }
@@ -96,10 +92,8 @@ void GlobalContext::setExpressionForSymbolName(const Expression * expression, co
     return;
   }
   Expression * evaluation = expression ? expression->approximate<double>(context) : nullptr; // evaluate before deleting anything (to be able to evaluate A+2->A)
-  if (m_expressions[index] != nullptr) {
-    delete m_expressions[index];
-    m_expressions[index] = nullptr;
-  }
+  delete m_expressions[index];
+  m_expressions[index] = nullptr;
   if (evaluation == nullptr) {
     return;
   }

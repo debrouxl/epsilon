@@ -12,11 +12,6 @@ ExpressionLayout(), m_numerator_layout(numerator_layout), m_denominator_layout(d
     + k_fractionLineMargin + k_fractionLineHeight;
 }
 
-FractionLayout::~FractionLayout() {
-  delete m_denominator_layout;
-  delete m_numerator_layout;
-}
-
 void FractionLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   KDCoordinate fractionLineY = p.y() + m_numerator_layout->size().height() + k_fractionLineMargin;
   ctx->fillRect(KDRect(p.x()+k_fractionBorderMargin, fractionLineY, size().width()-2*k_fractionBorderMargin, 1), expressionColor);
