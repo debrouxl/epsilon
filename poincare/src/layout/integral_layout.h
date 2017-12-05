@@ -6,10 +6,14 @@
 
 namespace Poincare {
 
-class IntegralLayout : public ExpressionLayout {
+class IntegralLayout final : public ExpressionLayout {
 public:
   IntegralLayout(ExpressionLayout * lowerBoundLayout, ExpressionLayout * upperBoundLayout, ExpressionLayout * integrandLayout);
-  ~IntegralLayout();
+  ~IntegralLayout() {
+    delete m_lowerBoundLayout;
+    delete m_upperBoundLayout;
+    delete m_integrandLayout;
+  }
   IntegralLayout(const IntegralLayout& other) = delete;
   IntegralLayout(IntegralLayout&& other) = delete;
   IntegralLayout& operator=(const IntegralLayout& other) = delete;

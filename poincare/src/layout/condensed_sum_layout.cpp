@@ -19,14 +19,6 @@ CondensedSumLayout::CondensedSumLayout(ExpressionLayout * baseLayout, Expression
   m_baseline = m_baseLayout->baseline() + max(0, superscriptSize.height() - m_baseLayout->size().height()/2);
 }
 
-CondensedSumLayout::~CondensedSumLayout() {
-  delete m_baseLayout;
-  delete m_subscriptLayout;
-  if (m_superscriptLayout) {
-    delete m_superscriptLayout;
-  }
-}
-
 void CondensedSumLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   // Nothing to draw
 }

@@ -6,10 +6,12 @@
 
 namespace Poincare {
 
-class ConjugateLayout : public ExpressionLayout {
+class ConjugateLayout final : public ExpressionLayout {
 public:
   ConjugateLayout(ExpressionLayout * operandLayout);
-  ~ConjugateLayout();
+  ~ConjugateLayout() {
+    delete m_operandLayout;
+  }
   ConjugateLayout(const ConjugateLayout& other) = delete;
   ConjugateLayout(ConjugateLayout&& other) = delete;
   ConjugateLayout& operator=(const ConjugateLayout& other) = delete;

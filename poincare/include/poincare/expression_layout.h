@@ -13,8 +13,12 @@ public:
   void draw(KDContext * ctx, KDPoint p, KDColor expressionColor = KDColorBlack, KDColor backgroundColor = KDColorWhite);
   KDPoint origin();
   KDSize size();
-  KDCoordinate baseline();
-  void setParent(ExpressionLayout* parent);
+  KDCoordinate baseline() {
+    return m_baseline;
+  }
+  void setParent(ExpressionLayout* parent) {
+    m_parent = parent;
+  }
 protected:
   virtual void render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) = 0;
   virtual KDSize computeSize() = 0;

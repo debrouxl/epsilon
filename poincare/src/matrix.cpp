@@ -33,10 +33,6 @@ Matrix::Matrix(const Expression * const * operands, int numberOfRows, int number
 {
 }
 
-int Matrix::numberOfRows() const {
-  return m_numberOfRows;
-}
-
 int Matrix::numberOfColumns() const {
   return numberOfOperands()/m_numberOfRows;
 }

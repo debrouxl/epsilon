@@ -30,13 +30,6 @@ NthRootLayout::NthRootLayout(ExpressionLayout * radicandLayout, ExpressionLayout
   }
 }
 
-NthRootLayout::~NthRootLayout() {
-  delete m_radicandLayout;
-  if (m_indexLayout != nullptr) {
-    delete m_indexLayout;
-  }
-}
-
 void NthRootLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   KDSize radicandSize = m_radicandLayout->size();
   KDSize indexSize = m_indexLayout != nullptr ? m_indexLayout->size() : KDSize(k_leftRadixWidth,0);

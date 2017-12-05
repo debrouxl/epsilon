@@ -49,11 +49,7 @@ const Expression * const * Expression::ExpressionArray(const Expression * e1, co
 
 /* Circuit breaker */
 
-static Expression::CircuitBreaker sCircuitBreaker = nullptr;
-
-void Expression::setCircuitBreaker(CircuitBreaker cb) {
-  sCircuitBreaker = cb;
-}
+Expression::CircuitBreaker Expression::sCircuitBreaker = nullptr;
 
 bool Expression::shouldStopProcessing() {
   if (sCircuitBreaker == nullptr) {
@@ -290,11 +286,6 @@ template<typename T> T Expression::approximateToScalar(const char * text, Contex
   T result = exp->approximateToScalar<T>(context, angleUnit);
   delete exp;
   return result;
-}
-
-template<typename T> T Expression::epsilon() {
-  static T epsilon = sizeof(T) == sizeof(double) ? 1E-15 : 1E-7f;
-  return epsilon;
 }
 
 }
