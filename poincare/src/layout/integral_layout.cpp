@@ -30,12 +30,6 @@ IntegralLayout::IntegralLayout(ExpressionLayout * lowerBoundLayout, ExpressionLa
   m_baseline = m_upperBoundLayout->size().height() + k_integrandHeigthMargin + m_integrandLayout->baseline();
 }
 
-IntegralLayout::~IntegralLayout() {
-  delete m_lowerBoundLayout;
-  delete m_upperBoundLayout;
-  delete m_integrandLayout;
-}
-
 void IntegralLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   KDSize integrandSize = m_integrandLayout->size();
   KDSize upperBoundSize = m_upperBoundLayout->size();

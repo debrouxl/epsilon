@@ -6,20 +6,27 @@
 
 namespace Poincare {
 
-class BaselineRelativeLayout : public ExpressionLayout {
+class BaselineRelativeLayout final : public ExpressionLayout {
 public:
   enum class Type {
     Subscript,
     Superscript
   };
   BaselineRelativeLayout(ExpressionLayout * baseLayout, ExpressionLayout * indiceLayout, Type type);
-  ~BaselineRelativeLayout();
+  ~BaselineRelativeLayout() {
+    delete m_baseLayout;
+    delete m_indiceLayout;
+  }
   BaselineRelativeLayout(const BaselineRelativeLayout& other) = delete;
   BaselineRelativeLayout(BaselineRelativeLayout&& other) = delete;
   BaselineRelativeLayout& operator=(const BaselineRelativeLayout& other) = delete;
   BaselineRelativeLayout& operator=(BaselineRelativeLayout&& other) = delete;
-  ExpressionLayout * baseLayout();
-  ExpressionLayout * indiceLayout();
+  ExpressionLayout * baseLayout() {
+    return m_baseLayout;
+  }
+  ExpressionLayout * indiceLayout() {
+    return m_indiceLayout;
+  }
 protected:
   void render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) override;
   KDSize computeSize() override;

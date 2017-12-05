@@ -14,10 +14,6 @@ ConjugateLayout::ConjugateLayout(ExpressionLayout * operandLayout) :
   m_baseline = m_operandLayout->baseline()+k_overlineWidth+k_overlineMargin;
 }
 
-ConjugateLayout::~ConjugateLayout() {
-  delete m_operandLayout;
-}
-
 void ConjugateLayout::render(KDContext * ctx, KDPoint p, KDColor expressionColor, KDColor backgroundColor) {
   ctx->fillRect(KDRect(p.x(), p.y(), m_operandLayout->size().width(), k_overlineWidth), expressionColor);
 }

@@ -6,7 +6,7 @@
 
 namespace Poincare {
 
-class Preferences {
+class Preferences final {
 public:
   static Preferences * sharedPreferences() {
     return &s_preferences;
