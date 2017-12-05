@@ -32,12 +32,27 @@ public:
   Symbol(char name);
   Symbol(Symbol&& other); // C++11 move constructor
   Symbol(const Symbol& other); // C++11 copy constructor
-  char name() const;
-  Type type() const override;
+  char name() const {
+    return m_name;
+  }
+  Type type() const override {
+    return Expression::Type::Symbol;
+  }
   Expression * clone() const override;
   Sign sign() const override;
-  bool isMatrixSymbol() const;
-  bool isScalarSymbol() const;
+  bool isMatrixSymbol() const {
+    if (m_name >= (char)SpecialSymbols::M0 && m_name <= (char)SpecialSymbols::M9) {
+      return true;
+    }
+    return false;
+  }
+  bool isScalarSymbol() const {
+    if (m_name >= 'A' && m_name <= 'Z') {
+      return true;
+    }
+    return false;
+  }
+
 private:
   const char * textForSpecialSymbols(char name) const;
   /* Comparison */
