@@ -105,10 +105,10 @@ bool SequenceToolbox::selectAddedCell(int selectedRow){
   StringLayout * nameLayout = (StringLayout *)layout->baseLayout();
   StringLayout * subscriptLayout = (StringLayout *)layout->indiceLayout();
   int currentChar = 0;
-  strlcpy(buffer, nameLayout->text(), strlen(nameLayout->text())+1);
+  strcpy(buffer, nameLayout->text());
   currentChar += strlen(nameLayout->text());
   buffer[currentChar++] = '(';
-  strlcpy(buffer+currentChar, subscriptLayout->text(), strlen(subscriptLayout->text())+1);
+  strcpy(buffer+currentChar, subscriptLayout->text());
   currentChar += strlen(subscriptLayout->text());
   buffer[currentChar++] = ')';
   buffer[currentChar] = 0;

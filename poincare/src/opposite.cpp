@@ -55,11 +55,10 @@ Expression * Opposite::shallowReduce(Context& context, AngleUnit angleUnit) {
 ExpressionLayout * Opposite::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * children_layouts[2];
-  char string[2] = {'-', '\0'};
-  children_layouts[0] = new StringLayout(string, 1);
-  children_layouts[1] = operand(0)->type() == Type::Opposite ? new ParenthesisLayout(operand(0)->createLayout(floatDisplayMode, complexFormat)) : operand(0)->createLayout(floatDisplayMode, complexFormat);
-  return new HorizontalLayout(children_layouts, 2);
+  ExpressionLayout * childrenLayouts[2];
+  childrenLayouts[0] = new StringLayout("-", 1);
+  childrenLayouts[1] = operand(0)->type() == Type::Opposite ? new ParenthesisLayout(operand(0)->createLayout(floatDisplayMode, complexFormat)) : operand(0)->createLayout(floatDisplayMode, complexFormat);
+  return new HorizontalLayout(childrenLayouts, 2);
 }
 
 int Opposite::writeTextInBuffer(char * buffer, int bufferSize, int numberOfSignificantDigits) const {
