@@ -153,9 +153,8 @@ void HistogramController::reloadBannerView() {
   char buffer[k_maxNumberOfCharacters+ PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits)*2];
   int numberOfChar = 0;
   const char * legend = " [";
-  int legendLength = strlen(legend);
-  strlcpy(buffer, legend, legendLength+1);
-  numberOfChar += legendLength;
+  strcpy(buffer, legend);
+  numberOfChar += sizeof(" [") - 1;
   double lowerBound = m_store->startOfBarAtIndex(*m_selectedBarIndex);
   numberOfChar += PrintFloat::convertFloatToText<double>(lowerBound, buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits), Constant::LargeNumberOfSignificantDigits);
   buffer[numberOfChar++] = ';';
@@ -163,34 +162,29 @@ void HistogramController::reloadBannerView() {
   numberOfChar += PrintFloat::convertFloatToText<double>(upperBound, buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits), Constant::LargeNumberOfSignificantDigits);
   buffer[numberOfChar++] = '[';
   legend = "                                  ";
-  legendLength = strlen(legend);
-  strlcpy(buffer+numberOfChar, legend, legendLength+1);
+  strcpy(buffer+numberOfChar, legend);
   buffer[k_maxIntervalLegendLength] = 0;
   m_bannerView.setLegendAtIndex(buffer, 1);
 
   numberOfChar = 0;
   legend = ": ";
-  legendLength = strlen(legend);
-  strlcpy(buffer, legend, legendLength+1);
-  numberOfChar += legendLength;
+  strcpy(buffer, legend);
+  numberOfChar += sizeof(": ") - 1;
   double size = m_store->heightOfBarAtIndex(*m_selectedBarIndex);
   numberOfChar += PrintFloat::convertFloatToText<double>(size, buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits), Constant::LargeNumberOfSignificantDigits);
   legend = "                            ";
-  legendLength = strlen(legend);
-  strlcpy(buffer+numberOfChar, legend, legendLength+1);
+  strcpy(buffer+numberOfChar, legend);
   buffer[k_maxLegendLength] = 0;
   m_bannerView.setLegendAtIndex(buffer, 3);
 
   numberOfChar = 0;
-  legend = ": ";
-  legendLength = strlen(legend);
-  strlcpy(buffer, legend, legendLength+1);
-  numberOfChar += legendLength;
+  //legend = ": ";
+  //strcpy(buffer, legend);
+  numberOfChar += sizeof(": ") - 1;
   double frequency = size/m_store->sumOfColumn(1);
   numberOfChar += PrintFloat::convertFloatToText<double>(frequency, buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits), Constant::LargeNumberOfSignificantDigits);
   legend = "                            ";
-  legendLength = strlen(legend);
-  strlcpy(buffer+numberOfChar, legend, legendLength+1);
+  strcpy(buffer+numberOfChar, legend);
   buffer[k_maxLegendLength] = 0;
   m_bannerView.setLegendAtIndex(buffer, 5);
 }
