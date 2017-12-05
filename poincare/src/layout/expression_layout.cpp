@@ -12,10 +12,6 @@ ExpressionLayout::ExpressionLayout() :
   m_frame(KDRectZero) {
 }
 
-KDCoordinate ExpressionLayout::baseline() {
-  return m_baseline;
-}
-
 KDPoint ExpressionLayout::origin() {
   if (m_parent == nullptr) {
     return absoluteOrigin();
@@ -51,10 +47,6 @@ KDSize ExpressionLayout::size() {
     m_sized = true;
   }
   return m_frame.size();
-}
-
-void ExpressionLayout::setParent(ExpressionLayout* parent) {
-  m_parent = parent;
 }
 
 }

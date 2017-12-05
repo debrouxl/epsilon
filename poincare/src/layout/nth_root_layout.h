@@ -6,10 +6,13 @@
 
 namespace Poincare {
 
-class NthRootLayout : public ExpressionLayout {
+class NthRootLayout final : public ExpressionLayout {
 public:
   NthRootLayout(ExpressionLayout * radicandLayout, ExpressionLayout * indexLayout);
-  ~NthRootLayout();
+  ~NthRootLayout() {
+    delete m_radicandLayout;
+    delete m_indexLayout;
+  }
   NthRootLayout(const NthRootLayout& other) = delete;
   NthRootLayout(NthRootLayout&& other) = delete;
   NthRootLayout& operator=(const NthRootLayout& other) = delete;

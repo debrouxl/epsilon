@@ -6,10 +6,14 @@
 
 namespace Poincare {
 
-class CondensedSumLayout : public ExpressionLayout {
+class CondensedSumLayout final : public ExpressionLayout {
 public:
   CondensedSumLayout(ExpressionLayout * baseLayout, ExpressionLayout * subscriptLayout, ExpressionLayout * superscriptLayout = nullptr);
-  ~CondensedSumLayout();
+  ~CondensedSumLayout() {
+    delete m_baseLayout;
+    delete m_subscriptLayout;
+    delete m_superscriptLayout;
+  }
   CondensedSumLayout(const CondensedSumLayout& other) = delete;
   CondensedSumLayout(CondensedSumLayout&& other) = delete;
   CondensedSumLayout& operator=(const CondensedSumLayout& other) = delete;

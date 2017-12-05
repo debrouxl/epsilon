@@ -9,7 +9,9 @@ namespace Poincare {
 class BracketLayout : public ExpressionLayout {
 public:
   BracketLayout(ExpressionLayout * operandLayout);
-  ~BracketLayout();
+  ~BracketLayout() {
+    delete m_operandLayout;
+  }
   BracketLayout(const BracketLayout& other) = delete;
   BracketLayout(BracketLayout&& other) = delete;
   BracketLayout& operator=(const BracketLayout& other) = delete;

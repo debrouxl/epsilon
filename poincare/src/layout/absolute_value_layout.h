@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class AbsoluteValueLayout : public BracketLayout {
+class AbsoluteValueLayout final : public BracketLayout {
 public:
   AbsoluteValueLayout(ExpressionLayout * operandLayout) : BracketLayout(operandLayout) {}
   ~AbsoluteValueLayout() {}

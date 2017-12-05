@@ -6,10 +6,13 @@
 
 namespace Poincare {
 
-class FractionLayout : public ExpressionLayout {
+class FractionLayout final : public ExpressionLayout {
 public:
   FractionLayout(ExpressionLayout * numerator, ExpressionLayout * denominator);
-  ~FractionLayout();
+  ~FractionLayout() {
+    delete m_denominator_layout;
+    delete m_numerator_layout;
+  }
   FractionLayout(const FractionLayout& other) = delete;
   FractionLayout(FractionLayout&& other) = delete;
   FractionLayout& operator=(const FractionLayout& other) = delete;

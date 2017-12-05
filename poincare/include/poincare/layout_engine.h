@@ -5,7 +5,7 @@
 
 namespace Poincare {
 
-class LayoutEngine {
+class LayoutEngine final {
 public:
   static ExpressionLayout * createInfixLayout(const Expression * expression, PrintFloat::Mode floatDisplayMode, Expression::ComplexFormat complexFormat, const char * operatorName);
   static ExpressionLayout * createPrefixLayout(const Expression * expression, PrintFloat::Mode floatDisplayMode, Expression::ComplexFormat complexFormat, const char * operatorName);
