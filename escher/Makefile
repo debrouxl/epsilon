@@ -24,7 +24,6 @@ objs += $(addprefix escher/src/,\
   highlight_cell.o\
   gauge_view.o\
   image_view.o\
-  invocation.o\
   input_view_controller.o\
   key_view.o\
   list_view_data_source.o\
@@ -38,18 +37,15 @@ objs += $(addprefix escher/src/,\
   message_table_cell_with_message.o\
   message_table_cell_with_switch.o\
   message_text_view.o\
-  message_tree.o\
   modal_view_controller.o\
   palette.o\
   pointer_text_view.o\
   responder.o\
   run_loop.o\
   scroll_view.o\
-  scroll_view_data_source.o\
   scroll_view_indicator.o\
   scrollable_view.o\
   selectable_table_view.o\
-  selectable_table_view_data_source.o\
   selectable_table_view_delegate.o\
   simple_list_view_data_source.o\
   simple_table_view_data_source.o\
@@ -60,7 +56,6 @@ objs += $(addprefix escher/src/,\
   tab_view.o\
   tab_view_cell.o\
   tab_view_controller.o\
-  tab_view_data_source.o\
   table_cell.o\
   table_view.o\
   table_view_data_source.o\
@@ -71,7 +66,6 @@ objs += $(addprefix escher/src/,\
   tiled_view.o\
   timer.o\
   toolbox.o\
-  toolbox_message_tree.o\
   view.o\
   view_controller.o\
   warning_controller.o\
