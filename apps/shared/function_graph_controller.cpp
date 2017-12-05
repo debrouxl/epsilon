@@ -50,34 +50,34 @@ bool FunctionGraphController::handleEnter() {
 
 void FunctionGraphController::reloadBannerView() {
   char buffer[k_maxNumberOfCharacters+PrintFloat::bufferSizeForFloatsWithPrecision(Constant::LargeNumberOfSignificantDigits)];
+  /*int numberOfChar = 0;
   const char * legend = "0=";
-  int legendLength = strlen(legend);
-  int numberOfChar = 0;
-  strlcpy(buffer, legend, legendLength+1);
+  int legendLength = sizeof("0=") - 1;
+  strcpy(buffer, legend);
   numberOfChar += legendLength;
-  buffer[0] = functionStore()->symbol();
   numberOfChar += Complex<float>::convertFloatToText(m_cursor->x(), buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::MediumNumberOfSignificantDigits), Constant::MediumNumberOfSignificantDigits);
   legend = "   ";
-  legendLength = strlen(legend);
-  strlcpy(buffer+numberOfChar, legend, legendLength+1);
+  strcpy(buffer+numberOfChar, legend);*/
+  convertFloatToText(m_cursor->x(), buffer, "0=", sizeof("0=") - 1, "   ", Constant::MediumNumberOfSignificantDigits);
+  buffer[0] = functionStore()->symbol();
   bannerView()->setLegendAtIndex(buffer, 0);
 
-  numberOfChar = 0;
+  /*numberOfChar = 0;
   legend = "0(x)=";
-  legendLength = strlen(legend);
+  legendLength = sizeof("0(x)=") - 1;
+  strcpy(buffer, legend);
   numberOfChar += legendLength;
-  strlcpy(buffer, legend, legendLength+1);
-  buffer[2] = functionStore()->symbol();
+  numberOfChar += Complex<float>::convertFloatToText(m_cursor->y(), buffer+numberOfChar, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::MediumNumberOfSignificantDigits), Constant::MediumNumberOfSignificantDigits);
+  legend = "   ";
+  strcpy(buffer+numberOfChar, legend);*/
   if (functionStore()->numberOfActiveFunctions() == 0) {
     return;
   }
   assert(m_indexFunctionSelectedByCursor < functionStore()->numberOfActiveFunctions());
   Function * f = functionStore()->activeFunctionAtIndex(m_indexFunctionSelectedByCursor);
+  convertFloatToText(m_cursor->x(), buffer, "0(x)=", sizeof("0(x)=") - 1, "   ", Constant::MediumNumberOfSignificantDigits);
   buffer[0] = f->name()[0];
-  numberOfChar += Complex<float>::convertFloatToText(m_cursor->y(), buffer+legendLength, PrintFloat::bufferSizeForFloatsWithPrecision(Constant::MediumNumberOfSignificantDigits), Constant::MediumNumberOfSignificantDigits);
-  legend = "   ";
-  legendLength = strlen(legend);
-  strlcpy(buffer+numberOfChar, legend, legendLength+1);
+  buffer[2] = functionStore()->symbol();
   bannerView()->setLegendAtIndex(buffer, 1);
 }
 
