@@ -15,24 +15,28 @@ public:
     KDColor backgroundIndicatorColor = Palette::GreyMiddle, KDCoordinate indicatorMargin = 14);
 
   virtual void scrollToCell(int i, int j);
-  HighlightCell * cellAtLocation(int i, int j);
+  HighlightCell * cellAtLocation(int i, int j) { return m_contentView.cellAtLocation(i, j); }
   virtual void reloadData();
-  void reloadCellAtLocation(int i, int j);
-  KDSize size() const;
+  void reloadCellAtLocation(int i, int j) { m_contentView.reloadCellAtLocation(i, j); }
+  KDSize size() const { return m_contentView.minimalSizeForOptimalDisplay(); }
 protected:
 #if ESCHER_VIEW_LOGGING
   const char * className() const override;
 #endif
-  TableViewDataSource * dataSource();
+  TableViewDataSource * dataSource() { return m_contentView.dataSource(); }
   class ContentView : public View {
   public:
-    ContentView(TableView * tableView, TableViewDataSource * dataSource, KDCoordinate horizontalCellOverlapping, KDCoordinate verticalCellOverlapping);
-
+    ContentView(TableView * tableView, TableViewDataSource * dataSource, KDCoordinate horizontalCellOverlapping, KDCoordinate verticalCellOverlapping) :
+      View(),
+      m_tableView(tableView),
+      m_dataSource(dataSource),
+      m_horizontalCellOverlapping(horizontalCellOverlapping),
+      m_verticalCellOverlapping(verticalCellOverlapping) {}
     void scrollToCell(int i, int j) const;
     void reloadCellAtLocation(int i, int j);
     HighlightCell * cellAtLocation(int i, int j);
     void resizeToFitContent();
-    TableViewDataSource * dataSource();
+    TableViewDataSource * dataSource() { return m_dataSource; }
     KDSize minimalSizeForOptimalDisplay() const override;
   protected:
 #if ESCHER_VIEW_LOGGING

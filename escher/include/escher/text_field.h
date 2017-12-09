@@ -11,19 +11,31 @@ public:
   TextField(Responder * parentResponder, char * textBuffer, char * draftTextBuffer, size_t textBufferSize,
     TextFieldDelegate * delegate = nullptr, bool hasTwoBuffers = true, KDText::FontSize size = KDText::FontSize::Large, float horizontalAlignment = 0.0f,
     float verticalAlignment = 0.5f, KDColor textColor = KDColorBlack, KDColor = KDColorWhite);
-  void setDelegate(TextFieldDelegate * delegate);
-  void setDraftTextBuffer(char * draftTextBuffer);
+  void setDelegate(TextFieldDelegate * delegate) {
+    m_delegate = delegate;
+  }
+  void setDraftTextBuffer(char * draftTextBuffer) {
+    m_contentView.setDraftTextBuffer(draftTextBuffer);
+  }
   Toolbox * toolbox() override;
-  bool isEditing() const;
-  const char * text() const;
+  bool isEditing() const { return m_contentView.isEditing(); }
+  const char * text() const { return m_contentView.text(); }
   int draftTextLength() const;
-  int cursorLocation() const;
+  int cursorLocation() const { return m_contentView.cursorLocation(); }
   void setCursorLocation(int location);
   void setText(const char * text);
-  void setBackgroundColor(KDColor backgroundColor);
-  KDColor backgroundColor() const;
-  void setTextColor(KDColor textColor);
-  void setAlignment(float horizontalAlignment, float verticalAlignment);
+  void setBackgroundColor(KDColor backgroundColor) {
+    m_contentView.setBackgroundColor(backgroundColor);
+  }
+  KDColor backgroundColor() const {
+    return m_contentView.backgroundColor();
+  }
+  void setTextColor(KDColor textColor) {
+    m_contentView.setTextColor(textColor);
+  }
+  void setAlignment(float horizontalAlignment, float verticalAlignment) {
+    m_contentView.setAlignment(horizontalAlignment, verticalAlignment);
+  }
   virtual void setEditing(bool isEditing, bool reinitDraftBuffer = true);
   /* If the text to be appended is too long to be added without overflowing the
    * buffer, nothing is done (not even adding few letters from the text to reach
@@ -33,14 +45,16 @@ public:
   bool handleEvent(Ion::Events::Event event) override;
   bool textFieldShouldFinishEditing(Ion::Events::Event event);
   constexpr static int maxBufferSize() {
-     return ContentView::k_maxBufferSize;
+    return ContentView::k_maxBufferSize;
   }
 protected:
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
     ContentView(char * textBuffer, char * draftTextBuffer, size_t textBufferSize, KDText::FontSize size, float horizontalAlignment = 0.0f,
     float verticalAlignment = 0.5f, KDColor textColor = KDColorBlack, KDColor = KDColorWhite);
-    void setDraftTextBuffer(char * draftTextBuffer);
+    void setDraftTextBuffer(char * draftTextBuffer) {
+      m_draftTextBuffer = draftTextBuffer;
+    }
     void drawRect(KDContext * ctx, KDRect rect) const override;
     void reload();
     bool isEditing() const { return m_isEditing; }

@@ -21,10 +21,6 @@ TextField::ContentView::ContentView(char * textBuffer, char * draftTextBuffer, s
   assert(m_textBufferSize <= k_maxBufferSize);
 }
 
-void TextField::ContentView::setDraftTextBuffer(char * draftTextBuffer) {
-  m_draftTextBuffer = draftTextBuffer;
-}
-
 void TextField::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   KDColor bckCol = m_backgroundColor;
   if (m_isEditing) {
@@ -146,7 +142,6 @@ KDCoordinate TextField::ContentView::charWidth() {
   return textSize.width();
 }
 
-
 void TextField::ContentView::deleteCharPrecedingCursor() {
   if (cursorLocation() <= 0) {
     return;
@@ -197,14 +192,6 @@ TextField::TextField(Responder * parentResponder, char * textBuffer, char * draf
 {
 }
 
-void TextField::setDelegate(TextFieldDelegate * delegate) {
-  m_delegate = delegate;
-}
-
-void TextField::setDraftTextBuffer(char * draftTextBuffer) {
-  m_contentView.setDraftTextBuffer(draftTextBuffer);
-}
-
 Toolbox * TextField::toolbox() {
   if (m_delegate) {
     return m_delegate->toolboxForTextField(this);
@@ -212,21 +199,9 @@ Toolbox * TextField::toolbox() {
   return nullptr;
 }
 
-bool TextField::isEditing() const {
-  return m_contentView.isEditing();
-}
-
-const char * TextField::text() const {
-  return m_contentView.text();
-}
-
 int TextField::draftTextLength() const {
   assert(isEditing());
   return m_contentView.draftTextLength();
-}
-
-int TextField::cursorLocation() const{
-  return m_contentView.cursorLocation();
 }
 
 void TextField::setCursorLocation(int location) {
@@ -241,22 +216,6 @@ void TextField::setText(const char * text) {
   if (isEditing()) {
     setCursorLocation(draftTextLength());
   }
-}
-
-void TextField::setBackgroundColor(KDColor backgroundColor) {
-  m_contentView.setBackgroundColor(backgroundColor);
-}
-
-KDColor TextField::backgroundColor() const {
-  return m_contentView.backgroundColor();
-}
-
-void TextField::setTextColor(KDColor textColor) {
-  m_contentView.setTextColor(textColor);
-}
-
-void TextField::setAlignment(float horizontalAlignment, float verticalAlignment) {
-  m_contentView.setAlignment(horizontalAlignment, verticalAlignment);
 }
 
 void TextField::setEditing(bool isEditing, bool reinitDrafBuffer) {

@@ -6,7 +6,7 @@
 #include <escher/text_field.h>
 #include <escher/text_field_delegate.h>
 
-class InputViewController : public ModalViewController, TextFieldDelegate {
+class InputViewController final : public ModalViewController, TextFieldDelegate {
 public:
   InputViewController(Responder * parentResponder, ViewController * child, TextFieldDelegate * textFieldDelegate);
   void edit(Responder * caller, Ion::Events::Event event, void * context, const char * initialText, Invocation::Action successAction, Invocation::Action failureAction);

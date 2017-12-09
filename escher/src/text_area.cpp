@@ -149,16 +149,6 @@ TextArea::Text::Position TextArea::Text::span() const {
 
 /* TextArea::ContentView */
 
-TextArea::ContentView::ContentView(char * textBuffer, size_t textBufferSize, KDText::FontSize fontSize, KDColor textColor, KDColor backgroundColor) :
-  View(),
-  m_cursorIndex(0),
-  m_text(textBuffer, textBufferSize),
-  m_fontSize(fontSize),
-  m_textColor(textColor),
-  m_backgroundColor(backgroundColor)
-{
-}
-
 KDSize TextArea::ContentView::minimalSizeForOptimalDisplay() const {
   KDSize charSize = KDText::charSize(m_fontSize);
   Text::Position span = m_text.span();
@@ -169,7 +159,6 @@ KDSize TextArea::ContentView::minimalSizeForOptimalDisplay() const {
     charSize.height() * span.line()
   );
 }
-
 
 void TextArea::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   ctx->fillRect(rect, m_backgroundColor);
@@ -272,10 +261,6 @@ void TextArea::ContentView::removeStartOfLine() {
     layoutSubviews();
     markRectAsDirty(dirtyRectFromCursorPosition(m_cursorIndex, false));
   }
-}
-
-KDRect TextArea::TextArea::ContentView::cursorRect() {
-  return characterFrameAtIndex(m_cursorIndex);
 }
 
 KDRect TextArea::TextArea::ContentView::characterFrameAtIndex(size_t index) {
