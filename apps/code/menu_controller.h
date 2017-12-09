@@ -12,7 +12,7 @@ namespace Code {
 
 class ScriptParameterController;
 
-class MenuController : public ViewController, public TableViewDataSource, public SelectableTableViewDataSource, public SelectableTableViewDelegate, public TextFieldDelegate, public ButtonRowDelegate {
+class MenuController final : public ViewController, public TableViewDataSource, public SelectableTableViewDataSource, public SelectableTableViewDelegate, public TextFieldDelegate, public ButtonRowDelegate {
 public:
   MenuController(Responder * parentResponder, ScriptStore * scriptStore, ButtonRowController * footer);
   ConsoleController * consoleController() { return &m_consoleController; }
@@ -20,9 +20,9 @@ public:
   void renameSelectedScript();
   void deleteScriptAtIndex(int i);
   void reloadConsole();
-  void loadPythonIfNeeded();
+  void loadPythonIfNeeded() { m_consoleController.loadPythonEnvironment(false); }
   void openConsoleWithScriptAtIndex(int scriptIndex);
-  void scriptContentEditionDidFinish();
+  void scriptContentEditionDidFinish() { reloadConsole(); }
 
   /* ViewController */
   View * view() override { return &m_selectableTableView; }

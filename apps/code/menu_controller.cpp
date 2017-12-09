@@ -123,10 +123,6 @@ void MenuController::reloadConsole() {
   m_reloadConsoleWhenBecomingFirstResponder = false;
 }
 
-void MenuController::loadPythonIfNeeded() {
-  m_consoleController.loadPythonEnvironment(false);
-}
-
 void MenuController::openConsoleWithScriptAtIndex(int scriptIndex) {
   reloadConsole();
   if (m_consoleController.loadPythonEnvironment(false)) {
@@ -134,10 +130,6 @@ void MenuController::openConsoleWithScriptAtIndex(int scriptIndex) {
     m_consoleController.autoImportScriptAtIndex(scriptIndex, true);
   }
   m_reloadConsoleWhenBecomingFirstResponder = true;
-}
-
-void MenuController::scriptContentEditionDidFinish(){
-  reloadConsole();
 }
 
 int MenuController::numberOfRows() {
@@ -206,11 +198,11 @@ int MenuController::indexFromCumulatedHeight(KDCoordinate offsetY) {
 HighlightCell * MenuController::reusableCell(int index, int type) {
   assert(index >= 0);
   if (type == ScriptCellType) {
-    assert(index >=0 && index < k_maxNumberOfDisplayableScriptCells);
+    assert(index < k_maxNumberOfDisplayableScriptCells);
     return &m_scriptCells[index];
   }
   if (type == ScriptParameterCellType) {
-    assert(index >=0 && index < k_maxNumberOfDisplayableScriptCells);
+    assert(index < k_maxNumberOfDisplayableScriptCells);
     return &m_scriptParameterCells[index];
   }
   if (type == AddScriptCellType) {

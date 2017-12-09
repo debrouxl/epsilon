@@ -31,22 +31,10 @@ void GraphController::viewWillAppear() {
   selectFunctionWithCursor(indexFunctionSelectedByCursor()); // update the color of the cursor
 }
 
-bool GraphController::displayDerivativeInBanner() const {
-  return m_displayDerivativeInBanner;
-}
-
-void GraphController::setDisplayDerivativeInBanner(bool displayDerivative) {
-  m_displayDerivativeInBanner = displayDerivative;
-}
-
 void GraphController::selectFunctionWithCursor(int functionIndex) {
   FunctionGraphController::selectFunctionWithCursor(functionIndex);
   CartesianFunction * f = m_functionStore->activeFunctionAtIndex(indexFunctionSelectedByCursor());
   m_cursorView.setColor(f->color());
-}
-
-BannerView * GraphController::bannerView() {
-  return &m_bannerView;
 }
 
 void GraphController::reloadBannerView() {
@@ -78,22 +66,6 @@ void GraphController::initCursorParameters() {
   } while (std::isnan(y) && functionIndex < functionStore()->numberOfActiveFunctions());
   m_cursor->moveTo(x, y);
   interactiveCurveViewRange()->panToMakePointVisible(x, y, k_cursorTopMarginRatio, k_cursorRightMarginRatio, k_cursorBottomMarginRatio, k_cursorLeftMarginRatio);
-}
-
-InteractiveCurveViewRange * GraphController::interactiveCurveViewRange() {
-  return m_graphRange;
-}
-
-CartesianFunctionStore * GraphController::functionStore() const {
-  return m_functionStore;
-}
-
-GraphView * GraphController::functionGraphView() {
-  return &m_view;
-}
-
-CurveParameterController * GraphController::curveParameterController() {
-  return &m_curveParameterController;
 }
 
 }

@@ -7,14 +7,6 @@ using namespace Shared;
 
 namespace Calculation {
 
-EditExpressionController::ContentView::ContentView(Responder * parentResponder, TableView * subview, TextFieldDelegate * textFieldDelegate) :
-  View(),
-  m_mainView(subview),
-  m_textField(parentResponder, m_textBody, TextField::maxBufferSize(), textFieldDelegate)
-{
-  m_textBody[0] = 0;
-}
-
 int EditExpressionController::ContentView::numberOfSubviews() const {
   return 2;
 }
@@ -36,14 +28,6 @@ void  EditExpressionController::ContentView::drawRect(KDContext * ctx, KDRect re
   ctx->fillRect(KDRect(0, bounds().height() -k_textFieldHeight-k_separatorThickness, bounds().width(), k_separatorThickness), Palette::GreyMiddle);
   // Color the margin
   ctx->fillRect(KDRect(0, bounds().height() -k_textFieldHeight, k_textMargin, k_textFieldHeight), m_textField.backgroundColor());
-}
-
-TextField * EditExpressionController::ContentView::textField() {
-  return &m_textField;
-}
-
-TableView * EditExpressionController::ContentView::mainView() {
-  return m_mainView;
 }
 
 EditExpressionController::EditExpressionController(Responder * parentResponder, HistoryController * historyController, CalculationStore * calculationStore) :
@@ -123,10 +107,6 @@ TextFieldDelegateApp * EditExpressionController::textFieldDelegateApp() {
 
 View * EditExpressionController::loadView() {
   return new ContentView(this, (TableView *)m_historyController->view(), this);
-}
-
-void EditExpressionController::unloadView(View * view) {
-  delete view;
 }
 
 void EditExpressionController::viewDidDisappear() {

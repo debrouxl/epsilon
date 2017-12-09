@@ -3,6 +3,9 @@
 
 #include <escher.h>
 #include <ion/events.h>
+#include "code_icon.h"
+#include "../shared/toolbox_helpers.h"
+#include "../i18n.h"
 #include "../shared/message_controller.h"
 #include "menu_controller.h"
 #include "script_store.h"
@@ -11,22 +14,29 @@
 
 namespace Code {
 
-class App : public ::App {
+class App final : public ::App {
 public:
-  class Descriptor : public ::App::Descriptor {
+  class Descriptor final : public ::App::Descriptor {
   public:
-    I18n::Message name() override;
-    I18n::Message upperName() override;
-    const Image * icon() override;
+    I18n::Message name() override {
+      return I18n::Message::CodeApp;
+    }
+    I18n::Message upperName() override {
+      return I18n::Message::CodeAppCapital;
+    }
+    const Image * icon() override {
+      return ImageStore::CodeIcon;
+    }
   };
-  class Snapshot : public ::App::Snapshot {
+  class Snapshot final : public ::App::Snapshot {
   public:
-    App * unpack(Container * container) override;
-    void reset() override;
-    Descriptor * descriptor() override;
-    ScriptStore * scriptStore();
+    App * unpack(Container * container) override { return new App(container, this); }
+    void reset() override { m_scriptStore.deleteAllScripts(); }
+    Descriptor * descriptor() override { return &s_descriptor; }
+    ScriptStore * scriptStore() { return &m_scriptStore; }
   private:
     ScriptStore m_scriptStore;
+    static Descriptor s_descriptor;
   };
   StackViewController * stackViewController() { return &m_codeStackViewController; }
   VariableBoxController * scriptsVariableBoxController() { return &m_variableBoxController; }
