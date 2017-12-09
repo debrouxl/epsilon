@@ -88,16 +88,6 @@ Symbol::Symbol(char name) :
 {
 }
 
-Symbol::Symbol(Symbol&& other) :
-  m_name(other.m_name)
-{
-}
-
-Symbol::Symbol(const Symbol& other) :
-  m_name(other.m_name)
-{
-}
-
 Expression * Symbol::clone() const {
   return new Symbol(m_name);
 }

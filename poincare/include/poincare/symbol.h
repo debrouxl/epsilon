@@ -30,8 +30,10 @@ public:
   };
   static SpecialSymbols matrixSymbol(char index);
   Symbol(char name);
-  Symbol(Symbol&& other); // C++11 move constructor
-  Symbol(const Symbol& other); // C++11 copy constructor
+  Symbol(Symbol&& other) : // C++11 move constructor
+    m_name(other.m_name) {}
+  Symbol(const Symbol& other) : // C++11 copy constructor
+    m_name(other.m_name) {}
   char name() const {
     return m_name;
   }

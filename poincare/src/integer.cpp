@@ -125,10 +125,6 @@ Integer Integer::denominator(Integer * exponent) {
   return denominator;
 }
 
-Integer::~Integer() {
-  releaseDynamicIvars();
-}
-
 Integer::Integer(Integer && other) {
   // Pilfer other's data
   if (other.usesImmediateDigit()) {
