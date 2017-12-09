@@ -23,24 +23,11 @@ TypeParameterController::TypeParameterController(Responder * parentResponder, Se
 {
 }
 
-TypeParameterController::~TypeParameterController() {
-  for (int i = 0; i < k_totalNumberOfCell; i++) {
-    if (m_expressionLayouts[i]) {
-      delete m_expressionLayouts[i];
-      m_expressionLayouts[i] = nullptr;
-    }
-  }
-}
-
 const char * TypeParameterController::title() {
   if (m_sequence) {
     return I18n::translate(I18n::Message::SequenceType);
   }
   return I18n::translate(I18n::Message::ChooseSequenceType);
-}
-
-View * TypeParameterController::view() {
-  return &m_selectableTableView;
 }
 
 void TypeParameterController::viewWillAppear() {
@@ -119,7 +106,7 @@ void TypeParameterController::willDisplayCellAtLocation(HighlightCell * cell, in
     nextName = m_sequence->name();
     size = KDText::FontSize::Small;
   }
-  const char * subscripts[3] = {"n", "n+1", "n+2"};
+  static const char * subscripts[3] = {"n", "n+1", "n+2"};
   if (m_expressionLayouts[j]) {
     delete m_expressionLayouts[j];
     m_expressionLayouts[j] = nullptr;
@@ -127,10 +114,6 @@ void TypeParameterController::willDisplayCellAtLocation(HighlightCell * cell, in
   m_expressionLayouts[j] = new BaselineRelativeLayout(new StringLayout(nextName, 1, size), new StringLayout(subscripts[j], strlen(subscripts[j]), KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
   ExpressionTableCellWithPointer * myCell = (ExpressionTableCellWithPointer *)cell;
   myCell->setExpression(m_expressionLayouts[j]);
-}
-
-void TypeParameterController::setSequence(Sequence * sequence) {
-  m_sequence = sequence;
 }
 
 StackViewController * TypeParameterController::stackController() const {
