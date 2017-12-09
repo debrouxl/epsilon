@@ -146,10 +146,6 @@ bool ListController::removeFunctionRow(Function * function) {
   return true;
 }
 
-ListParameterController * ListController::parameterController() {
-  return &m_parameterController;
-}
-
 int ListController::maxNumberOfRows() {
   return k_maxNumberOfRows;
 }

@@ -36,10 +36,8 @@ SubController::SubController(Responder * parentResponder) :
 
 SubController::~SubController() {
   for (int i = 0; i < 2; i++) {
-    if (m_complexFormatLayout[i]) {
-      delete m_complexFormatLayout[i];
-      m_complexFormatLayout[i] = nullptr;
-    }
+    delete m_complexFormatLayout[i];
+    m_complexFormatLayout[i] = nullptr;
   }
 }
 
@@ -48,10 +46,6 @@ const char * SubController::title() {
     return I18n::translate(m_messageTreeModel->label());
   }
   return "";
-}
-
-View * SubController::view() {
-  return &m_selectableTableView;
 }
 
 void SubController::didEnterResponderChain(Responder * previousFirstResponder) {
@@ -208,10 +202,6 @@ void SubController::willDisplayCellForIndex(HighlightCell * cell, int index) {
     }
     myCell->setAccessoryText(accessoryMessage);
   }
-}
-
-void SubController::setMessageTreeModel(const MessageTree * messageTreeModel) {
-  m_messageTreeModel = (MessageTree *)messageTreeModel;
 }
 
 void SubController::viewWillAppear() {
