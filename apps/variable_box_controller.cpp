@@ -7,23 +7,8 @@ using namespace Poincare;
 
 /* ContentViewController */
 
-VariableBoxController::ContentViewController::ContentViewController(Responder * parentResponder, GlobalContext * context) :
-  ViewController(parentResponder),
-  m_context(context),
-  m_textFieldCaller(nullptr),
-  m_firstSelectedRow(0),
-  m_previousSelectedRow(0),
-  m_currentPage(Page::RootMenu),
-  m_selectableTableView(this, this, 0, 1, 0, 0, 0, 0, this, nullptr, false)
-{
-}
-
 const char * VariableBoxController::ContentViewController::title() {
   return I18n::translate(I18n::Message::Variables);
-}
-
-View * VariableBoxController::ContentViewController::view() {
-  return &m_selectableTableView;
 }
 
 void VariableBoxController::ContentViewController::didBecomeFirstResponder() {
@@ -257,27 +242,11 @@ void VariableBoxController::ContentViewController::putLabelAtIndexInBuffer(int i
 I18n::Message VariableBoxController::ContentViewController::nodeLabelAtIndex(int index) {
   assert(m_currentPage == Page::RootMenu);
 #if LIST_VARIABLES
-  I18n::Message labels[3] = {I18n::Message::Number, I18n::Message::List, I18n::Message::Matrix};
+  static const I18n::Message labels[3] = {I18n::Message::Number, I18n::Message::List, I18n::Message::Matrix};
 #else
-  I18n::Message labels[2] = {I18n::Message::Number, I18n::Message::Matrix};
+  static const I18n::Message labels[2] = {I18n::Message::Number, I18n::Message::Matrix};
 #endif
   return labels[index];
-}
-
-void VariableBoxController::ContentViewController::setTextFieldCaller(TextField * textField) {
-  m_textFieldCaller = textField;
-}
-
-void VariableBoxController::ContentViewController::reloadData() {
-  m_selectableTableView.reloadData();
-}
-
-void VariableBoxController::ContentViewController::resetPage() {
-#if MATRIX_VARIABLES
-  m_currentPage = Page::RootMenu;
-#else
-  m_currentPage = Page::Scalar;
-#endif
 }
 
 void VariableBoxController::ContentViewController::viewDidDisappear() {
@@ -295,16 +264,8 @@ void VariableBoxController::didBecomeFirstResponder() {
   app()->setFirstResponder(&m_contentViewController);
 }
 
-void VariableBoxController::setTextFieldCaller(TextField * textField) {
-  m_contentViewController.setTextFieldCaller(textField);
-}
-
 void VariableBoxController::viewWillAppear() {
   StackViewController::viewWillAppear();
   m_contentViewController.resetPage();
   m_contentViewController.reloadData();
-}
-
-void VariableBoxController::viewDidDisappear() {
-  StackViewController::viewDidDisappear();
 }

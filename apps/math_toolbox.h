@@ -7,7 +7,7 @@
 
 class MathToolbox : public Toolbox {
 public:
-  MathToolbox();
+  MathToolbox() : Toolbox(nullptr, I18n::translate(rootModel()->label())) {}
 protected:
   TextField * sender() override;
   bool selectLeaf(ToolboxMessageTree * selectedMessageTree) override;
