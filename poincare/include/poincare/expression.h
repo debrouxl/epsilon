@@ -221,7 +221,12 @@ public:
 protected:
   /* Constructor */
   Expression() : m_parent(nullptr) {}
-  static const Expression * const * ExpressionArray(const Expression * e1, const Expression * e2);
+  static const Expression * const * ExpressionArray(const Expression * e1, const Expression * e2) {
+    static const Expression * result[2] = {nullptr, nullptr};
+    result[0] = e1;
+    result[1] = e2;
+    return result;
+  }
   /* Hierarchy */
   void detachOperandAtIndex(int i);
   /* Evaluation Engine */
