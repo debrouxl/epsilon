@@ -7,7 +7,7 @@
 #include <escher/text_cursor_view.h>
 #include <escher/text_area_delegate.h>
 
-class TextArea : public ScrollableView, public ScrollViewDataSource {
+class TextArea final : public ScrollableView, public ScrollViewDataSource {
 public:
   TextArea(Responder * parentResponder, char * textBuffer = nullptr, size_t textBufferSize = 0,
     TextAreaDelegate * delegate = nullptr, KDText::FontSize fontSize = KDText::FontSize::Large,
@@ -24,7 +24,7 @@ public:
   int cursorLocation() const { return m_contentView.cursorLocation(); }
   void moveCursor(int deltaX);
 private:
-  class Text {
+  class Text final {
   public:
     Text(char * buffer, size_t bufferSize);
     void setText(char * buffer, size_t bufferSize);
@@ -87,10 +87,15 @@ private:
     size_t m_bufferSize;
   };
 
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
-    ContentView(char * textBuffer, size_t textBufferSize, KDText::FontSize size,
-      KDColor textColor, KDColor backgroundColor);
+    ContentView(char * textBuffer, size_t textBufferSize, KDText::FontSize fontSize, KDColor textColor, KDColor backgroundColor) :
+      View(),
+      m_cursorIndex(0),
+      m_text(textBuffer, textBufferSize),
+      m_fontSize(fontSize),
+      m_textColor(textColor),
+      m_backgroundColor(backgroundColor) {}
     void drawRect(KDContext * ctx, KDRect rect) const override;
     KDSize minimalSizeForOptimalDisplay() const override;
     void setText(char * textBuffer, size_t textBufferSize);
@@ -103,7 +108,7 @@ private:
     void removeChar();
     bool removeEndOfLine();
     void removeStartOfLine();
-    KDRect cursorRect();
+    KDRect cursorRect() { return characterFrameAtIndex(m_cursorIndex); }
   private:
     int numberOfSubviews() const override;
     View * subviewAtIndex(int index) override;
