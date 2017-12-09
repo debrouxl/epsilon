@@ -17,10 +17,6 @@ USBTestController::USBTestController(Responder * parentResponder) :
 {
 }
 
-View * USBTestController::view() {
-  return &m_view;
-}
-
 bool USBTestController::handleEvent(Ion::Events::Event e) {
   return true;
 }
@@ -59,22 +55,6 @@ void USBTestController::ContentView::USBView::drawRect(KDContext * ctx, KDRect r
   ctx->fillRect(KDRect((width-k_USBHoleWidth)/2, k_USBHoleHeight+k_marginHeight+30, k_USBHoleWidth, 50), KDColorBlack);
   ctx->fillRect(KDRect((width-10)/2, k_USBHoleHeight+k_marginHeight+30+50, 10, 10), KDColorBlack);
   ctx->fillRect(KDRect((width-4)/2, k_USBHoleHeight+k_marginHeight+30+50+10, 4, height-(k_USBHoleHeight+k_marginHeight+30+50+10)), KDColorBlack);
-}
-
-USBTestController::ContentView::ContentView() :
-  SolidColorView(KDColorWhite),
-  m_USBTextView(KDText::FontSize::Large),
-  m_USBView(),
-  m_arrowView()
-{
-}
-
-BufferTextView * USBTestController::ContentView::USBTextView() {
-  return &m_USBTextView;
-}
-
-ArrowView * USBTestController::ContentView::arrowView() {
-  return &m_arrowView;
 }
 
 void USBTestController::ContentView::layoutSubviews() {

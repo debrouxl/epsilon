@@ -11,7 +11,7 @@ namespace Calculation {
 class HistoryController;
 
 /* TODO: implement a split view */
-class EditExpressionController : public DynamicViewController, public Shared::TextFieldDelegate {
+class EditExpressionController final : public DynamicViewController, public Shared::TextFieldDelegate {
 public:
   EditExpressionController(Responder * parentResponder, HistoryController * historyController, CalculationStore * calculationStore);
   void didBecomeFirstResponder() override;
@@ -23,14 +23,19 @@ bool textFieldDidReceiveEvent(::TextField * textField, Ion::Events::Event event)
   bool textFieldDidFinishEditing(::TextField * textField, const char * text, Ion::Events::Event event) override;
   bool textFieldDidAbortEditing(::TextField * textField, const char * text) override;
 private:
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
-    ContentView(Responder * parentResponder, TableView * subview, TextFieldDelegate * textFieldDelegate);
+    ContentView(Responder * parentResponder, TableView * subview, TextFieldDelegate * textFieldDelegate) :
+      View(),
+      m_mainView(subview),
+      m_textField(parentResponder, m_textBody, TextField::maxBufferSize(), textFieldDelegate) {
+      m_textBody[0] = 0;
+    }
     int numberOfSubviews() const override;
     View * subviewAtIndex(int index) override;
     void layoutSubviews() override;
-    TextField * textField();
-    TableView * mainView();
+    TextField * textField() { return &m_textField; }
+    TableView * mainView() { return m_mainView; }
     void drawRect(KDContext * ctx, KDRect rect) const override;
   private:
     static constexpr KDCoordinate k_textFieldHeight = 37;
@@ -41,7 +46,9 @@ private:
     char m_textBody[TextField::maxBufferSize()];
   };
   View * loadView() override;
-  void unloadView(View * view) override;
+  void unloadView(View * view) override {
+    delete view;
+  }
   Shared::TextFieldDelegateApp * textFieldDelegateApp() override;
   char m_cacheBuffer[TextField::maxBufferSize()];
   HistoryController * m_historyController;
