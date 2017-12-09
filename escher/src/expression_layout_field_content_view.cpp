@@ -42,8 +42,10 @@ KDSize ExpressionLayoutField::ContentView::minimalSizeForOptimalDisplay() const 
 
 View * ExpressionLayoutField::ContentView::subviewAtIndex(int index) {
   assert(index >= 0 && index < 2);
-  View * m_views[] = {&m_expressionView, &m_cursorView};
-  return m_views[index];
+  if (index == 0) {
+    return &m_expressionView;
+  }
+  return &m_cursorView;
 }
 
 void ExpressionLayoutField::ContentView::layoutSubviews() {

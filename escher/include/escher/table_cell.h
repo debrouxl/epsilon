@@ -9,10 +9,16 @@ public:
     Vertical,
     Horizontal
   };
-  TableCell(Layout layout = Layout::Horizontal);
-  virtual View * labelView() const;
-  virtual View * accessoryView() const;
-  virtual View * subAccessoryView() const;
+  TableCell(Layout layout = Layout::Horizontal) : HighlightCell(), m_layout(layout) {}
+  virtual View * labelView() const {
+    return nullptr;
+  }
+  virtual View * accessoryView() const {
+    return nullptr;
+  }
+  virtual View * subAccessoryView() const {
+    return nullptr;
+  }
   void drawRect(KDContext * ctx, KDRect rect) const override;
 protected:
   int numberOfSubviews() const override;

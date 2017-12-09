@@ -2,24 +2,6 @@
 #include <escher/palette.h>
 #include <escher/metric.h>
 
-TableCell::TableCell(Layout layout) :
-  HighlightCell(),
-  m_layout(layout)
-{
-}
-
-View * TableCell::labelView() const {
-  return nullptr;
-}
-
-View * TableCell::accessoryView() const {
-  return nullptr;
-}
-
-View * TableCell::subAccessoryView() const {
-  return nullptr;
-}
-
 int TableCell::numberOfSubviews() const {
   return (labelView() != nullptr) + (accessoryView()!= nullptr) + (subAccessoryView()!= nullptr);
 }
