@@ -3,10 +3,10 @@
 
 #include <escher/view.h>
 
-class SwitchView : public View {
+class SwitchView final : public View {
 public:
-  SwitchView();
-  bool state();
+  SwitchView() : View(), m_state(true) {}
+  bool state() { return m_state; }
   void setState(bool state);
   void drawRect(KDContext * ctx, KDRect rect) const override;
   KDSize minimalSizeForOptimalDisplay() const override;

@@ -8,11 +8,12 @@
 #include <escher/selectable_table_view.h>
 #include <escher/stack_view_controller.h>
 #include <escher/toolbox_message_tree.h>
+#include <escher/metric.h>
 
 class Toolbox : public StackViewController, public ListViewDataSource, public SelectableTableViewDataSource {
 public:
   Toolbox(Responder * parentResponder, const char * title = 0);
-  void setSender(Responder * sender);
+  void setSender(Responder * sender) { m_sender = sender; }
 
   // StackViewController
   bool handleEvent(Ion::Events::Event event) override;
@@ -21,10 +22,10 @@ public:
   void viewDidDisappear() override;
 
   //ListViewDataSource
-  virtual KDCoordinate rowHeight(int j) override;
+  virtual KDCoordinate rowHeight(int j) override { return Metric::ToolboxRowHeight; }
   int numberOfRows() override;
   HighlightCell * reusableCell(int index, int type) override;
-  int reusableCellCount(int type) override;
+  int reusableCellCount(int type) override { return maxNumberOfDisplayedRows(); }
   void willDisplayCellForIndex(HighlightCell * cell, int index) override;
   KDCoordinate cumulatedHeightFromIndex(int j) override;
   int indexFromCumulatedHeight(KDCoordinate offsetY) override;
@@ -72,7 +73,7 @@ protected:
   bool handleEventForRow(Ion::Events::Event event, int selectedRow);
   bool selectSubMenu(ToolboxMessageTree * selectedMessageTree);
   bool returnToPreviousMenu();
-  virtual Responder * sender();
+  virtual Responder * sender() { return m_sender; }
   virtual bool selectLeaf(ToolboxMessageTree * selectedMessageTree) = 0;
   virtual const ToolboxMessageTree * rootModel() = 0;
   virtual MessageTableCellWithMessage * leafCellAtIndex(int index) = 0;

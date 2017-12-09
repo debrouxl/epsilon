@@ -3,10 +3,10 @@
 
 #include <escher/view.h>
 
-class GaugeView : public View {
+class GaugeView final : public View {
 public:
   GaugeView();
-  float level();
+  float level() { return m_level; }
   void setLevel(float level);
   void setBackgroundColor(KDColor color);
   void drawRect(KDContext * ctx, KDRect rect) const override;

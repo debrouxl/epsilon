@@ -185,26 +185,10 @@ void ScrollView::updateScrollIndicator() {
   }
 }
 
-KDSize ScrollView::contentSize() {
-  return m_contentView->minimalSizeForOptimalDisplay();
-}
-
 void ScrollView::setContentOffset(KDPoint offset, bool forceRelayout) {
   if (m_dataSource->setOffset(offset) || forceRelayout) {
     layoutSubviews();
   }
-}
-
-KDPoint ScrollView::contentOffset() const {
-  return m_dataSource->offset();
-}
-
-KDCoordinate ScrollView::topMargin() const {
-  return m_topMargin;
-}
-
-KDCoordinate ScrollView::leftMargin() const {
-  return m_leftMargin;
 }
 
 KDCoordinate ScrollView::maxContentWidthDisplayableWithoutScrolling() {
