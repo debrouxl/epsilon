@@ -65,7 +65,7 @@ bool ListParameterController::handleEvent(Ion::Events::Event event) {
 
 int ListParameterController::numberOfRows() {
   return k_totalNumberOfCell;
-};
+}
 
 HighlightCell * ListParameterController::reusableCell(int index) {
   switch (index) {

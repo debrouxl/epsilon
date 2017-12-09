@@ -12,13 +12,6 @@
 
 namespace Probability {
 
-ImageCell::ImageCell() :
-  HighlightCell(),
-  m_icon(nullptr),
-  m_focusedIcon(nullptr)
-{
-}
-
 int ImageCell::numberOfSubviews() const {
   return 1;
 }
@@ -39,11 +32,6 @@ void ImageCell::reloadCell() {
   } else {
     m_iconView.setImage(m_icon);
   }
-}
-
-void ImageCell::setImage(const Image * image, const Image * focusedImage) {
-  m_icon = image;
-  m_focusedIcon = focusedImage;
 }
 
 ImageTableView::ImageTableView(Responder * parentResponder, Law * law, Calculation * calculation, CalculationController * calculationController) :

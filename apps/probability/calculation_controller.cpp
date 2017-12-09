@@ -123,18 +123,6 @@ void CalculationController::ContentView::drawRect(KDContext * ctx, KDRect rect) 
   }
 }
 
-LawCurveView * CalculationController::ContentView::lawCurveView() {
-  return &m_lawCurveView;
-}
-
-ImageTableView * CalculationController::ContentView::imageTableView() {
-  return &m_imageTableView;
-}
-
-EditableTextCell * CalculationController::ContentView::calculationCellAtIndex(int index) {
-  return &m_calculationCell[index];
-}
-
 CalculationController::CalculationController(Responder * parentResponder, Law * law, Calculation * calculation) :
   ViewController(parentResponder),
   m_calculation(calculation),
@@ -144,14 +132,6 @@ CalculationController::CalculationController(Responder * parentResponder, Law * 
 {
   assert(law != nullptr);
   assert(calculation != nullptr);
-}
-
-View * CalculationController::view() {
-  return &m_contentView;
-}
-
-const char * CalculationController::title() {
-  return m_titleBuffer;
 }
 
 void CalculationController::reload() {

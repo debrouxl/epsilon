@@ -12,10 +12,6 @@ SequenceTitleCell::SequenceTitleCell(Orientation orientation) :
 {
 }
 
-void SequenceTitleCell::setExpression(Poincare::ExpressionLayout * expressionLayout) {
-  m_titleTextView.setExpression(expressionLayout);
-}
-
 void SequenceTitleCell::setHighlighted(bool highlight) {
   EvenOddCell::setHighlighted(highlight);
   m_titleTextView.setHighlighted(highlight);
