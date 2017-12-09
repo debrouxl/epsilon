@@ -15,9 +15,9 @@ public:
     KDCoordinate indicatorMargin = 14);
 
   void setContentOffset(KDPoint offset, bool forceRelayout = false);
-  KDPoint contentOffset() const;
-  KDCoordinate topMargin() const;
-  KDCoordinate leftMargin() const;
+  KDPoint contentOffset() const { return m_dataSource->offset(); }
+  KDCoordinate topMargin() const { return m_topMargin; }
+  KDCoordinate leftMargin() const { return m_leftMargin; }
   void drawRect(KDContext * ctx, KDRect rect) const override;
   void scrollToContentPoint(KDPoint p, bool allowOverscroll = false);
   void scrollToContentRect(KDRect rect, bool allowOverscroll = false); // Minimal scrolling to make this rect visible
@@ -27,7 +27,8 @@ protected:
   KDRect visibleContentRect();
   void layoutSubviews() override;
   void updateScrollIndicator();
-  KDSize contentSize();
+  KDSize contentSize() { return m_contentView->minimalSizeForOptimalDisplay(); }
+
   KDCoordinate m_topMargin;
 #if ESCHER_VIEW_LOGGING
   virtual const char * className() const override;

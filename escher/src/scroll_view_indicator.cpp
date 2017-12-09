@@ -39,19 +39,11 @@ void ScrollViewIndicator::drawRect(KDContext * ctx, KDRect rect) const {
   ctx->fillRect(indicatorFrame, m_indicatorColor);
 }
 
-float ScrollViewIndicator::start() const {
-  return m_start;
-}
-
 void ScrollViewIndicator::setStart(float start) {
   if (m_start != start) {
     m_start = start;
     markRectAsDirty(bounds());
   }
-}
-
-float ScrollViewIndicator::end() const {
-  return m_end;
 }
 
 void ScrollViewIndicator::setEnd(float end) {
@@ -61,9 +53,6 @@ void ScrollViewIndicator::setEnd(float end) {
   }
 }
 
-KDRect ScrollViewIndicator::frame() {
-  return m_frame;
-}
 #if ESCHER_VIEW_LOGGING
 const char * ScrollViewIndicator::className() const {
   return "ScrollViewIndicator";

@@ -18,10 +18,6 @@ TextField::ContentView::ContentView(char * textBuffer, char * draftTextBuffer, s
   assert(m_textBufferSize <= k_maxBufferSize);
 }
 
-void TextField::ContentView::setDraftTextBuffer(char * draftTextBuffer) {
-  m_draftTextBuffer = draftTextBuffer;
-}
-
 void TextField::ContentView::drawRect(KDContext * ctx, KDRect rect) const {
   KDColor bckCol = m_backgroundColor;
   if (m_isEditing) {
@@ -168,14 +164,6 @@ TextField::TextField(Responder * parentResponder, char * textBuffer, char * draf
 {
 }
 
-void TextField::setDraftTextBuffer(char * draftTextBuffer) {
-  m_contentView.setDraftTextBuffer(draftTextBuffer);
-}
-
-bool TextField::isEditing() const {
-  return m_contentView.isEditing();
-}
-
 size_t TextField::draftTextLength() const {
   assert(isEditing());
   return m_contentView.editedTextLength();
@@ -187,10 +175,6 @@ void TextField::setText(const char * text) {
   if (isEditing()) {
     setCursorLocation(draftTextLength());
   }
-}
-
-void TextField::setAlignment(float horizontalAlignment, float verticalAlignment) {
-  m_contentView.setAlignment(horizontalAlignment, verticalAlignment);
 }
 
 void TextField::setEditing(bool isEditing, bool reinitDrafBuffer) {

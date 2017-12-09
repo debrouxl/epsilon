@@ -2,26 +2,6 @@
 #include <escher/app.h>
 #include <assert.h>
 
-ModalViewController::ContentView::ContentView() :
-  View(),
-  m_regularView(nullptr),
-  m_currentModalView(nullptr),
-  m_isDisplayingModal(false),
-  m_verticalAlignment(0.0f),
-  m_horizontalAlignment(0.0f),
-  m_topMargin(0),
-  m_leftMargin(0),
-  m_bottomMargin(0),
-  m_rightMargin(0)
-{
-}
-
-void ModalViewController::ContentView::setMainView(View * regularView) {
-  if (m_regularView != regularView) {
-    m_regularView = regularView;
-  }
-}
-
 int ModalViewController::ContentView::numberOfSubviews() const {
   KDRect regularFrame = bounds();
   KDRect modalFrame = frame();
@@ -91,10 +71,6 @@ void ModalViewController::ContentView::dismissModalView() {
   layoutSubviews();
 }
 
-bool ModalViewController::ContentView::isDisplayingModal() const {
-  return m_isDisplayingModal;
-}
-
 ModalViewController::ModalViewController(Responder * parentResponder, ViewController * child) :
   ViewController(parentResponder),
   m_contentView(),
@@ -106,10 +82,6 @@ ModalViewController::ModalViewController(Responder * parentResponder, ViewContro
 
 View * ModalViewController::view() {
   return &m_contentView;
-}
-
-bool ModalViewController::isDisplayingModal() {
-  return m_contentView.isDisplayingModal();
 }
 
 void ModalViewController::displayModalViewController(ViewController * vc, float verticalAlignment, float horizontalAlignment,
