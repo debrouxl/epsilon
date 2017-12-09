@@ -22,8 +22,14 @@ int EditorView::numberOfSubviews() const {
 }
 
 View * EditorView::subviewAtIndex(int index) {
-  View * subviews[] = {&m_textArea, &m_gutterView};
-  return subviews[index];
+  assert(index >= 0 && index < 2);
+  if (index == 0) {
+    return &m_textArea;
+  }
+  if (index == 1) {
+    return &m_gutterView;
+  }
+  return nullptr;
 }
 
 void EditorView::didBecomeFirstResponder() {

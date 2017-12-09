@@ -12,10 +12,6 @@ ConsoleLineCell::ScrollableConsoleLineView::ConsoleLineView::ConsoleLineView() :
 {
 }
 
-void ConsoleLineCell::ScrollableConsoleLineView::ConsoleLineView::setLine(ConsoleLine * line) {
-  m_line = line;
-}
-
 void ConsoleLineCell::ScrollableConsoleLineView::ConsoleLineView::drawRect(KDContext * ctx, KDRect rect) const {
   ctx->fillRect(bounds(), KDColorWhite);
   ctx->drawString(m_line->text(), KDPointZero, ConsoleController::k_fontSize, textColor(m_line), isHighlighted()? Palette::Select : KDColorWhite);
@@ -73,8 +69,13 @@ int ConsoleLineCell::numberOfSubviews() const {
 View * ConsoleLineCell::subviewAtIndex(int index) {
   if (m_line.isCommand()) {
     assert(index >= 0 && index < 2);
-    View * views[] = {&m_promptView, &m_scrollableView};
-    return views[index];
+    if (index == 0) {
+      return &m_promptView;
+    }
+    if (index == 1) {
+      return &m_scrollableView;
+    }
+    return nullptr;
   }
   assert(m_line.isResult());
   assert(index == 0);

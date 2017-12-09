@@ -111,8 +111,17 @@ int OutputExpressionsView::numberOfSubviews() const {
 }
 
 View * OutputExpressionsView::subviewAtIndex(int index) {
-  View * views[3] = {&m_approximateExpressionView, &m_approximateSign, &m_exactExpressionView};
-  return views[index];
+  assert(index >= 0 && index < 3);
+  if (index == 0) {
+    return &m_approximateExpressionView;
+  }
+  if (index == 1) {
+    return &m_approximateSign;
+  }
+  if (index == 2) {
+    return &m_exactExpressionView;
+  }
+  return nullptr;
 }
 
 void OutputExpressionsView::layoutSubviews() {

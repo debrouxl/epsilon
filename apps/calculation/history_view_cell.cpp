@@ -19,18 +19,12 @@ HistoryViewCell::HistoryViewCell(Responder * parentResponder) :
 }
 
 HistoryViewCell::~HistoryViewCell() {
-  if (m_inputLayout != nullptr) {
-    delete m_inputLayout;
-    m_inputLayout = nullptr;
-  }
-  if (m_exactOutputLayout != nullptr) {
-    delete m_exactOutputLayout;
-    m_exactOutputLayout = nullptr;
-  }
-  if (m_approximateOutputLayout != nullptr) {
-    delete m_approximateOutputLayout;
-    m_approximateOutputLayout = nullptr;
-  }
+  delete m_inputLayout;
+  m_inputLayout = nullptr;
+  delete m_exactOutputLayout;
+  m_exactOutputLayout = nullptr;
+  delete m_approximateOutputLayout;
+  m_approximateOutputLayout = nullptr;
 }
 
 OutputExpressionsView * HistoryViewCell::outputView() {
@@ -79,8 +73,14 @@ int HistoryViewCell::numberOfSubviews() const {
 }
 
 View * HistoryViewCell::subviewAtIndex(int index) {
-  View * views[2] = {&m_inputView, &m_scrollableOutputView};
-  return views[index];
+  assert(index >= 0 && index < 2);
+  if (index == 0) {
+    return &m_inputView;
+  }
+  if (index == 1) {
+    return &m_scrollableOutputView;
+  }
+  return nullptr;
 }
 
 void HistoryViewCell::layoutSubviews() {
@@ -133,10 +133,6 @@ void HistoryViewCell::didBecomeFirstResponder() {
   } else {
     app()->setFirstResponder(&m_scrollableOutputView);
   }
-}
-
-HistoryViewCell::SubviewType HistoryViewCell::selectedSubviewType() {
-  return m_selectedSubviewType;
 }
 
 void HistoryViewCell::setSelectedSubviewType(HistoryViewCell::SubviewType subviewType) {

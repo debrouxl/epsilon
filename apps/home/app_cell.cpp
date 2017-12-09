@@ -3,14 +3,6 @@
 
 namespace Home {
 
-AppCell::AppCell() :
-  HighlightCell(),
-  m_nameView(KDText::FontSize::Small, (I18n::Message)0, 0.5f, 0.5f, KDColorBlack, KDColorWhite),
-  m_visible(true)
-{
-}
-
-
 void AppCell::drawRect(KDContext * ctx, KDRect rect) const {
   KDSize nameSize = m_nameView.minimalSizeForOptimalDisplay();
   ctx->fillRect(KDRect(0,  bounds().height()-nameSize.height() - 2*k_nameHeightMargin, bounds().width(), nameSize.height()+2*k_nameHeightMargin), KDColorWhite);
@@ -21,8 +13,14 @@ int AppCell::numberOfSubviews() const {
 }
 
 View * AppCell::subviewAtIndex(int index) {
-  View * views[] = {&m_iconView, &m_nameView};
-  return views[index];
+  assert(index >= 0 && index < 2);
+  if (index == 0) {
+    return &m_iconView;
+  }
+  if (index == 1) {
+    return &m_nameView;
+  }
+  return nullptr;
 }
 
 void AppCell::layoutSubviews() {
