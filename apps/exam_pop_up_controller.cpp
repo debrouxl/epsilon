@@ -4,17 +4,6 @@
 #include "global_preferences.h"
 #include <assert.h>
 
-ExamPopUpController::ExamPopUpController() :
-  ViewController(nullptr),
-  m_contentView(this),
-  m_isActivatingExamMode(false)
-{
-}
-
-View * ExamPopUpController::view() {
-  return &m_contentView;
-}
-
 void ExamPopUpController::didBecomeFirstResponder() {
   m_contentView.setSelectedButton(0, app());
 }
@@ -36,10 +25,6 @@ void ExamPopUpController::setActivatingExamMode(bool activatingExamMode) {
     m_isActivatingExamMode = activatingExamMode;
     m_contentView.setMessages(activatingExamMode);
   }
-}
-
-bool ExamPopUpController::isActivatingExamMode() {
-  return m_isActivatingExamMode;
 }
 
 ExamPopUpController::ContentView::ContentView(Responder * parentResponder) :

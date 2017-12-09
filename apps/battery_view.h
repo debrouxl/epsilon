@@ -3,9 +3,9 @@
 
 #include <escher.h>
 
-class BatteryView : public View {
+class BatteryView final : public View {
 public:
-  BatteryView();
+  BatteryView() : View(), m_chargeState(Ion::Battery::Charge::SOMEWHERE_INBETWEEN), m_isCharging(false), m_isPlugged(false) {}
   bool setChargeState(Ion::Battery::Charge chargeState);
   bool setIsCharging(bool isCharging);
   bool setIsPlugged(bool isPlugged);

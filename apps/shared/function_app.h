@@ -15,11 +15,21 @@ public:
   class Snapshot : public ::App::Snapshot, public TabViewDataSource {
   public:
     Snapshot();
-    CurveViewCursor * cursor();
-    uint32_t * modelVersion();
-    uint32_t * rangeVersion();
-    Poincare::Expression::AngleUnit * angleUnitVersion();
-    Interval * interval();
+    CurveViewCursor * cursor() {
+      return &m_cursor;
+    }
+    uint32_t * modelVersion() {
+      return &m_modelVersion;
+    }
+    uint32_t * rangeVersion() {
+      return &m_rangeVersion;
+    }
+    Poincare::Expression::AngleUnit * angleUnitVersion() {
+      return &m_angleUnitVersion;
+    }
+    Interval * interval() {
+      return &m_interval;
+    }
     void reset() override;
   protected:
     CurveViewCursor m_cursor;
@@ -33,7 +43,8 @@ public:
   virtual InputViewController * inputViewController() = 0;
   void willBecomeInactive() override;
 protected:
-  FunctionApp(Container * container, Snapshot * snapshot, ViewController * rootViewController);
+  FunctionApp(Container * container, Snapshot * snapshot, ViewController * rootViewController) :
+    TextFieldDelegateApp(container, snapshot, rootViewController) {}
 };
 
 }

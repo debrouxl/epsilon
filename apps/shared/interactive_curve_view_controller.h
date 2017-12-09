@@ -16,13 +16,21 @@ namespace Shared {
 class InteractiveCurveViewController : public ViewController, public ButtonRowDelegate, public AlternateEmptyViewDelegate {
 public:
   InteractiveCurveViewController(Responder * parentResponder, ButtonRowController * header, InteractiveCurveViewRange * interactiveRange, CurveView * curveView, CurveViewCursor * cursor, uint32_t * modelVersion, uint32_t * rangeVersion);
-  View * view() override;
-  const char * title() override;
+  View * view() override {
+    return curveView();
+  }
+  const char * title() override {
+    return I18n::translate(I18n::Message::GraphTab);
+  }
   bool handleEvent(Ion::Events::Event event) override;
   void didBecomeFirstResponder() override;
 
-  ViewController * rangeParameterController();
-  ViewController * zoomParameterController();
+  ViewController * rangeParameterController() {
+    return &m_rangeParameterController;
+  }
+  ViewController * zoomParameterController() {
+    return &m_zoomParameterController;
+  }
   virtual ViewController * initialisationParameterController() = 0;
 
   int numberOfButtons(ButtonRowController::Position position) const override;

@@ -34,31 +34,11 @@ bool AppsContainer::poincareCircuitBreaker() {
   return state.keyDown(Ion::Keyboard::Key::A6);
 }
 
-App::Snapshot * AppsContainer::hardwareTestAppSnapshot() {
-  return &m_hardwareTestSnapshot;
-}
-
-App::Snapshot * AppsContainer::onBoardingAppSnapshot() {
-  return &m_onBoardingSnapshot;
-}
-
 void AppsContainer::reset() {
   Clipboard::sharedClipboard()->reset();
   for (int i = 0; i < numberOfApps(); i++) {
     appSnapshotAtIndex(i)->reset();
   }
-}
-
-Poincare::Context * AppsContainer::globalContext() {
-  return &m_globalContext;
-}
-
-MathToolbox * AppsContainer::mathToolbox() {
-  return &m_mathToolbox;
-}
-
-VariableBoxController * AppsContainer::variableBoxController() {
-  return &m_variableBoxController;
 }
 
 void AppsContainer::suspend(bool checkIfPowerKeyReleased) {
@@ -145,10 +125,6 @@ bool AppsContainer::updateBatteryState() {
   return false;
 }
 
-void AppsContainer::refreshPreferences() {
-  m_window.refreshPreferences();
-}
-
 void AppsContainer::displayExamModePopUp(bool activate) {
   m_examPopUpController.setActivatingExamMode(activate);
   activeApp()->displayModalViewController(&m_examPopUpController, 0.f, 0.f, Metric::ExamPopUpTopMargin, Metric::PopUpRightMargin, Metric::ExamPopUpBottomMargin, Metric::PopUpLeftMargin);
@@ -172,16 +148,8 @@ bool AppsContainer::updateAlphaLock() {
   return m_window.updateAlphaLock();
 }
 
-OnBoarding::UpdateController * AppsContainer::updatePopUpController() {
-  return &m_updateController;
-}
-
 void AppsContainer::redrawWindow() {
   m_window.redraw();
-}
-
-Window * AppsContainer::window() {
-  return &m_window;
 }
 
 int AppsContainer::numberOfContainerTimers() {
