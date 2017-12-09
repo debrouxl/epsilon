@@ -8,7 +8,7 @@
 
 namespace Calculation {
 
-class HistoryViewCell : public ::EvenOddCell, public Responder {
+class HistoryViewCell final : public ::EvenOddCell, public Responder {
 public:
   enum class SubviewType {
     Input,
@@ -30,7 +30,7 @@ public:
   void didBecomeFirstResponder() override;
   bool handleEvent(Ion::Events::Event event) override;
   constexpr static KDCoordinate k_digitVerticalMargin = 5;
-  SubviewType selectedSubviewType();
+  SubviewType selectedSubviewType() { return m_selectedSubviewType; }
   void setSelectedSubviewType(HistoryViewCell::SubviewType subviewType);
   OutputExpressionsView * outputView();
 private:

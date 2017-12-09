@@ -7,19 +7,25 @@
 
 namespace HardwareTest {
 
-class USBTestController : public ViewController, public Timer {
+class USBTestController final : public ViewController, public Timer {
 public:
   USBTestController(Responder * parentResponder);
-  View * view() override;
+  View * view() override {
+    return &m_view;
+  }
   void viewWillAppear() override;
   bool handleEvent(Ion::Events::Event e) override;
 private:
   bool fire() override;
-  class ContentView : public SolidColorView {
+  class ContentView final : public SolidColorView {
   public:
-    ContentView();
-    BufferTextView * USBTextView();
-    ArrowView * arrowView();
+    ContentView() : SolidColorView(KDColorWhite), m_USBTextView(KDText::FontSize::Large), m_USBView(), m_arrowView() {}
+    BufferTextView * USBTextView() {
+      return &m_USBTextView;
+    }
+    ArrowView * arrowView() {
+      return &m_arrowView;
+    }
   private:
     class USBView : public View {
     public:

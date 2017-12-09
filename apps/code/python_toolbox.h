@@ -8,7 +8,7 @@
 
 namespace Code {
 
-class PythonToolbox : public Toolbox {
+class PythonToolbox final : public Toolbox {
 public:
   typedef void (*Action)(void * sender, const char * text);
   PythonToolbox();

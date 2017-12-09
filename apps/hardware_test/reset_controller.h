@@ -5,15 +5,19 @@
 
 namespace HardwareTest {
 
-class ResetController : public ViewController {
+class ResetController final : public ViewController {
 public:
-  ResetController(Responder * parentResponder);
-  View * view() override;
+  ResetController(Responder * parentResponder) : ViewController(parentResponder), m_view() {}
+  View * view() override {
+    return &m_view;
+  }
   bool handleEvent(Ion::Events::Event event) override;
 private:
-  class ContentView : public View {
+  class ContentView final : public View {
   public:
-    ContentView();
+    ContentView() : m_resetTextView() {
+      m_resetTextView.setText("RESET");
+    }
     BufferTextView * resetTextView();
   private:
     void layoutSubviews() override;
