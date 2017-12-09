@@ -7,12 +7,14 @@ namespace Shared {
 
 class FloatPairStore {
 public:
-  FloatPairStore();
+  FloatPairStore() : m_numberOfPairs(0), m_data{} {}
   // Delete the implicit copy constructor: the object is heavy
   FloatPairStore(const FloatPairStore&) = delete;
   double get(int i, int j);
   void set(double f, int i, int j);
-  int numberOfPairs();
+  int numberOfPairs() {
+    return m_numberOfPairs;
+  }
   void deletePairAtIndex(int j);
   void deleteAllPairs();
   void resetColumn(int i);
@@ -20,7 +22,9 @@ public:
   uint32_t storeChecksum();
   constexpr static int k_maxNumberOfPairs = 100;
 protected:
-  virtual double defaultValue(int i);
+  virtual double defaultValue(int i) {
+    return 0.0;
+  }
   int m_numberOfPairs;
   double m_data[2][k_maxNumberOfPairs];
 };
