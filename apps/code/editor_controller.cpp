@@ -16,7 +16,7 @@ EditorController::EditorController(MenuController * menuController) :
   m_textArea.setDelegate(this);
 }
 
-void EditorController::setScript(Script script){
+void EditorController::setScript(Script script) {
   m_textArea.setText(script.editableContent(), script.contentBufferSize());
 }
 

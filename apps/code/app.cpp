@@ -1,39 +1,9 @@
 #include "app.h"
 #include "../apps_container.h"
-#include "code_icon.h"
-#include "../shared/toolbox_helpers.h"
-#include "../i18n.h"
 
 namespace Code {
 
-I18n::Message App::Descriptor::name() {
-  return I18n::Message::CodeApp;
-}
-
-I18n::Message App::Descriptor::upperName() {
-  return I18n::Message::CodeAppCapital;
-}
-
-const Image * App::Descriptor::icon() {
-  return ImageStore::CodeIcon;
-}
-
-App * App::Snapshot::unpack(Container * container) {
-  return new App(container, this);
-}
-
-void App::Snapshot::reset() {
-  m_scriptStore.deleteAllScripts();
-}
-
-App::Descriptor * App::Snapshot::descriptor() {
-  static Descriptor descriptor;
-  return &descriptor;
-}
-
-ScriptStore * App::Snapshot::scriptStore() {
-  return &m_scriptStore;
-}
+App::Descriptor App::Snapshot::s_descriptor;
 
 App::App(Container * container, Snapshot * snapshot) :
   ::App(container, snapshot, &m_codeStackViewController, I18n::Message::Warning),

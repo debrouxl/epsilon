@@ -2,12 +2,6 @@
 
 namespace Calculation {
 
-TextField::TextField(Responder * parentResponder, char * textBuffer, size_t textBufferSize, TextFieldDelegate * delegate) :
-  ::TextField(parentResponder, textBuffer, textBuffer, textBufferSize, delegate, false)
-{
-  setEditing(true);
-}
-
 bool TextField::handleEvent(Ion::Events::Event event) {
   if (event == Ion::Events::Back) {
     return false;
@@ -27,7 +21,7 @@ bool TextField::handleEvent(Ion::Events::Event event) {
     insertTextAtLocation("ans", cursorLocation());
     setCursorLocation(cursorLocation() + strlen("ans"));
   }
-  return(::TextField::handleEvent(event));
+  return ::TextField::handleEvent(event);
 }
 
 }

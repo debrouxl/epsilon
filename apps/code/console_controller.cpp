@@ -61,10 +61,6 @@ void ConsoleController::unloadPythonEnvironment() {
   }
 }
 
-bool ConsoleController::pythonEnvironmentIsLoaded() {
-  return (m_pythonHeap != nullptr);
-}
-
 void ConsoleController::autoImport() {
   for (int i = 0; i < m_scriptStore->numberOfScripts(); i++) {
     autoImportScriptAtIndex(i);

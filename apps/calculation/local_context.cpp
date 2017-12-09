@@ -4,12 +4,6 @@ using namespace Poincare;
 
 namespace Calculation {
 
-LocalContext::LocalContext(GlobalContext * parentContext, CalculationStore * calculationStore) :
-  m_calculationStore(calculationStore),
-  m_parentContext(parentContext)
-{
-}
-
 Expression * LocalContext::ansValue() {
   if (m_calculationStore->numberOfCalculations() == 0) {
     return m_parentContext->defaultExpression();

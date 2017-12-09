@@ -5,7 +5,7 @@
 
 namespace Code {
 
-class Script {
+class Script final {
 public:
   Script(const char * marker = nullptr, const char * name = nullptr, size_t nameBufferSize = 0, const char * content = nullptr, size_t contentBufferSize = 0);
   bool isNull() const;

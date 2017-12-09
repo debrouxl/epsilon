@@ -231,10 +231,6 @@ PythonToolbox::PythonToolbox() :
 {
 }
 
-void PythonToolbox::setAction(Action action) {
-  m_action = action;
-}
-
 bool PythonToolbox::handleEvent(Ion::Events::Event event) {
   if (Toolbox::handleEvent(event)) {
     return true;

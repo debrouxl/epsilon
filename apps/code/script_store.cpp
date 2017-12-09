@@ -101,10 +101,6 @@ void ScriptStore::deleteScriptAtIndex(int index) {
   m_accordion.deleteBufferAtIndex(accordionIndex-2);
 }
 
-void ScriptStore::deleteAllScripts() {
-  m_accordion.deleteAll();
-}
-
 bool ScriptStore::isFull() {
   return (numberOfScripts() >= k_maxNumberOfScripts || m_accordion.freeSpaceSize() < k_fullFreeSpaceSizeLimit);
 }

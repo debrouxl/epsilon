@@ -9,19 +9,28 @@ class AppsContainer;
 
 namespace HardwareTest {
 
-class App : public ::App {
+class App final : public ::App {
 public:
-  class Snapshot : public ::App::Snapshot {
+  class Snapshot final : public ::App::Snapshot {
   public:
     App * unpack(Container * container) override;
-    Descriptor * descriptor() override;
+    Descriptor * descriptor() override {
+      return &s_descriptor;
+    }
+  private:
+    static App::Descriptor s_descriptor;
   };
-  ViewController * USBController();
+  ViewController * USBController() {
+    return &m_USBTestController;
+  }
   int numberOfTimers() override;
   Timer * timerAtIndex(int i) override;
   bool processEvent(Ion::Events::Event e) override;
 private:
-  App(Container * container, Snapshot * snapshot);
+  App(Container * container, Snapshot * snapshot) :
+    ::App(container, snapshot, &m_keyboardController),
+    m_keyboardController(&m_modalViewController),
+    m_USBTestController(nullptr) {}
   KeyboardTestController m_keyboardController;
   USBTestController m_USBTestController;
 };

@@ -4,7 +4,7 @@
 /* Accordion sequentially stores null-terminated char buffers. It moves the free
  * space at the end of a buffer if it will be edited. */
 
-class Accordion {
+class Accordion final {
 public:
   Accordion(char * buffer, int bufferSize);
   int numberOfBuffers() { return m_numberOfBuffers; }

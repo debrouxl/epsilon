@@ -13,7 +13,7 @@
 
 namespace Code {
 
-class ConsoleLineCell : public HighlightCell, public Responder {
+class ConsoleLineCell final : public HighlightCell, public Responder {
 public:
   ConsoleLineCell(Responder * parentResponder = nullptr);
   void setLine(ConsoleLine line);
@@ -35,7 +35,7 @@ private:
     class ConsoleLineView : public HighlightCell {
     public:
       ConsoleLineView();
-      void setLine(ConsoleLine * line);
+      void setLine(ConsoleLine * line) { m_line = line; }
       void drawRect(KDContext * ctx, KDRect rect) const override;
       KDSize minimalSizeForOptimalDisplay() const override;
     private:

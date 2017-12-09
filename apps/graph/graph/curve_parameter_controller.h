@@ -6,7 +6,7 @@
 
 namespace Graph {
 
-class CurveParameterController : public Shared::FunctionCurveParameterController {
+class CurveParameterController final : public Shared::FunctionCurveParameterController {
 public:
   CurveParameterController(Shared::InteractiveCurveViewRange * graphRange, BannerView * bannerView, Shared::CurveViewCursor * cursor);
   const char * title() override;
@@ -16,7 +16,7 @@ public:
   int reusableCellCount() override;
   void willDisplayCellForIndex(HighlightCell * cell, int index) override;
 private:
-  Shared::FunctionGoToParameterController * goToParameterController() override;
+  Shared::FunctionGoToParameterController * goToParameterController() override { return &m_goToParameterController; }
   Shared::FunctionGoToParameterController m_goToParameterController;
   BannerView * m_bannerView;
 #if FUNCTION_CALCULATE_MENU

@@ -8,11 +8,11 @@
 
 namespace Code {
 
-class PythonToolbox : public Toolbox {
+class PythonToolbox final : public Toolbox {
 public:
   typedef void (*Action)(void * sender, const char * text);
   PythonToolbox();
-  void setAction(Action action);
+  void setAction(Action action) { m_action = action; }
 
   // StackViewController
   bool handleEvent(Ion::Events::Event event) override;

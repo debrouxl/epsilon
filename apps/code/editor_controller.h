@@ -9,7 +9,7 @@ namespace Code {
 class MenuController;
 class ScriptParameterController;
 
-class EditorController : public ViewController, public TextAreaDelegate {
+class EditorController final : public ViewController, public TextAreaDelegate {
 public:
   EditorController(MenuController * menuController);
   void setScript(Script script);

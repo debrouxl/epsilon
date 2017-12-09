@@ -11,7 +11,7 @@ extern "C" {
 
 namespace Code {
 
-class ScriptStore : public MicroPython::ScriptProvider {
+class ScriptStore final : public MicroPython::ScriptProvider {
 public:
   enum class EditableZone {
     None,
@@ -31,7 +31,7 @@ public:
   bool renameScriptAtIndex(int index, const char * newName);
   void switchAutoImportAtIndex(int index);
   void deleteScriptAtIndex(int index);
-  void deleteAllScripts();
+  void deleteAllScripts() { m_accordion.deleteAll(); }
   bool isFull();
 
   /* Provide scripts content information */

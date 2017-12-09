@@ -19,30 +19,18 @@ Calculation::Calculation() :
 }
 
 Calculation::~Calculation() {
-  if (m_inputLayout != nullptr) {
-    delete m_inputLayout;
-    m_inputLayout = nullptr;
-  }
-  if (m_input != nullptr) {
-    delete m_input;
-    m_input = nullptr;
-  }
-  if (m_exactOutput != nullptr) {
-    delete m_exactOutput;
-    m_exactOutput = nullptr;
-  }
-  if (m_exactOutputLayout != nullptr) {
-    delete m_exactOutputLayout;
-    m_exactOutputLayout = nullptr;
-  }
-  if (m_approximateOutput != nullptr) {
-    delete m_approximateOutput;
-    m_approximateOutput = nullptr;
-  }
-  if (m_approximateOutputLayout != nullptr) {
-    delete m_approximateOutputLayout;
-    m_approximateOutputLayout = nullptr;
-  }
+  delete m_inputLayout;
+  m_inputLayout = nullptr;
+  delete m_input;
+  m_input = nullptr;
+  delete m_exactOutput;
+  m_exactOutput = nullptr;
+  delete m_exactOutputLayout;
+  m_exactOutputLayout = nullptr;
+  delete m_approximateOutput;
+  m_approximateOutput = nullptr;
+  delete m_approximateOutputLayout;
+  m_approximateOutputLayout = nullptr;
 }
 
 Calculation& Calculation::operator=(const Calculation& other) {
@@ -76,23 +64,11 @@ void Calculation::setContent(const char * c, Context * context) {
   m_approximateOutput->writeTextInBuffer(m_approximateOutputText, sizeof(m_approximateOutputText));
 }
 
-const char * Calculation::inputText() {
-  return m_inputText;
-}
-
 const char * Calculation::outputText() {
   if (shouldApproximateOutput()) {
     return m_approximateOutputText;
   }
   return m_exactOutputText;
-}
-
-const char * Calculation::exactOutputText() {
-  return m_exactOutputText;
-}
-
-const char * Calculation::approximateOutputText() {
-  return m_approximateOutputText;
 }
 
 Expression * Calculation::input() {
@@ -138,29 +114,17 @@ bool Calculation::isEmpty() {
 }
 
 void Calculation::tidy() {
-  if (m_input != nullptr) {
-    delete m_input;
-  }
+  delete m_input;
   m_input = nullptr;
-  if (m_inputLayout != nullptr) {
-    delete m_inputLayout;
-  }
+  delete m_inputLayout;
   m_inputLayout = nullptr;
-  if (m_exactOutput != nullptr) {
-    delete m_exactOutput;
-  }
+  delete m_exactOutput;
   m_exactOutput = nullptr;
-  if (m_exactOutputLayout != nullptr) {
-    delete m_exactOutputLayout;
-  }
+  delete m_exactOutputLayout;
   m_exactOutputLayout = nullptr;
-  if (m_approximateOutput != nullptr) {
-    delete m_approximateOutput;
-  }
+  delete m_approximateOutput;
   m_approximateOutput = nullptr;
-  if (m_approximateOutputLayout != nullptr) {
-    delete m_approximateOutputLayout;
-  }
+  delete m_approximateOutputLayout;
   m_approximateOutputLayout = nullptr;
 }
 

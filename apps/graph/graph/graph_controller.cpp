@@ -23,10 +23,6 @@ I18n::Message GraphController::emptyMessage() {
   return I18n::Message::NoActivatedFunction;
 }
 
-BannerView * GraphController::bannerView() {
-  return &m_bannerView;
-}
-
 void GraphController::reloadBannerView() {
   FunctionGraphController::reloadBannerView();
   if (!m_bannerView.displayDerivative()) {
@@ -72,22 +68,6 @@ void GraphController::initCursorParameters() {
   } while (std::isnan(y) && functionIndex < functionStore()->numberOfActiveFunctions());
   m_cursor->moveTo(x, y);
   interactiveCurveViewRange()->panToMakePointVisible(x, y, k_cursorTopMarginRatio, k_cursorRightMarginRatio, k_cursorBottomMarginRatio, k_cursorLeftMarginRatio);
-}
-
-InteractiveCurveViewRange * GraphController::interactiveCurveViewRange() {
-  return m_graphRange;
-}
-
-CartesianFunctionStore * GraphController::functionStore() const {
-  return m_functionStore;
-}
-
-GraphView * GraphController::functionGraphView() {
-  return &m_view;
-}
-
-CurveParameterController * GraphController::curveParameterController() {
-  return &m_curveParameterController;
 }
 
 }

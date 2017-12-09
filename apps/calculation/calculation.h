@@ -6,7 +6,7 @@
 
 namespace Calculation {
 
-class Calculation {
+class Calculation final {
 public:
   Calculation();
   ~Calculation(); // Delete expression and layout, if needed
@@ -17,10 +17,10 @@ public:
   /* c.reset() is the equivalent of c = Calculation() without copy assingment. */
   void reset();
   void setContent(const char * c, Poincare::Context * context);
-  const char * inputText();
+  const char * inputText() { return m_inputText; }
   const char * outputText();
-  const char * exactOutputText();
-  const char * approximateOutputText();
+  const char * exactOutputText() { return m_exactOutputText; }
+  const char * approximateOutputText() { return m_approximateOutputText; }
   Poincare::Expression * input();
   Poincare::ExpressionLayout * inputLayout();
   Poincare::Expression * output(Poincare::Context * context);

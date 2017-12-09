@@ -8,13 +8,9 @@ class VariableBoxLeafCell final : public HighlightCell {
 public:
   VariableBoxLeafCell();
   ~VariableBoxLeafCell();
-  void displayExpression(bool displayExpression) {
-    m_displayExpression = displayExpression;
-  }
+  void displayExpression(bool displayExpression) { m_displayExpression = displayExpression; }
   void reloadCell() override;
-  void setLabel(const char * text) {
-    m_labelView.setText(text);
-  }
+  void setLabel(const char * text) { m_labelView.setText(text); }
   void setSubtitle(const char * text);
   void setExpression(const Poincare::Expression * expression);
   void drawRect(KDContext * ctx, KDRect rect) const override;
