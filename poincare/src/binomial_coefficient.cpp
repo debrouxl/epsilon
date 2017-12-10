@@ -71,23 +71,17 @@ Expression * BinomialCoefficient::shallowReduce(Context& context, AngleUnit angl
 ExpressionLayout * BinomialCoefficient::privateCreateLayout(PrintFloat::Mode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != PrintFloat::Mode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = operand(0)->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = operand(1)->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout * childrenLayouts[2] = {
+    operand(0)->createLayout(floatDisplayMode, complexFormat),
+    operand(1)->createLayout(floatDisplayMode, complexFormat)
+  };
   return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1));
 }
 
 template<typename T>
 Expression * BinomialCoefficient::templatedApproximate(Context& context, AngleUnit angleUnit) const {
-  Expression * nInput = operand(0)->approximate<T>(context, angleUnit);
-  Expression * kInput = operand(1)->approximate<T>(context, angleUnit);
-  if (nInput->type() != Type::Complex || kInput->type() != Type::Complex) {
-    return Complex<T>::NewFNAN();
-  }
-  T n = static_cast<Complex<T> *>(nInput)->toScalar();
-  T k = static_cast<Complex<T> *>(kInput)->toScalar();
-  delete nInput;
-  delete kInput;
+  T n = operand(0)->approximateToScalar<T>(context, angleUnit);
+  T k = operand(1)->approximateToScalar<T>(context, angleUnit);
   return Complex<T>::NewFloat(compute(k, n));
 }
 

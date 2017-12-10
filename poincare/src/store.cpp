@@ -31,13 +31,15 @@ Expression * Store::shallowReduce(Context& context, AngleUnit angleUnit) {
 }
 
 ExpressionLayout * Store::privateCreateLayout(PrintFloat::Mode floatDisplayMode, ComplexFormat complexFormat) const {
-  assert(floatDisplayMode != PrintFloat::Mode::Default);
-  assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[3];
-  childrenLayouts[0] = value()->createLayout(floatDisplayMode, complexFormat);
   static const char stoSymbol[2] = {Ion::Charset::Sto, 0};
-  childrenLayouts[1] = new StringLayout(stoSymbol, 1);
-  childrenLayouts[2] = symbol()->createLayout(floatDisplayMode, complexFormat);
+  assert(floatDisplayMode != PrintFloat::Mode::Default);
+  assert(floatDisplayMode != FloatDisplayMode::Default);
+  assert(complexFormat != ComplexFormat::Default);
+  ExpressionLayout * childrenLayouts[3] = {
+    value()->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout(stoSymbol, 1),
+    symbol()->createLayout(floatDisplayMode, complexFormat)
+  };
   return new HorizontalLayout(childrenLayouts, 3);
 }
 
