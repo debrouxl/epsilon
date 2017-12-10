@@ -43,9 +43,10 @@ Expression * Opposite::shallowReduce(Context& context, AngleUnit angleUnit) {
 ExpressionLayout * Opposite::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = new StringLayout("-", 1);
-  childrenLayouts[1] = operand(0)->type() == Type::Opposite ? new ParenthesisLayout(operand(0)->createLayout(floatDisplayMode, complexFormat)) : operand(0)->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout * childrenLayouts[2] = {
+    new StringLayout("-", 1),
+    operand(0)->type() == Type::Opposite ? new ParenthesisLayout(operand(0)->createLayout(floatDisplayMode, complexFormat)) : operand(0)->createLayout(floatDisplayMode, complexFormat)
+  };
   return new HorizontalLayout(childrenLayouts, 2);
 }
 

@@ -9,9 +9,6 @@ extern "C" {
 #include <poincare/addition.h>
 #include <poincare/opposite.h>
 #include <poincare/matrix.h>
-#include "layout/horizontal_layout.h"
-#include "layout/string_layout.h"
-#include "layout/parenthesis_layout.h"
 
 namespace Poincare {
 

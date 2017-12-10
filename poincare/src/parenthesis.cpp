@@ -26,9 +26,4 @@ Expression * Parenthesis::shallowReduce(Context& context, AngleUnit angleUnit) {
   return replaceWith(editableOperand(0), true);
 }
 
-template<typename T>
-Expression * Parenthesis::templatedApproximate(Context& context, AngleUnit angleUnit) const {
-  return operand(0)->approximate<T>(context, angleUnit);
-}
-
 }
