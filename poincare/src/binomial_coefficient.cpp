@@ -82,7 +82,7 @@ Expression * BinomialCoefficient::templatedApproximate(Context& context, AngleUn
   Expression * nInput = operand(0)->approximate<T>(context, angleUnit);
   Expression * kInput = operand(1)->approximate<T>(context, angleUnit);
   if (nInput->type() != Type::Complex || kInput->type() != Type::Complex) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   T n = static_cast<Complex<T> *>(nInput)->toScalar();
   T k = static_cast<Complex<T> *>(kInput)->toScalar();
@@ -90,16 +90,16 @@ Expression * BinomialCoefficient::templatedApproximate(Context& context, AngleUn
   delete kInput;
   k = k > (n-k) ? n-k : k;
   if (std::isnan(n) || std::isnan(k) || n != std::round(n) || k != std::round(k) || k > n || k < 0 || n < 0) {
-    return new Complex<T>(Complex<T>::Float(NAN));
+    return Complex<T>::NewFNAN();
   }
   T result = 1;
   for (int i = 0; i < k; i++) {
     result *= (n-(T)i)/(k-(T)i);
     if (std::isinf(result) || std::isnan(result)) {
-      return new Complex<T>(Complex<T>::Float(result));
+      return Complex<T>::NewFloat(result);
     }
   }
-  return new Complex<T>(Complex<T>::Float(std::round(result)));
+  return Complex<T>::NewFloat(std::round(result));
 }
 
 }
