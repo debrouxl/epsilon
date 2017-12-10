@@ -21,8 +21,7 @@ ExpressionLayout * LayoutEngine::createInfixLayout(const Expression * expression
   }
   /* HorizontalLayout holds the children layouts so they do not need to be
    * deleted here. */
-  ExpressionLayout * layout = new HorizontalLayout(children_layouts, 2*numberOfOperands-1);
-  delete[] children_layouts;
+  ExpressionLayout * layout = new HorizontalLayout(children_layouts, 2*numberOfOperands-1, true);
   return layout;
 }
 
@@ -41,14 +40,14 @@ ExpressionLayout * LayoutEngine::createPrefixLayout(const Expression * expressio
     }
     /* HorizontalLayout holds the grand children layouts so they do not need to
      * be deleted */
-    argumentLayouts = new HorizontalLayout(grandChildrenLayouts, 2*numberOfOperands-1);
-    delete [] grandChildrenLayouts;
+    argumentLayouts = new HorizontalLayout(grandChildrenLayouts, 2*numberOfOperands-1, true);
   }
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = new StringLayout(operatorName, strlen(operatorName));
-  childrenLayouts[1] = new ParenthesisLayout(argumentLayouts);
+  ExpressionLayout * childrenLayouts[2] = {
+    new StringLayout(operatorName, strlen(operatorName)),
+    new ParenthesisLayout(argumentLayouts)
+  };
   /* Same comment as above */
-  return new HorizontalLayout(childrenLayouts, 2);
+  return new HorizontalLayout(childrenLayouts, 2, false);
 }
 
 int LayoutEngine::writeInfixExpressionTextInBuffer(const Expression * expression, char * buffer, int bufferSize, int numberOfDigits, const char * operatorName) {
