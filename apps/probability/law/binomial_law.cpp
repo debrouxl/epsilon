@@ -110,32 +110,35 @@ double BinomialLaw::rightIntegralInverseForProbability(double * probability) {
 
 template<typename T>
 T BinomialLaw::templatedApproximateAtAbscissa(T x) const {
-  if (m_parameter1 == 0) {
-    if (m_parameter2 == 0 || m_parameter2 == 1) {
+  const T parameter1 = m_parameter1;
+  const T parameter2 = m_parameter2;
+  const T floorx = std::floor(x);
+  if (parameter1 == 0) {
+    if (parameter2 == 0 || parameter2 == 1) {
       return NAN;
     }
-    if (floor(x) == 0) {
+    if (floorx == 0) {
       return 1;
     }
     return 0;
   }
-  if (m_parameter2 == 1) {
-    if (floor(x) == m_parameter1) {
+  if (parameter2 == 1) {
+    if (floorx == parameter1) {
       return 1;
     }
     return 0;
   }
-  if (m_parameter2 == 0) {
-    if (floor(x) == 0) {
+  if (parameter2 == 0) {
+    if (floorx == 0) {
       return 1;
     }
     return 0;
   }
-  if (x > m_parameter1) {
+  if (x > parameter1) {
     return 0;
   }
-  T lResult = std::lgamma((T)(m_parameter1+1.0)) - std::lgamma(std::floor(x)+(T)1.0) - std::lgamma((T)m_parameter1 - std::floor(x)+(T)1.0)+
-    std::floor(x)*std::log((T)m_parameter2) + ((T)m_parameter1-std::floor(x))*std::log((T)(1.0-m_parameter2));
+  T lResult = std::lgamma(parameter1+(T)1.0) - std::lgamma(floorx+(T)1.0) - std::lgamma(parameter1-floorx+(T)1.0) +
+    floorx*std::log(parameter2) + (parameter1-floorx)*std::log((T)1.0-parameter2);
   return std::exp(lResult);
 }
 
