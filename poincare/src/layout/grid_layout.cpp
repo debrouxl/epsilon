@@ -6,19 +6,6 @@ extern "C" {
 
 namespace Poincare {
 
-GridLayout::GridLayout(ExpressionLayout ** entryLayouts, int numberOfRows, int numberOfColumns) :
-  ExpressionLayout(),
-  m_numberOfRows(numberOfRows),
-  m_numberOfColumns(numberOfColumns)
-{
-  m_entryLayouts = new ExpressionLayout *[numberOfColumns*numberOfRows];
-  for (int i = 0; i < m_numberOfRows*m_numberOfColumns; i++) {
-    m_entryLayouts[i] = entryLayouts[i];
-    m_entryLayouts[i]->setParent(this);
-  }
-  m_baseline = (height()+1)/2;
-}
-
 GridLayout::~GridLayout() {
   for (int i=0; i<m_numberOfColumns*m_numberOfRows; i++) {
     delete m_entryLayouts[i];

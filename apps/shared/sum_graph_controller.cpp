@@ -255,7 +255,7 @@ void SumGraphController::LegendView::setSumSymbol(Step step, double start, doubl
     childrenLayouts[2] = new StringLayout(buffer, strlen(buffer), KDText::FontSize::Small);
     childrenLayouts[1] = functionLayout;
     childrenLayouts[0] = m_sumLayout;
-    m_sumLayout = new HorizontalLayout(childrenLayouts, 3);
+    m_sumLayout = new HorizontalLayout(childrenLayouts, 3, false);
   }
   m_sum.setExpression(m_sumLayout);
   if (step == Step::Result) {

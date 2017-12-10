@@ -54,7 +54,7 @@ ExpressionLayout * Integral::privateCreateLayout(FloatDisplayMode floatDisplayMo
     operand(0)->createLayout(floatDisplayMode, complexFormat),
     new StringLayout("dx", 2)
   };
-  return new IntegralLayout(operand(1)->createLayout(floatDisplayMode, complexFormat), operand(2)->createLayout(floatDisplayMode, complexFormat), new HorizontalLayout(childrenLayouts, 2));
+  return new IntegralLayout(operand(1)->createLayout(floatDisplayMode, complexFormat), operand(2)->createLayout(floatDisplayMode, complexFormat), new HorizontalLayout(childrenLayouts, 2, false));
 }
 
 template<typename T>

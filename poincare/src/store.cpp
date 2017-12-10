@@ -35,7 +35,7 @@ ExpressionLayout * Store::privateCreateLayout(FloatDisplayMode floatDisplayMode,
     new StringLayout(stoSymbol, 1),
     symbol()->createLayout(floatDisplayMode, complexFormat)
   };
-  return new HorizontalLayout(childrenLayouts, 3);
+  return new HorizontalLayout(childrenLayouts, 3, false);
 }
 
 template<typename T>
