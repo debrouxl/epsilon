@@ -10,10 +10,6 @@ Expression::Type Undefined::type() const {
   return Type::Undefined;
 }
 
-Expression * Undefined::clone() const {
-  return new Undefined();
-}
-
 int Undefined::polynomialDegree(char symbolName) const {
   return -1;
 }
