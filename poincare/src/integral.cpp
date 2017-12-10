@@ -18,11 +18,6 @@ Expression::Type Integral::type() const {
   return Type::Integral;
 }
 
-Expression * Integral::clone() const {
-  Integral * a = new Integral(m_operands, true);
-  return a;
-}
-
 Expression * Integral::shallowReduce(Context& context, AngleUnit angleUnit) {
   Expression * e = Expression::shallowReduce(context, angleUnit);
   if (e != this) {

@@ -176,7 +176,7 @@ bool Expression::IsMatrix(const Expression * e, Context & context) {
   return e->type() == Type::Matrix || e->type() == Type::ConfidenceInterval || e->type() == Type::MatrixDimension || e->type() == Type::PredictionInterval || e->type() == Type::MatrixInverse || e->type() == Type::MatrixTranspose || (e->type() == Type::Symbol && static_cast<const Symbol *>(e)->isMatrixSymbol());
 }
 
-bool Expression::isOfType(Type * types, int length) const {
+bool Expression::isOfType(const Type * types, int length) const {
   for (int i = 0; i < length; i++) {
     if (type() == types[i]) {
       return true;

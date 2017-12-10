@@ -19,12 +19,8 @@ Expression::Type Division::type() const {
   return Type::Division;
 }
 
-Expression * Division::clone() const {
-  return new Division(m_operands, true);
-}
-
 bool Division::needParenthesisWithParent(const Expression * e) const {
-  Type types[] = {Type::Division, Type::Power, Type::Factorial};
+  static const Type types[] = {Type::Division, Type::Power, Type::Factorial};
   return e->isOfType(types, 3);
 }
 
@@ -42,7 +38,7 @@ Expression * Division::shallowReduce(Context& context, AngleUnit angleUnit) {
 }
 
 template<typename T>
-Complex<T> Division::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Division::compute(const Complex<T> & c, const Complex<T> & d) {
   /* We want to avoid multiplies in the middle of the calculation that could
    * overflow.
    * aa, ab, ba, bb, min, max = |d.a| <= |d.b| ? (c.a, c.b, -c.a, c.b, d.a, d.b)

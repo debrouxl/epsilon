@@ -12,7 +12,9 @@ class Store final : public StaticHierarchy<2> {
 public:
   using StaticHierarchy<2>::StaticHierarchy;
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Store(operands(), true);
+  }
 private:
   /* Simplification */
   Expression * shallowReduce(Context& context, AngleUnit angleUnit) override;

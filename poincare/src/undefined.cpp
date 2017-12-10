@@ -10,10 +10,6 @@ Expression::Type Undefined::type() const {
   return Type::Undefined;
 }
 
-Expression * Undefined::clone() const {
-  return new Undefined();
-}
-
 template<typename T> Complex<T> * Undefined::templatedApproximate(Context& context, AngleUnit angleUnit) const {
   return new Complex<T>(Complex<T>::Float(NAN));
 }

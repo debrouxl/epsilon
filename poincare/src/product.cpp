@@ -13,19 +13,6 @@ Expression::Type Product::type() const {
   return Type::Product;
 }
 
-Expression * Product::clone() const {
-  Product * a = new Product(m_operands, true);
-  return a;
-}
-
-const char * Product::name() const {
-  return "product";
-}
-
-int Product::emptySequenceValue() const {
-  return 1;
-}
-
 ExpressionLayout * Product::createSequenceLayoutWithArgumentLayouts(ExpressionLayout * subscriptLayout, ExpressionLayout * superscriptLayout, ExpressionLayout * argumentLayout) const {
   return new ProductLayout(subscriptLayout, superscriptLayout, argumentLayout);
 }

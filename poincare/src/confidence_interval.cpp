@@ -16,11 +16,6 @@ Expression::Type ConfidenceInterval::type() const {
   return Type::ConfidenceInterval;
 }
 
-Expression * ConfidenceInterval::clone() const {
-  ConfidenceInterval * a = new ConfidenceInterval(m_operands, true);
-  return a;
-}
-
 Expression * ConfidenceInterval::shallowReduce(Context& context, AngleUnit angleUnit) {
   Expression * e = Expression::shallowReduce(context, angleUnit);
   if (e != this) {

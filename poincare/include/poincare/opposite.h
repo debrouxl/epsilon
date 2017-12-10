@@ -10,9 +10,11 @@ namespace Poincare {
 class Opposite final : public StaticHierarchy<1> {
   using StaticHierarchy<1>::StaticHierarchy;
 public:
-  Expression * clone() const override;
   Type type() const override;
-  template<typename T> static Complex<T> compute(const Complex<T> c, AngleUnit angleUnit);
+  Expression * clone() const override {
+    return new Opposite(m_operands, true);
+  }
+  template<typename T> static Complex<T> compute(const Complex<T> & c, AngleUnit angleUnit);
 private:
   /* Layout */
   bool needParenthesisWithParent(const Expression * e) const override;

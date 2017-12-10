@@ -88,10 +88,6 @@ Symbol::Symbol(char name) :
 {
 }
 
-Expression * Symbol::clone() const {
-  return new Symbol(m_name);
-}
-
 Expression * Symbol::replaceSymbolWithExpression(char symbol, Expression * expression) {
   if (m_name == symbol) {
     Expression * value = expression->clone();
