@@ -147,7 +147,7 @@ Expression * Symbol::templatedApproximate(Context& context, AngleUnit angleUnit)
   if (context.expressionForSymbol(this) != nullptr) {
     return context.expressionForSymbol(this)->approximate<T>(context, angleUnit);
   }
-  return new Complex<T>(Complex<T>::Float(NAN));
+  return Complex<T>::NewFNAN();
 }
 
 ExpressionLayout * Symbol::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
