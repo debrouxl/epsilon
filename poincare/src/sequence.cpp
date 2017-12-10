@@ -16,20 +16,17 @@ namespace Poincare {
 ExpressionLayout * Sequence::privateCreateLayout(PrintFloat::Mode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != PrintFloat::Mode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = new StringLayout("n=", 2);
-  childrenLayouts[1] = operand(1)->createLayout(floatDisplayMode, complexFormat);
+  ExpressionLayout * childrenLayouts[2] = {
+    new StringLayout("n=", 2),
+    operand(1)->createLayout(floatDisplayMode, complexFormat)
+  };
   return createSequenceLayoutWithArgumentLayouts(new HorizontalLayout(childrenLayouts, 2), operand(2)->createLayout(floatDisplayMode, complexFormat), operand(0)->createLayout(floatDisplayMode, complexFormat));
 }
 
 template<typename T>
 Expression * Sequence::templatedApproximate(Context& context, AngleUnit angleUnit) const {
-  Expression * aInput = operand(1)->approximate<T>(context, angleUnit);
-  Expression * bInput = operand(2)->approximate<T>(context, angleUnit);
-  T start = aInput->type() == Type::Complex ? static_cast<Complex<T> *>(aInput)->toScalar() : NAN;
-  T end = bInput->type() == Type::Complex ? static_cast<Complex<T> *>(bInput)->toScalar() : NAN;
-  delete aInput;
-  delete bInput;
+  T start = operand(1)->approximateToScalar<T>(context, angleUnit);
+  T end = operand(2)->approximateToScalar<T>(context, angleUnit);
   if (std::isnan(start) || std::isnan(end) || start != (int)start || end != (int)end || end - start > k_maxNumberOfSteps) {
     return Complex<T>::NewFNAN();
   }
