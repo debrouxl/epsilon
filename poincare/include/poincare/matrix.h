@@ -17,7 +17,9 @@ public:
 
   /* Expression */
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Matrix(m_operands, numberOfRows(), numberOfColumns(), true);
+  }
   int writeTextInBuffer(char * buffer, int bufferSize) const override;
 
   /* Operation on matrix */

@@ -19,12 +19,8 @@ Expression::Type Subtraction::type() const {
   return Expression::Type::Subtraction;
 }
 
-Expression * Subtraction::clone() const {
-  return new Subtraction(m_operands, true);
-}
-
 template<typename T>
-Complex<T> Subtraction::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Subtraction::compute(const Complex<T> & c, const Complex<T> & d) {
   return Complex<T>::Cartesian(c.a()-d.a(), c.b() - d.b());
 }
 

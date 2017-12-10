@@ -9,7 +9,9 @@ namespace Poincare {
 class Undefined final : public StaticHierarchy<0> {
 public:
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Undefined();
+  }
   int writeTextInBuffer(char * buffer, int bufferSize) const override;
 private:
   /* Layout */

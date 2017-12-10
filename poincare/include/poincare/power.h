@@ -20,7 +20,7 @@ public:
   Type type() const override;
   Expression * clone() const override;
   Sign sign() const override;
-  template<typename T> static Complex<T> compute(const Complex<T> c, const Complex<T> d);
+  template<typename T> static Complex<T> compute(const Complex<T> & c, const Complex<T> & d);
 private:
   constexpr static int k_maxIntegerPower = 100;
   /* Property */

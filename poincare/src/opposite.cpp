@@ -18,13 +18,8 @@ Expression::Type Opposite::type() const {
   return Type::Opposite;
 }
 
-Expression * Opposite::clone() const {
-  Opposite * o = new Opposite(m_operands, true);
-  return o;
-}
-
 template<typename T>
-Complex<T> Opposite::compute(const Complex<T> c, AngleUnit angleUnit) {
+Complex<T> Opposite::compute(const Complex<T> & c, AngleUnit angleUnit) {
   return Complex<T>::Cartesian(-c.a(), -c.b());
 }
 
@@ -69,5 +64,5 @@ int Opposite::writeTextInBuffer(char * buffer, int bufferSize) const {
 
 }
 
-template Poincare::Complex<float> Poincare::Opposite::compute<float>(Poincare::Complex<float>, AngleUnit angleUnit);
-template Poincare::Complex<double> Poincare::Opposite::compute<double>(Poincare::Complex<double>, AngleUnit angleUnit);
+template Poincare::Complex<float> Poincare::Opposite::compute<float>(const Poincare::Complex<float> &, AngleUnit angleUnit);
+template Poincare::Complex<double> Poincare::Opposite::compute<double>(const Poincare::Complex<double> &, AngleUnit angleUnit);

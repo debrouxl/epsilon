@@ -28,13 +28,6 @@ Expression::Type Multiplication::type() const {
   return Expression::Type::Multiplication;
 }
 
-Expression * Multiplication::clone() const {
-  if (numberOfOperands() == 0) {
-    return new Multiplication();
-  }
-  return new Multiplication(operands(), numberOfOperands(), true);
-}
-
 ExpressionLayout * Multiplication::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   const char middleDotString[] = {Ion::Charset::MiddleDot, 0};
   return LayoutEngine::createInfixLayout(this, floatDisplayMode, complexFormat, middleDotString);
@@ -64,7 +57,7 @@ Expression * Multiplication::setSign(Sign s, Context & context, AngleUnit angleU
 }
 
 template<typename T>
-Complex<T> Multiplication::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Multiplication::compute(const Complex<T> & c, const Complex<T> & d) {
   return Complex<T>::Cartesian(c.a()*d.a()-c.b()*d.b(), c.b()*d.a() + c.a()*d.b());
 }
 
@@ -655,7 +648,7 @@ void Multiplication::addMissingFactors(Expression * factor, Context & context, A
 
 template Matrix * Multiplication::computeOnComplexAndMatrix<float>(Complex<float> const*, const Matrix*);
 template Matrix * Multiplication::computeOnComplexAndMatrix<double>(Complex<double> const*, const Matrix*);
-template Complex<float> Multiplication::compute<float>(Complex<float>, Complex<float>);
-template Complex<double> Multiplication::compute<double>(Complex<double>, Complex<double>);
+template Complex<float> Multiplication::compute<float>(const Complex<float> &, const Complex<float> &);
+template Complex<double> Multiplication::compute<double>(const Complex<double> &, const Complex<double> &);
 
 }

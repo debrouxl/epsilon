@@ -12,11 +12,6 @@ Expression::Type Parenthesis::type() const {
   return Type::Parenthesis;
 }
 
-Expression * Parenthesis::clone() const {
-  Parenthesis * o = new Parenthesis(m_operands, true);
-  return o;
-}
-
 ExpressionLayout * Parenthesis::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);

@@ -10,8 +10,10 @@ class Parenthesis final : public StaticHierarchy<1> {
 public:
   using StaticHierarchy<1>::StaticHierarchy;
 public:
-  Expression * clone() const override;
   Type type() const override;
+  Expression * clone() const override {
+    return new Parenthesis(m_operands, true);
+  }
 private:
   /* Layout */
   ExpressionLayout * privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const override;

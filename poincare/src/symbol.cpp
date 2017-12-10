@@ -87,10 +87,6 @@ Symbol::Symbol(char name) :
 {
 }
 
-Expression * Symbol::clone() const {
-  return new Symbol(m_name);
-}
-
 Expression::Sign Symbol::sign() const {
   /* TODO: Maybe, we will want to know that from a context given in parameter:
   if (context.expressionForSymbol(this) != nullptr) {

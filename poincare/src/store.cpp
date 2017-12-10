@@ -16,10 +16,6 @@ Expression::Type Store::type() const {
   return Type::Store;
 }
 
-Expression * Store::clone() const {
-  return new Store(operands(), true);
-}
-
 static_assert('\x8F' == Ion::Charset::Sto, "Incorrect");
 int Store::writeTextInBuffer(char * buffer, int bufferSize) const {
   return LayoutEngine::writeInfixExpressionTextInBuffer(this, buffer, bufferSize, "\x8F");

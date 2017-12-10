@@ -10,10 +10,12 @@ class Factorial final : public StaticHierarchy<1> {
 public:
   Factorial(const Expression * argument, bool clone = true);
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Factorial(m_operands[0], true);
+  }
 private:
   constexpr static int k_maxOperandValue = 100;
-  template<typename T> static Complex<T> computeOnComplex(const Complex<T> c, AngleUnit angleUnit);
+  template<typename T> static Complex<T> computeOnComplex(const Complex<T> & c, AngleUnit angleUnit);
   Expression * privateApproximate(SinglePrecision p, Context& context, AngleUnit angleUnit) const override {
     return ApproximationEngine::map<float>(this, context, angleUnit,computeOnComplex<float>);
   }

@@ -15,11 +15,6 @@ Expression::Type Derivative::type() const {
   return Type::Derivative;
 }
 
-Expression * Derivative::clone() const {
-  Derivative * a = new Derivative(m_operands, true);
-  return a;
-}
-
 Expression * Derivative::shallowReduce(Context& context, AngleUnit angleUnit) {
   Expression * e = Expression::shallowReduce(context, angleUnit);
   if (e != this) {

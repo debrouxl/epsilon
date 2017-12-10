@@ -17,11 +17,6 @@ Expression::Type PredictionInterval::type() const {
   return Type::PredictionInterval;
 }
 
-Expression * PredictionInterval::clone() const {
-  PredictionInterval * a = new PredictionInterval(m_operands, true);
-  return a;
-}
-
 Expression * PredictionInterval::shallowReduce(Context& context, AngleUnit angleUnit) {
   Expression * e = Expression::shallowReduce(context, angleUnit);
   if (e != this) {

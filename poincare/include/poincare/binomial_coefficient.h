@@ -10,7 +10,9 @@ class BinomialCoefficient final : public StaticHierarchy<2> {
   using StaticHierarchy<2>::StaticHierarchy;
 public:
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new BinomialCoefficient(m_operands, true);
+  }
 private:
   constexpr static int k_maxNValue = 300;
   /* Layout */

@@ -21,7 +21,9 @@ public:
   Integer mantissa() const { return m_mantissa; }
   // Expression subclassing
   Type type() const override;
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Decimal(m_mantissa, m_exponent);
+  }
   int writeTextInBuffer(char * buffer, int bufferSize) const override;
   Sign sign() const override { return m_mantissa.isNegative() ? Sign::Negative : Sign::Positive; }
 private:

@@ -40,7 +40,9 @@ public:
   Type type() const override {
     return Expression::Type::Symbol;
   }
-  Expression * clone() const override;
+  Expression * clone() const override {
+    return new Symbol(m_name);
+  }
   Sign sign() const override;
   bool isMatrixSymbol() const {
     if (m_name >= (char)SpecialSymbols::M0 && m_name <= (char)SpecialSymbols::M9) {

@@ -16,13 +16,6 @@ Expression::Type Addition::type() const {
   return Type::Addition;
 }
 
-Expression * Addition::clone() const {
-  if (numberOfOperands() == 0) {
-    return new Addition();
-  }
-  return new Addition(operands(), numberOfOperands(), true);
-}
-
 /* Simplication */
 
 Expression * Addition::shallowReduce(Context& context, AngleUnit angleUnit) {
@@ -309,12 +302,12 @@ Expression * Addition::shallowBeautify(Context & context, AngleUnit angleUnit) {
 /* Evaluation */
 
 template<typename T>
-Complex<T> Addition::compute(const Complex<T> c, const Complex<T> d) {
+Complex<T> Addition::compute(const Complex<T> & c, const Complex<T> & d) {
   return Complex<T>::Cartesian(c.a()+d.a(), c.b()+d.b());
 }
 
-template Complex<float> Poincare::Addition::compute<float>(Poincare::Complex<float>, Poincare::Complex<float>);
-template Complex<double> Poincare::Addition::compute<double>(Poincare::Complex<double>, Poincare::Complex<double>);
+template Complex<float> Poincare::Addition::compute<float>(const Poincare::Complex<float> &, const Poincare::Complex<float> &);
+template Complex<double> Poincare::Addition::compute<double>(const Poincare::Complex<double> &, const Poincare::Complex<double> &);
 
 template Matrix* Addition::computeOnMatrices<float>(const Matrix*,const Matrix*);
 template Matrix* Addition::computeOnMatrices<double>(const Matrix*,const Matrix*);
