@@ -79,9 +79,10 @@ Complex<T> Factorial::computeOnComplex(const Complex<T> & c, AngleUnit angleUnit
 ExpressionLayout * Factorial::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = operand(0)->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = new StringLayout("!", 1);
+  ExpressionLayout * childrenLayouts[2] = {
+    operand(0)->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout("!", 1)
+  };
   return new HorizontalLayout(childrenLayouts, 2);
 }
 

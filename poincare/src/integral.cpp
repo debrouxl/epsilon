@@ -34,12 +34,8 @@ Expression * Integral::shallowReduce(Context& context, AngleUnit angleUnit) {
 template<typename T>
 Complex<T> * Integral::templatedApproximate(Context & context, AngleUnit angleUnit) const {
   VariableContext<T> xContext = VariableContext<T>('x', &context);
-  Expression * aInput = operand(1)->approximate<T>(context, angleUnit);
-  T a = aInput->type() == Type::Complex ? static_cast<Complex<T> *>(aInput)->toScalar() : NAN;
-  delete aInput;
-  Expression * bInput = operand(2)->approximate<T>(context, angleUnit);
-  T b = bInput->type() == Type::Complex ? static_cast<Complex<T> *>(bInput)->toScalar() : NAN;
-  delete bInput;
+  T a = operand(1)->approximateToScalar<T>(context, angleUnit);
+  T b = operand(2)->approximateToScalar<T>(context, angleUnit);
   if (std::isnan(a) || std::isnan(b)) {
     return Complex<T>::NewFNAN();
   }
@@ -54,9 +50,10 @@ Complex<T> * Integral::templatedApproximate(Context & context, AngleUnit angleUn
 ExpressionLayout * Integral::privateCreateLayout(FloatDisplayMode floatDisplayMode, ComplexFormat complexFormat) const {
   assert(floatDisplayMode != FloatDisplayMode::Default);
   assert(complexFormat != ComplexFormat::Default);
-  ExpressionLayout * childrenLayouts[2];
-  childrenLayouts[0] = operand(0)->createLayout(floatDisplayMode, complexFormat);
-  childrenLayouts[1] = new StringLayout("dx", 2);
+  ExpressionLayout * childrenLayouts[2] = {
+    operand(0)->createLayout(floatDisplayMode, complexFormat),
+    new StringLayout("dx", 2)
+  };
   return new IntegralLayout(operand(1)->createLayout(floatDisplayMode, complexFormat), operand(2)->createLayout(floatDisplayMode, complexFormat), new HorizontalLayout(childrenLayouts, 2));
 }
 
@@ -65,9 +62,7 @@ T Integral::functionValueAtAbscissa(T x, VariableContext<T> xContext, AngleUnit 
   Complex<T> e = Complex<T>::Float(x);
   Symbol xSymbol('x');
   xContext.setExpressionForSymbolName(&e, &xSymbol, xContext);
-  Expression * f = operand(0)->approximate<T>(xContext, angleUnit);
-  T result = f->type() == Type::Complex ? static_cast<Complex<T> *>(f)->toScalar() : NAN;
-  delete f;
+  T result = operand(0)->approximateToScalar<T>(xContext, angleUnit);
   return result;
 }
 
