@@ -222,7 +222,7 @@ void TermSumController::LegendView::setSumResult(const char * sequenceName, doub
   childrenLayouts[2] = new StringLayout(buffer, strlen(buffer), KDText::FontSize::Small);
   childrenLayouts[1] = new BaselineRelativeLayout(new StringLayout(sequenceName, 1, KDText::FontSize::Small), new StringLayout("n", 1, KDText::FontSize::Small), BaselineRelativeLayout::Type::Subscript);
   childrenLayouts[0] = m_sumLayout;
-  m_sumLayout = new HorizontalLayout(childrenLayouts, 3);
+  m_sumLayout = new HorizontalLayout(childrenLayouts, 3, false);
   m_sum.setExpression(m_sumLayout);
   m_sum.setAlignment(0.5f, 0.5f);
 }
