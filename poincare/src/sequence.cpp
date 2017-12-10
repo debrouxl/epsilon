@@ -20,7 +20,7 @@ ExpressionLayout * Sequence::privateCreateLayout(PrintFloat::Mode floatDisplayMo
     new StringLayout("n=", 2),
     operand(1)->createLayout(floatDisplayMode, complexFormat)
   };
-  return createSequenceLayoutWithArgumentLayouts(new HorizontalLayout(childrenLayouts, 2), operand(2)->createLayout(floatDisplayMode, complexFormat), operand(0)->createLayout(floatDisplayMode, complexFormat));
+  return createSequenceLayoutWithArgumentLayouts(new HorizontalLayout(childrenLayouts, 2, false), operand(2)->createLayout(floatDisplayMode, complexFormat), operand(0)->createLayout(floatDisplayMode, complexFormat));
 }
 
 template<typename T>

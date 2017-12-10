@@ -75,7 +75,7 @@ ExpressionLayout * BinomialCoefficient::privateCreateLayout(PrintFloat::Mode flo
     operand(0)->createLayout(floatDisplayMode, complexFormat),
     operand(1)->createLayout(floatDisplayMode, complexFormat)
   };
-  return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1));
+  return new ParenthesisLayout(new GridLayout(childrenLayouts, 2, 1, false));
 }
 
 template<typename T>
