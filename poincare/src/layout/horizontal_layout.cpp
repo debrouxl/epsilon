@@ -1,8 +1,8 @@
 extern "C" {
 #include <assert.h>
-#include <kandinsky.h>
 #include <stdlib.h>
 }
+#include <kandinsky.h>
 #include "horizontal_layout.h"
 #include "string_layout.h"
 
